@@ -24,6 +24,29 @@ class PilotMLP(nn.Module):
         return self.network.out(x)
 
 
+class ConcatMLP(nn.Module):
+    """Baseline: standard ReLU MLP on the concatenation [imputed values, missingness mask]; confidence unused.
+    Same hidden sizes as the three-channel network; the first layer has twice the input width."""
+
+    def __init__(self, inputs, classes, hidden):
+        super().__init__()
+        sizes = [2 * inputs] + list(hidden)
+        self.layers = nn.ModuleList([nn.Linear(sizes[i], sizes[i + 1]) for i in range(len(hidden))])
+        self.out = nn.Linear(sizes[-1], classes)
+
+    def forward(self, x, m, c):
+        h = torch.cat([x, m], dim=1)
+        for layer in self.layers:
+            h = torch.relu(layer(h))
+        return self.out(h)
+
+
+def build_model(model_type, inputs, classes, hidden, tree, propagation="full"):
+    if model_type == "concat_mlp":
+        return ConcatMLP(inputs, classes, hidden)
+    return PilotMLP(inputs, classes, hidden, tree, propagation)
+
+
 def fixed_tree(name):
     x = g.create_input_node("value")
     if name == "relu":
@@ -32,6 +55,8 @@ def fixed_tree(name):
         return g.create_binary_node("multiply", x, g.create_unary_node("sigmoid", x))
     if name in ("elu", "leaky_relu"):
         return g.create_unary_node(name, x)
+    if name == "mask_concat_relu":          # tree recorded for completeness; the ConcatMLP uses torch.relu directly
+        return g.create_unary_node("relu", x)
     raise ValueError(name)
 
 

@@ -30,7 +30,10 @@ REGISTRY = {
     "pima":         ("Pima/diabetes.csv",                  "Outcome",  0,    "numeric"),    # zeros retained as observed (original)
     "sonar":        ("Sonar/sonar_final_numeric.csv",      "Label",    0,    "numeric"),
     "wdbc":         ("WDBC/wdbc_prepared.csv",             "Diagnosis", 0,   "numeric"),
+    # same file as pima; physiologically impossible zeros treated as missing (NOT the GECCO convention; a declared variant)
+    "pima_zeros_missing": ("Pima/diabetes.csv",             "Outcome",  0,    "pima_zeros"),
 }
+PIMA_ZERO_COLUMNS = ("Glucose", "BloodPressure", "SkinThickness", "Insulin", "BMI")
 
 
 def load_gecco_dataset(name):
@@ -57,6 +60,9 @@ def load_gecco_dataset(name):
                 X[c] = pd.to_numeric(X[c], errors="coerce")
     else:
         X = X.apply(pd.to_numeric, errors="coerce")
+    if policy == "pima_zeros":
+        for c in PIMA_ZERO_COLUMNS:
+            X.loc[X[c] == 0, c] = np.nan
     all_nan = X.columns[X.isna().all()].tolist()
     X = X.drop(columns=all_nan)
     classes = sorted(y_raw.unique(), key=lambda v: (len(v), v) if not v.lstrip("-").isdigit() else (0, int(v)))
@@ -67,4 +73,6 @@ def load_gecco_dataset(name):
             "dropped_missing_label_rows": int((~keep).sum()), "natural_missing_rate": float(np.isnan(x).mean())}
     if name == "pima":
         meta["pima_zero_policy"] = "retain as observed, matching supplied GECCO CSV"
+    if name == "pima_zeros_missing":
+        meta["pima_zero_policy"] = "zeros in " + ", ".join(PIMA_ZERO_COLUMNS) + " treated as missing (declared variant)"
     return x, y, meta

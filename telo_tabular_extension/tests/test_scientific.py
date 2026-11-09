@@ -197,7 +197,7 @@ class ScientificChecks(unittest.TestCase):
             rows = confidence_stage(self.cfg, tmp)
             self.assertEqual(len(rows), 4)
             trained = train_stage(self.cfg, tmp)
-            self.assertEqual(len(trained), 6)
+            self.assertEqual(len(trained), 8)
             self.assertTrue(any(r["status"] == "trained" and r["variant"] == "learned" for r in trained))
             self.assertFalse((Path(tmp) / "test_results.csv").exists())
             evaluated = evaluate_stage(tmp)
@@ -234,3 +234,34 @@ class GeccoDatasetRegistryTests(unittest.TestCase):
         x, y, m = load_gecco_dataset("wdbc"); self.assertEqual(x.shape, (569, 30)); self.assertEqual(m["classes"], ["B", "M"])
         x, y, m = load_gecco_dataset("housevote"); self.assertEqual(x.shape[1], 16); self.assertTrue(np.isnan(x).any())
         x, y, m = load_gecco_dataset("horse"); self.assertEqual(len(m["classes"]), 3)
+
+
+class NewBaselineTests(unittest.TestCase):
+    def test_regression_imputation_is_train_fitted_finite_and_differs_from_mean(self):
+        import joblib
+        from telo_tabular.experiment import read_config, prepare, variant_arrays, regression_impute_standardized
+        cfg = read_config(Path(__file__).resolve().parents[1] / "configs" / "smoke.json")
+        with tempfile.TemporaryDirectory() as tmp:
+            pack = prepare(cfg, "synthetic", 42, tmp)
+            for split in ("train", "val"):
+                x_reg, m, c, y = variant_arrays(pack, split, "regression_imputation", 1)
+                x_mean, _, c0, _ = variant_arrays(pack, split, "original", 1)
+                self.assertTrue(np.isfinite(x_reg).all())
+                np.testing.assert_array_equal(c, c0)                       # original confidence rule
+                np.testing.assert_allclose(x_reg[m == 0], x_mean[m == 0], atol=1e-5)   # observed entries untouched
+                self.assertGreater(np.abs(x_reg[m == 1] - x_mean[m == 1]).mean(), 1e-3)  # imputations differ from the mean
+            self.assertIn("imputer", pack)
+
+    def test_concat_mlp_shapes_and_ignores_confidence(self):
+        import torch
+        from telo_tabular.models import build_model, fixed_tree
+        model = build_model("concat_mlp", 5, 3, [8, 4], fixed_tree("mask_concat_relu"))
+        x, m = torch.randn(7, 5), torch.zeros(7, 5)
+        out1 = model(x, m, torch.ones(7, 5)); out2 = model(x, m, torch.full((7, 5), 0.3))
+        self.assertEqual(out1.shape, (7, 3)); torch.testing.assert_close(out1, out2)
+
+    def test_pima_zero_variant_marks_zeros_missing(self):
+        from telo_tabular.datasets_gecco import load_gecco_dataset
+        x0, _, _ = load_gecco_dataset("pima"); x1, _, m1 = load_gecco_dataset("pima_zeros_missing")
+        self.assertEqual(x0.shape, x1.shape); self.assertFalse(np.isnan(x0).any()); self.assertGreater(np.isnan(x1).sum(), 600)
+        self.assertIn("treated as missing", m1["pima_zero_policy"])
