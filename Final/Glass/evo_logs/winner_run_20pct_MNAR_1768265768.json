@@ -1,0 +1,810 @@
+{
+  "timestamp": "2026-01-12 18:56:08",
+  "dataset": "hepatitis",
+  "missing_rate": 0.2,
+  "mechanism": "MNAR",
+  "best": {
+    "fitness": 0.6071844864209494,
+    "nodes": 4,
+    "depth": 3,
+    "uses_inputs": 1,
+    "tree_str": "add(\n  value,\n  elu(\n    value\n  )\n)"
+  },
+  "per_generation": [
+    {
+      "generation": 1,
+      "fitness": 0.5667395626068115,
+      "nodes": 8,
+      "depth": 4,
+      "uses_inputs": 3,
+      "tree_str": "max(\n  min(\n    min(\n      missing,\n      -2.0\n    ),\n    identity(\n      confidence\n    )\n  ),\n  value\n)",
+      "infix": "max(min(min(m, -2), c), x)",
+      "tree": {
+        "type": "binary",
+        "operator": "max",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "min",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  },
+                  {
+                    "type": "constant",
+                    "value": -2.0,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "identity",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "fitness": 0.5666395626068115,
+      "nodes": 9,
+      "depth": 4,
+      "uses_inputs": 3,
+      "tree_str": "divide(\n  negate(\n    value\n  ),\n  divide(\n    max(\n      confidence,\n      missing\n    ),\n    log(\n      0.5\n    )\n  )\n)",
+      "infix": "((-x) / (max(c, m) / log(|0.5|)))",
+      "tree": {
+        "type": "binary",
+        "operator": "divide",
+        "children": [
+          {
+            "type": "unary",
+            "operator": "negate",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "max",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "log",
+                "children": [
+                  {
+                    "type": "constant",
+                    "value": 0.5,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 3,
+      "fitness": 0.5843286613782247,
+      "nodes": 2,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "relu(\n  value\n)",
+      "infix": "relu(x)",
+      "tree": {
+        "type": "unary",
+        "operator": "relu",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 4,
+      "fitness": 0.5660395626068115,
+      "nodes": 13,
+      "depth": 5,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  add(\n    value,\n    sigmoid(\n      missing\n    )\n  ),\n  add(\n    sin(\n      divide(\n        2.0,\n        confidence\n      )\n    ),\n    min(\n      -1.0,\n      0.5\n    )\n  )\n)",
+      "infix": "((x + sigmoid(m)) + (sin((2 / c)) + min(-1, 0.5)))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "unary",
+                "operator": "sigmoid",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "sin",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "divide",
+                    "children": [
+                      {
+                        "type": "constant",
+                        "value": 2.0,
+                        "children": []
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "constant",
+                    "value": -1.0,
+                    "children": []
+                  },
+                  {
+                    "type": "constant",
+                    "value": 0.5,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 5,
+      "fitness": 0.5144612458546957,
+      "nodes": 3,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  0.5,\n  value\n)",
+      "infix": "(0.5 + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "constant",
+            "value": 0.5,
+            "children": []
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 6,
+      "fitness": 0.5177945791880291,
+      "nodes": 3,
+      "depth": 2,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  missing,\n  value\n)",
+      "infix": "(m + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "missing",
+            "children": []
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 7,
+      "fitness": 0.5842286613782247,
+      "nodes": 3,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  value\n)",
+      "infix": "(x + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 8,
+      "fitness": 0.5643062292734783,
+      "nodes": 3,
+      "depth": 2,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  missing,\n  value\n)",
+      "infix": "(m + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "missing",
+            "children": []
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 9,
+      "fitness": 0.5434837375640869,
+      "nodes": 8,
+      "depth": 4,
+      "uses_inputs": 3,
+      "tree_str": "multiply(\n  confidence,\n  max(\n    min(\n      value,\n      confidence\n    ),\n    log(\n      missing\n    )\n  )\n)",
+      "infix": "(c * max(min(x, c), log(|m|)))",
+      "tree": {
+        "type": "binary",
+        "operator": "multiply",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "confidence",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "log",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 10,
+      "fitness": 0.5373170708974203,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  min(\n    2.0,\n    value\n  ),\n  value\n)",
+      "infix": "(min(2, x) + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "min",
+            "children": [
+              {
+                "type": "constant",
+                "value": 2.0,
+                "children": []
+              },
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 11,
+      "fitness": 0.5839286613782247,
+      "nodes": 4,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  elu(\n    value\n  )\n)",
+      "infix": "(x + elu(x))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "unary",
+            "operator": "elu",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 12,
+      "fitness": 0.6071844864209494,
+      "nodes": 4,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  elu(\n    value\n  )\n)",
+      "infix": "(x + elu(x))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "unary",
+            "operator": "elu",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 13,
+      "fitness": 0.5170945791880289,
+      "nodes": 6,
+      "depth": 4,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  multiply(\n    leaky_relu(\n      value\n    ),\n    missing\n  ),\n  value\n)",
+      "infix": "((leakyrelu(x) * m) + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "multiply",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "leaky_relu",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 14,
+      "fitness": 0.5606728959401449,
+      "nodes": 4,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "divide(\n  elu(\n    value\n  ),\n  0.5\n)",
+      "infix": "(elu(x) / 0.5)",
+      "tree": {
+        "type": "binary",
+        "operator": "divide",
+        "children": [
+          {
+            "type": "unary",
+            "operator": "elu",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "constant",
+            "value": 0.5,
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 15,
+      "fitness": 0.5370170708974201,
+      "nodes": 6,
+      "depth": 4,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  elu(\n    divide(\n      value,\n      0.5\n    )\n  )\n)",
+      "infix": "(x + elu((x / 0.5)))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "unary",
+            "operator": "elu",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "divide",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "constant",
+                    "value": 0.5,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 16,
+      "fitness": 0.5137612458546955,
+      "nodes": 6,
+      "depth": 4,
+      "uses_inputs": 1,
+      "tree_str": "multiply(\n  min(\n    value,\n    exp(\n      value\n    )\n  ),\n  2.0\n)",
+      "infix": "(min(x, exp(x)) * 2)",
+      "tree": {
+        "type": "binary",
+        "operator": "multiply",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "min",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "unary",
+                "operator": "exp",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "constant",
+            "value": 2.0,
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 17,
+      "fitness": 0.5839286613782247,
+      "nodes": 4,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  sqrt(\n    value\n  )\n)",
+      "infix": "(x + sqrt(x))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "unary",
+            "operator": "sqrt",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 18,
+      "fitness": 0.5606728959401449,
+      "nodes": 4,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  sqrt(\n    value\n  )\n)",
+      "infix": "(x + sqrt(x))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "unary",
+            "operator": "sqrt",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 19,
+      "fitness": 0.5378170708974203,
+      "nodes": 2,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "leaky_relu(\n  value\n)",
+      "infix": "leakyrelu(x)",
+      "tree": {
+        "type": "unary",
+        "operator": "leaky_relu",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 20,
+      "fitness": 0.5388504042307537,
+      "nodes": 15,
+      "depth": 7,
+      "uses_inputs": 2,
+      "tree_str": "divide(\n  value,\n  max(\n    divide(\n      divide(\n        max(\n          value,\n          confidence\n        ),\n        tanh(\n          cos(\n            2.0\n          )\n        )\n      ),\n      add(\n        confidence,\n        value\n      )\n    ),\n    confidence\n  )\n)",
+      "infix": "(x / max(((max(x, c) / tanh(cos(2))) / (c + x)), c))",
+      "tree": {
+        "type": "binary",
+        "operator": "divide",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "divide",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "divide",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "max",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "tanh",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cos",
+                            "children": [
+                              {
+                                "type": "constant",
+                                "value": 2.0,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

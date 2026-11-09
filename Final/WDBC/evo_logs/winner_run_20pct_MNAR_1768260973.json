@@ -1,0 +1,1038 @@
+{
+  "timestamp": "2026-01-12 17:36:13",
+  "dataset": "hepatitis",
+  "missing_rate": 0.2,
+  "mechanism": "MNAR",
+  "best": {
+    "fitness": 0.9940613773663839,
+    "nodes": 3,
+    "depth": 2,
+    "uses_inputs": 1,
+    "tree_str": "divide(\n  value,\n  0.1\n)"
+  },
+  "per_generation": [
+    {
+      "generation": 1,
+      "fitness": 0.9795508583704632,
+      "nodes": 4,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  elu(\n    value\n  ),\n  missing\n)",
+      "infix": "(elu(x) + m)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "unary",
+            "operator": "elu",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "missing",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "fitness": 0.9763175250371298,
+      "nodes": 3,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "identity(\n  tanh(\n    value\n  )\n)",
+      "infix": "tanh(x)",
+      "tree": {
+        "type": "unary",
+        "operator": "identity",
+        "children": [
+          {
+            "type": "unary",
+            "operator": "tanh",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 3,
+      "fitness": 0.9902561476707459,
+      "nodes": 12,
+      "depth": 6,
+      "uses_inputs": 3,
+      "tree_str": "subtract(\n  divide(\n    value,\n    0.1\n  ),\n  leaky_relu(\n    min(\n      divide(\n        divide(\n          confidence,\n          confidence\n        ),\n        value\n      ),\n      missing\n    )\n  )\n)",
+      "infix": "((x / 0.1) - leakyrelu(min(((c / c) / x), m)))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 0.1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "leaky_relu",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "divide",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "divide",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 4,
+      "fitness": 0.9766175250371297,
+      "nodes": 2,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "identity(\n  value\n)",
+      "infix": "x",
+      "tree": {
+        "type": "unary",
+        "operator": "identity",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 5,
+      "fitness": 0.9811841917037964,
+      "nodes": 15,
+      "depth": 6,
+      "uses_inputs": 3,
+      "tree_str": "subtract(\n  divide(\n    multiply(\n      confidence,\n      elu(\n        value\n      )\n    ),\n    0.1\n  ),\n  leaky_relu(\n    min(\n      divide(\n        divide(\n          confidence,\n          confidence\n        ),\n        -2.0\n      ),\n      missing\n    )\n  )\n)",
+      "infix": "(((c * elu(x)) / 0.1) - leakyrelu(min(((c / c) / -2), m)))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "multiply",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "elu",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "constant",
+                "value": 0.1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "leaky_relu",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "divide",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "divide",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "constant",
+                        "value": -2.0,
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 6,
+      "fitness": 0.9902561476707459,
+      "nodes": 12,
+      "depth": 6,
+      "uses_inputs": 3,
+      "tree_str": "subtract(\n  divide(\n    value,\n    0.1\n  ),\n  leaky_relu(\n    min(\n      divide(\n        divide(\n          value,\n          confidence\n        ),\n        -2.0\n      ),\n      missing\n    )\n  )\n)",
+      "infix": "((x / 0.1) - leakyrelu(min(((x / c) / -2), m)))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 0.1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "leaky_relu",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "divide",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "divide",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "constant",
+                        "value": -2.0,
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 7,
+      "fitness": 0.9870228143374126,
+      "nodes": 11,
+      "depth": 6,
+      "uses_inputs": 2,
+      "tree_str": "subtract(\n  divide(\n    value,\n    0.1\n  ),\n  leaky_relu(\n    divide(\n      multiply(\n        confidence,\n        elu(\n          value\n        )\n      ),\n      0.1\n    )\n  )\n)",
+      "infix": "((x / 0.1) - leakyrelu(((c * elu(x)) / 0.1)))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 0.1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "leaky_relu",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "divide",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "multiply",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "elu",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "constant",
+                    "value": 0.1,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 8,
+      "fitness": 0.9877228143374125,
+      "nodes": 8,
+      "depth": 4,
+      "uses_inputs": 2,
+      "tree_str": "subtract(\n  divide(\n    value,\n    0.1\n  ),\n  leaky_relu(\n    min(\n      -1.0,\n      missing\n    )\n  )\n)",
+      "infix": "((x / 0.1) - leakyrelu(min(-1, m)))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 0.1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "leaky_relu",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "constant",
+                    "value": -1.0,
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 9,
+      "fitness": 0.9940613773663839,
+      "nodes": 3,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "divide(\n  value,\n  0.1\n)",
+      "infix": "(x / 0.1)",
+      "tree": {
+        "type": "binary",
+        "operator": "divide",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "constant",
+            "value": 0.1,
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 10,
+      "fitness": 0.9882228143374127,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "subtract(\n  value,\n  max(\n    value,\n    missing\n  )\n)",
+      "infix": "(x - max(x, m))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 11,
+      "fitness": 0.978950858370463,
+      "nodes": 8,
+      "depth": 4,
+      "uses_inputs": 2,
+      "tree_str": "multiply(\n  confidence,\n  add(\n    elu(\n      value\n    ),\n    multiply(\n      value,\n      1.0\n    )\n  )\n)",
+      "infix": "(c * (elu(x) + (x * 1)))",
+      "tree": {
+        "type": "binary",
+        "operator": "multiply",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "confidence",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "elu",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "multiply",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "constant",
+                    "value": 1.0,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 12,
+      "fitness": 0.9820841917037963,
+      "nodes": 10,
+      "depth": 4,
+      "uses_inputs": 3,
+      "tree_str": "subtract(\n  divide(\n    value,\n    min(\n      -1.0,\n      confidence\n    )\n  ),\n  leaky_relu(\n    min(\n      -1.0,\n      missing\n    )\n  )\n)",
+      "infix": "((x / min(-1, c)) - leakyrelu(min(-1, m)))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "constant",
+                    "value": -1.0,
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "leaky_relu",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "constant",
+                    "value": -1.0,
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 13,
+      "fitness": 0.9870228143374126,
+      "nodes": 11,
+      "depth": 6,
+      "uses_inputs": 2,
+      "tree_str": "subtract(\n  divide(\n    value,\n    0.1\n  ),\n  leaky_relu(\n    max(\n      missing,\n      subtract(\n        sin(\n          value\n        ),\n        -1.0\n      )\n    )\n  )\n)",
+      "infix": "((x / 0.1) - leakyrelu(max(m, (sin(x) - -1))))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 0.1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "leaky_relu",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "max",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "subtract",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "sin",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "constant",
+                        "value": -1.0,
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 14,
+      "fitness": 0.9853894810040792,
+      "nodes": 2,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "tanh(\n  value\n)",
+      "infix": "tanh(x)",
+      "tree": {
+        "type": "unary",
+        "operator": "tanh",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 15,
+      "fitness": 0.9794508583704632,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "subtract(\n  divide(\n    value,\n    0.1\n  ),\n  confidence\n)",
+      "infix": "((x / 0.1) - c)",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 0.1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "confidence",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 16,
+      "fitness": 0.9880228143374126,
+      "nodes": 5,
+      "depth": 4,
+      "uses_inputs": 2,
+      "tree_str": "divide(\n  value,\n  relu(\n    identity(\n      missing\n    )\n  )\n)",
+      "infix": "(x / relu(m))",
+      "tree": {
+        "type": "binary",
+        "operator": "divide",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "unary",
+            "operator": "relu",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "identity",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 17,
+      "fitness": 0.9794508583704632,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "divide(\n  divide(\n    value,\n    0.1\n  ),\n  confidence\n)",
+      "infix": "((x / 0.1) / c)",
+      "tree": {
+        "type": "binary",
+        "operator": "divide",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 0.1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "confidence",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 18,
+      "fitness": 0.9794508583704632,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "divide(\n  divide(\n    value,\n    missing\n  ),\n  -2.0\n)",
+      "infix": "((x / m) / -2)",
+      "tree": {
+        "type": "binary",
+        "operator": "divide",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "constant",
+            "value": -2.0,
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 19,
+      "fitness": 0.9785508583704631,
+      "nodes": 10,
+      "depth": 5,
+      "uses_inputs": 2,
+      "tree_str": "identity(\n  subtract(\n    divide(\n      value,\n      elu(\n        confidence\n      )\n    ),\n    subtract(\n      confidence,\n      leaky_relu(\n        value\n      )\n    )\n  )\n)",
+      "infix": "((x / elu(c)) - (c - leakyrelu(x)))",
+      "tree": {
+        "type": "unary",
+        "operator": "identity",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "subtract",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "divide",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "elu",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "subtract",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "leaky_relu",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 20,
+      "fitness": 0.9862228143374125,
+      "nodes": 17,
+      "depth": 7,
+      "uses_inputs": 2,
+      "tree_str": "min(\n  subtract(\n    divide(\n      max(\n        value,\n        value\n      ),\n      0.1\n    ),\n    0.1\n  ),\n  log(\n    min(\n      subtract(\n        confidence,\n        elu(\n          subtract(\n            value,\n            -2.0\n          )\n        )\n      ),\n      value\n    )\n  )\n)",
+      "infix": "min(((max(x, x) / 0.1) - 0.1), log(|min((c - elu((x - -2))), x)|))",
+      "tree": {
+        "type": "binary",
+        "operator": "min",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "subtract",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "divide",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "constant",
+                    "value": 0.1,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "constant",
+                "value": 0.1,
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "log",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "subtract",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "elu",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "subtract",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "value",
+                                "children": []
+                              },
+                              {
+                                "type": "constant",
+                                "value": -2.0,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,229 @@
+================================================================================
+ABLATION STUDY: Three-Channel Activation Functions
+================================================================================
+Dataset: hepatitis.csv
+Number of runs: 5
+================================================================================
+
+Strategy:
+  1. Evolve activation with FULL channels (x, m, c)
+  2. Train model with full channels
+  3. Evaluate SAME model with ablated inputs
+  This tests if the model actually USES m and c.
+================================================================================
+Loaded dataset: 155 samples, 20 columns
+Samples: 155, Features: 19, Classes: 2
+Missing rate: 5.7%
+
+================================================================================
+RUN 1/5 (seed=42)
+================================================================================
+
+  Evolving activation with full channels (x, m, c)...
+    Gen 1/15 - Best: 0.9029
+    Gen 2/15 - Best: 0.9029
+    Gen 3/15 - Best: 0.9029
+    Gen 4/15 - Best: 0.9029
+    Gen 5/15 - Best: 0.9352
+    Gen 6/15 - Best: 0.9352
+    Gen 7/15 - Best: 0.9352
+    Gen 8/15 - Best: 0.9352
+    Gen 9/15 - Best: 0.9352
+    Gen 10/15 - Best: 0.9353
+    Gen 11/15 - Best: 0.9353
+    Gen 12/15 - Best: 0.9353
+    Gen 13/15 - Best: 0.9353
+    Gen 14/15 - Best: 0.9665
+    Gen 15/15 - Best: 0.9665
+
+  Evolved: ((min(softplus(x), c))^2 + min(c, min(softplus(x), x)))
+  Uses m: True, Uses c: True
+
+  Training final model...
+
+  Evaluating ablations...
+  Full (x,m,c):      Acc=0.7742, F1=0.8444
+  No Conf (x,m,1):   Acc=0.7742, F1=0.8444
+  No Miss (x,0,c):   Acc=0.7742, F1=0.8444
+  Value Only (x,0,1): Acc=0.7742, F1=0.8444
+
+================================================================================
+RUN 2/5 (seed=43)
+================================================================================
+
+  Evolving activation with full channels (x, m, c)...
+    Gen 1/15 - Best: 0.9351
+    Gen 2/15 - Best: 0.9352
+    Gen 3/15 - Best: 0.9668
+    Gen 4/15 - Best: 0.9668
+    Gen 5/15 - Best: 0.9672
+    Gen 6/15 - Best: 0.9672
+    Gen 7/15 - Best: 0.9672
+    Gen 8/15 - Best: 0.9672
+    Gen 9/15 - Best: 0.9979
+    Gen 10/15 - Best: 0.9979
+    Gen 11/15 - Best: 0.9979
+    Gen 12/15 - Best: 0.9979
+    Gen 13/15 - Best: 0.9979
+    Gen 14/15 - Best: 0.9979
+    Gen 15/15 - Best: 0.9979
+
+  Evolved: ((m - (max((max(x, x) + max(x, x)), (x + max(x, x))) + max(x, 0))) - m)
+  Uses m: True, Uses c: False
+
+  Training final model...
+
+  Evaluating ablations...
+  Full (x,m,c):      Acc=0.7742, F1=0.8627
+  No Conf (x,m,1):   Acc=0.7742, F1=0.8627
+  No Miss (x,0,c):   Acc=0.7742, F1=0.8627
+  Value Only (x,0,1): Acc=0.7742, F1=0.8627
+
+================================================================================
+RUN 3/5 (seed=44)
+================================================================================
+
+  Evolving activation with full channels (x, m, c)...
+    Gen 1/15 - Best: 0.9351
+    Gen 2/15 - Best: 0.9351
+    Gen 3/15 - Best: 0.9351
+    Gen 4/15 - Best: 0.9352
+    Gen 5/15 - Best: 0.9353
+    Gen 6/15 - Best: 0.9353
+    Gen 7/15 - Best: 0.9353
+    Gen 8/15 - Best: 0.9353
+    Gen 9/15 - Best: 0.9353
+    Gen 10/15 - Best: 0.9671
+    Gen 11/15 - Best: 0.9671
+    Gen 12/15 - Best: 0.9671
+    Gen 13/15 - Best: 0.9671
+    Gen 14/15 - Best: 0.9671
+    Gen 15/15 - Best: 0.9671
+
+  Evolved: min((x)^2, (x)^2)
+  Uses m: True, Uses c: False
+
+  Training final model...
+
+  Evaluating ablations...
+  Full (x,m,c):      Acc=0.7742, F1=0.8727
+  No Conf (x,m,1):   Acc=0.7742, F1=0.8727
+  No Miss (x,0,c):   Acc=0.7742, F1=0.8727
+  Value Only (x,0,1): Acc=0.7742, F1=0.8727
+
+================================================================================
+RUN 4/5 (seed=45)
+================================================================================
+
+  Evolving activation with full channels (x, m, c)...
+    Gen 1/15 - Best: 0.9350
+    Gen 2/15 - Best: 0.9350
+    Gen 3/15 - Best: 0.9350
+    Gen 4/15 - Best: 0.9350
+    Gen 5/15 - Best: 0.9350
+    Gen 6/15 - Best: 0.9350
+    Gen 7/15 - Best: 0.9353
+    Gen 8/15 - Best: 0.9353
+    Gen 9/15 - Best: 0.9353
+    Gen 10/15 - Best: 0.9353
+    Gen 11/15 - Best: 0.9353
+    Gen 12/15 - Best: 0.9353
+    Gen 13/15 - Best: 0.9353
+    Gen 14/15 - Best: 0.9353
+    Gen 15/15 - Best: 0.9353
+
+  Evolved: exp(x)
+  Uses m: False, Uses c: False
+
+  Training final model...
+
+  Evaluating ablations...
+  Full (x,m,c):      Acc=0.7419, F1=0.8462
+  No Conf (x,m,1):   Acc=0.7419, F1=0.8462
+  No Miss (x,0,c):   Acc=0.7419, F1=0.8462
+  Value Only (x,0,1): Acc=0.7419, F1=0.8462
+
+================================================================================
+RUN 5/5 (seed=46)
+================================================================================
+
+  Evolving activation with full channels (x, m, c)...
+    Gen 1/15 - Best: 0.8383
+    Gen 2/15 - Best: 0.8706
+    Gen 3/15 - Best: 0.8706
+    Gen 4/15 - Best: 0.9022
+    Gen 5/15 - Best: 0.9351
+    Gen 6/15 - Best: 0.9351
+    Gen 7/15 - Best: 0.9351
+    Gen 8/15 - Best: 0.9351
+    Gen 9/15 - Best: 0.9351
+    Gen 10/15 - Best: 0.9351
+    Gen 11/15 - Best: 0.9668
+    Gen 12/15 - Best: 0.9668
+    Gen 13/15 - Best: 0.9668
+    Gen 14/15 - Best: 0.9668
+    Gen 15/15 - Best: 0.9668
+
+  Evolved: (-min(exp(x), (-min(exp(m), x))))
+  Uses m: True, Uses c: False
+
+  Training final model...
+
+  Evaluating ablations...
+  Full (x,m,c):      Acc=0.8065, F1=0.8750
+  No Conf (x,m,1):   Acc=0.8065, F1=0.8750
+  No Miss (x,0,c):   Acc=0.8065, F1=0.8750
+  Value Only (x,0,1): Acc=0.8065, F1=0.8750
+
+================================================================================
+EVOLVED FORMULAS
+================================================================================
+Run 1: ((min(softplus(x), c))^2 + min(c, min(softplus(x), x)))
+       Uses m: True, Uses c: True
+Run 2: ((m - (max((max(x, x) + max(x, x)), (x + max(x, x))) + max(x, 0))) - m)
+       Uses m: True, Uses c: False
+Run 3: min((x)^2, (x)^2)
+       Uses m: True, Uses c: False
+Run 4: exp(x)
+       Uses m: False, Uses c: False
+Run 5: (-min(exp(x), (-min(exp(m), x))))
+       Uses m: True, Uses c: False
+
+====================================================================================================
+ABLATION RESULTS (mean ± std)
+====================================================================================================
+Variant              Accuracy       Precision      Recall         Specificity    F1             AUC           
+----------------------------------------------------------------------------------------------------
+Full (x,m,c)         0.7742±0.0204  0.8443±0.0548  0.8857±0.0707  0.6262±0.1090  0.8602±0.0129  0.7611±0.0511
+No Conf (x,m,1)      0.7742±0.0204  0.8443±0.0548  0.8857±0.0707  0.6262±0.1090  0.8602±0.0129  0.7611±0.0511
+No Miss (x,0,c)      0.7742±0.0204  0.8443±0.0548  0.8857±0.0707  0.6262±0.1090  0.8602±0.0129  0.7611±0.0511
+Value Only (x,0,1)   0.7742±0.0204  0.8443±0.0548  0.8857±0.0707  0.6262±0.1090  0.8602±0.0129  0.7611±0.0511
+====================================================================================================
+
+============================================================
+PERFORMANCE DROP ANALYSIS
+============================================================
+
+No Conf (x,m,1):
+  Accuracy drop: +0.00% points
+  F1 drop:       +0.00% points
+
+No Miss (x,0,c):
+  Accuracy drop: +0.00% points
+  F1 drop:       +0.00% points
+
+Value Only (x,0,1):
+  Accuracy drop: +0.00% points
+  F1 drop:       +0.00% points
+
+============================================================
+CHANNEL USAGE
+============================================================
+Evolved functions using 'm': 4/5
+Evolved functions using 'c': 1/5
+
+============================================================
+COMPLETE
+============================================================
+
+Results saved to: ablation_study_results.txt

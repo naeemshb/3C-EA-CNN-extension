@@ -1,0 +1,61 @@
+{
+  "name": "ref_bloodmnist",
+  "label": "REFERENCE search budget (paper Table 3): pop 100 x 30 gen, depth 3, p_cross 0.7, p_mut 0.15, 2 elites. CHEAP FITNESS PROTOCOL (decided 2026-10-27, fidelity-checked; see README section 5): each candidate trains <=5 minibatch epochs (patience 2, batch 256) on a fixed seeded 10k-sample subset of the training partition. Selection, final retraining (<=100 epochs, patience 15, batch 128) and the test evaluation use the full partitions. TWO-STAGE SELECTION (deviation D12, decided 2026-11-09 after the step-3 gate): every distinct valid formula of the final population is re-scored under the long protocol (<=30 epochs, patience 2, batch 128, full training partition, paired seeds) and the best re-scored formula is selected.",
+  "dataset": "bloodmnist",
+  "data_root": "data",
+  "download": true,
+  "val_fraction": 0.1,
+  "corruption": {
+    "pattern": "random",
+    "rate": 0.2
+  },
+  "backbone": "cnn",
+  "metadata_mode": "full",
+  "method": {
+    "type": "evolved",
+    "terminals": [
+      "value",
+      "missing",
+      "confidence"
+    ]
+  },
+  "search": {
+    "population_size": 100,
+    "generations": 30,
+    "max_tree_depth": 3,
+    "mutation_rate": 0.15,
+    "crossover_rate": 0.7,
+    "elite_size": 2,
+    "fitness_epochs": 5,
+    "fitness_patience": 2,
+    "fitness_batch_size": 256,
+    "fitness_train_subset": 10000,
+    "rerank": {
+      "top_k": null,
+      "epochs": 30,
+      "patience": 2,
+      "batch_size": 128,
+      "train_subset": null
+    },
+    "reuse_search_dir": null
+  },
+  "final": {
+    "epochs": 100,
+    "patience": 15,
+    "batch_size": 128
+  },
+  "optimizer": {
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "grad_clip": 1.0
+  },
+  "seeds": {
+    "split": 1000,
+    "corruption": 2000,
+    "evolution": 3000,
+    "init": 4000,
+    "batch": 5000
+  },
+  "device": "auto",
+  "out_root": "runs"
+}

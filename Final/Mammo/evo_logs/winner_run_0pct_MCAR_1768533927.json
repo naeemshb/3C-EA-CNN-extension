@@ -1,0 +1,1514 @@
+{
+  "timestamp": "2026-01-15 21:25:27",
+  "dataset": "hepatitis",
+  "missing_rate": 0.0,
+  "mechanism": "MCAR",
+  "best": {
+    "fitness": 0.8328012299537659,
+    "nodes": 13,
+    "depth": 7,
+    "uses_inputs": 3,
+    "tree_str": "multiply(\n  confidence,\n  subtract(\n    multiply(\n      add(\n        max(\n          confidence,\n          value\n        ),\n        leaky_relu(\n          cube(\n            missing\n          )\n        )\n      ),\n      missing\n    ),\n    value\n  )\n)"
+  },
+  "per_generation": [
+    {
+      "generation": 1,
+      "fitness": 0.8130955895105999,
+      "nodes": 4,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "sqrt(\n  min(\n    value,\n    confidence\n  )\n)",
+      "infix": "sqrt(min(x, c))",
+      "tree": {
+        "type": "unary",
+        "operator": "sqrt",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "min",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "fitness": 0.8184196521441142,
+      "nodes": 9,
+      "depth": 4,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  max(\n    divide(\n      value,\n      confidence\n    ),\n    value\n  ),\n  leaky_relu(\n    cube(\n      value\n    )\n  )\n)",
+      "infix": "(max((x / c), x) + leakyrelu((x)^3))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "divide",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "leaky_relu",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "cube",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 3,
+      "fitness": 0.8133955895105999,
+      "nodes": 3,
+      "depth": 2,
+      "uses_inputs": 2,
+      "tree_str": "min(\n  value,\n  missing\n)",
+      "infix": "min(x, m)",
+      "tree": {
+        "type": "binary",
+        "operator": "min",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "input",
+            "input_name": "missing",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 4,
+      "fitness": 0.8250437743822735,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "min(\n  confidence,\n  min(\n    value,\n    1.0\n  )\n)",
+      "infix": "min(c, min(x, 1))",
+      "tree": {
+        "type": "binary",
+        "operator": "min",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "confidence",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "min",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 1.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 5,
+      "fitness": 0.8266771077156068,
+      "nodes": 14,
+      "depth": 7,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  max(\n    square(\n      subtract(\n        elu(\n          divide(\n            confidence,\n            confidence\n          )\n        ),\n        0.1\n      )\n    ),\n    add(\n      value,\n      softplus(\n        missing\n      )\n    )\n  ),\n  value\n)",
+      "infix": "(max(((elu((c / c)) - 0.1))^2, (x + softplus(m))) + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "square",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "subtract",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "elu",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "divide",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "confidence",
+                                "children": []
+                              },
+                              {
+                                "type": "input",
+                                "input_name": "confidence",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "constant",
+                        "value": 0.1,
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "softplus",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "missing",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 6,
+      "fitness": 0.8194196521441143,
+      "nodes": 3,
+      "depth": 2,
+      "uses_inputs": 2,
+      "tree_str": "divide(\n  value,\n  confidence\n)",
+      "infix": "(x / c)",
+      "tree": {
+        "type": "binary",
+        "operator": "divide",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "input",
+            "input_name": "confidence",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 7,
+      "fitness": 0.8319012299537658,
+      "nodes": 18,
+      "depth": 9,
+      "uses_inputs": 3,
+      "tree_str": "min(\n  add(\n    confidence,\n    subtract(\n      value,\n      0.1\n    )\n  ),\n  square(\n    cube(\n      max(\n        elu(\n          exp(\n            multiply(\n              identity(\n                value\n              ),\n              missing\n            )\n          )\n        ),\n        subtract(\n          1.0,\n          value\n        )\n      )\n    )\n  )\n)",
+      "infix": "min((c + (x - 0.1)), ((max(elu(exp((x * m))), (1 - x)))^3)^2)",
+      "tree": {
+        "type": "binary",
+        "operator": "min",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              },
+              {
+                "type": "binary",
+                "operator": "subtract",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "constant",
+                    "value": 0.1,
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "square",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "cube",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "elu",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "exp",
+                            "children": [
+                              {
+                                "type": "binary",
+                                "operator": "multiply",
+                                "children": [
+                                  {
+                                    "type": "unary",
+                                    "operator": "identity",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "value",
+                                        "children": []
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "input",
+                                    "input_name": "missing",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "binary",
+                        "operator": "subtract",
+                        "children": [
+                          {
+                            "type": "constant",
+                            "value": 1.0,
+                            "children": []
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 8,
+      "fitness": 0.8230437743822735,
+      "nodes": 15,
+      "depth": 8,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  max(\n    square(\n      subtract(\n        elu(\n          subtract(\n            softplus(\n              value\n            ),\n            -0.1\n          )\n        ),\n        0.1\n      )\n    ),\n    add(\n      value,\n      softplus(\n        missing\n      )\n    )\n  ),\n  value\n)",
+      "infix": "(max(((elu((softplus(x) - -0.1)) - 0.1))^2, (x + softplus(m))) + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "square",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "subtract",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "elu",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "subtract",
+                            "children": [
+                              {
+                                "type": "unary",
+                                "operator": "softplus",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "value",
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "constant",
+                                "value": -0.1,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "constant",
+                        "value": 0.1,
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "softplus",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "missing",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 9,
+      "fitness": 0.8168196521441142,
+      "nodes": 17,
+      "depth": 8,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  max(\n    square(\n      subtract(\n        elu(\n          subtract(\n            softplus(\n              confidence\n            ),\n            exp(\n              value\n            )\n          )\n        ),\n        value\n      )\n    ),\n    add(\n      max(\n        confidence,\n        confidence\n      ),\n      value\n    )\n  ),\n  value\n)",
+      "infix": "(max(((elu((softplus(c) - exp(x))) - x))^2, (max(c, c) + x)) + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "square",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "subtract",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "elu",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "subtract",
+                            "children": [
+                              {
+                                "type": "unary",
+                                "operator": "softplus",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "confidence",
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "unary",
+                                "operator": "exp",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "value",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 10,
+      "fitness": 0.8217104410489401,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "multiply(\n  tanh(\n    value\n  ),\n  softplus(\n    value\n  )\n)",
+      "infix": "(tanh(x) * softplus(x))",
+      "tree": {
+        "type": "binary",
+        "operator": "multiply",
+        "children": [
+          {
+            "type": "unary",
+            "operator": "tanh",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "softplus",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 11,
+      "fitness": 0.82211044104894,
+      "nodes": 3,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  1.0,\n  value\n)",
+      "infix": "(1 + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "constant",
+            "value": 1.0,
+            "children": []
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 12,
+      "fitness": 0.81921044104894,
+      "nodes": 20,
+      "depth": 8,
+      "uses_inputs": 1,
+      "tree_str": "min(\n  max(\n    multiply(\n      tanh(\n        value\n      ),\n      softplus(\n        add(\n          max(\n            -2.0,\n            value\n          ),\n          leaky_relu(\n            cube(\n              value\n            )\n          )\n        )\n      )\n    ),\n    divide(\n      value,\n      elu(\n        sigmoid(\n          0.1\n        )\n      )\n    )\n  ),\n  exp(\n    value\n  )\n)",
+      "infix": "min(max((tanh(x) * softplus((max(-2, x) + leakyrelu((x)^3)))), (x / elu(sigmoid(0.1)))), exp(x))",
+      "tree": {
+        "type": "binary",
+        "operator": "min",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "multiply",
+                "children": [
+                  {
+                    "type": "unary",
+                    "operator": "tanh",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "softplus",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "add",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "max",
+                            "children": [
+                              {
+                                "type": "constant",
+                                "value": -2.0,
+                                "children": []
+                              },
+                              {
+                                "type": "input",
+                                "input_name": "value",
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "unary",
+                            "operator": "leaky_relu",
+                            "children": [
+                              {
+                                "type": "unary",
+                                "operator": "cube",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "value",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "divide",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "elu",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "sigmoid",
+                        "children": [
+                          {
+                            "type": "constant",
+                            "value": 0.1,
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "exp",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 13,
+      "fitness": 0.8248437743822734,
+      "nodes": 7,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "multiply(\n  max(\n    value,\n    confidence\n  ),\n  min(\n    value,\n    confidence\n  )\n)",
+      "infix": "(max(x, c) * min(x, c))",
+      "tree": {
+        "type": "binary",
+        "operator": "multiply",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "binary",
+            "operator": "min",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 14,
+      "fitness": 0.8328012299537659,
+      "nodes": 13,
+      "depth": 7,
+      "uses_inputs": 3,
+      "tree_str": "multiply(\n  confidence,\n  subtract(\n    multiply(\n      add(\n        max(\n          confidence,\n          value\n        ),\n        leaky_relu(\n          cube(\n            missing\n          )\n        )\n      ),\n      missing\n    ),\n    value\n  )\n)",
+      "infix": "(c * (((max(c, x) + leakyrelu((m)^3)) * m) - x))",
+      "tree": {
+        "type": "binary",
+        "operator": "multiply",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "confidence",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "subtract",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "multiply",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "max",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "leaky_relu",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cube",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "missing",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 15,
+      "fitness": 0.8294678966204326,
+      "nodes": 13,
+      "depth": 7,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  add(\n    confidence,\n    multiply(\n      add(\n        max(\n          confidence,\n          value\n        ),\n        leaky_relu(\n          cube(\n            confidence\n          )\n        )\n      ),\n      value\n    )\n  ),\n  value\n)",
+      "infix": "((c + ((max(c, x) + leakyrelu((c)^3)) * x)) + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              },
+              {
+                "type": "binary",
+                "operator": "multiply",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "max",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "leaky_relu",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cube",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "confidence",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 16,
+      "fitness": 0.8310012299537659,
+      "nodes": 25,
+      "depth": 10,
+      "uses_inputs": 3,
+      "tree_str": "subtract(\n  add(\n    softplus(\n      confidence\n    ),\n    missing\n  ),\n  min(\n    value,\n    min(\n      value,\n      max(\n        multiply(\n          add(\n            max(\n              min(\n                value,\n                confidence\n              ),\n              elu(\n                divide(\n                  -2.0,\n                  confidence\n                )\n              )\n            ),\n            leaky_relu(\n              cube(\n                value\n              )\n            )\n          ),\n          missing\n        ),\n        value\n      )\n    )\n  )\n)",
+      "infix": "((softplus(c) + m) - min(x, min(x, max(((max(min(x, c), elu((-2 / c))) + leakyrelu((x)^3)) * m), x))))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "softplus",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "binary",
+            "operator": "min",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "multiply",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "add",
+                            "children": [
+                              {
+                                "type": "binary",
+                                "operator": "max",
+                                "children": [
+                                  {
+                                    "type": "binary",
+                                    "operator": "min",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "value",
+                                        "children": []
+                                      },
+                                      {
+                                        "type": "input",
+                                        "input_name": "confidence",
+                                        "children": []
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "unary",
+                                    "operator": "elu",
+                                    "children": [
+                                      {
+                                        "type": "binary",
+                                        "operator": "divide",
+                                        "children": [
+                                          {
+                                            "type": "constant",
+                                            "value": -2.0,
+                                            "children": []
+                                          },
+                                          {
+                                            "type": "input",
+                                            "input_name": "confidence",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "unary",
+                                "operator": "leaky_relu",
+                                "children": [
+                                  {
+                                    "type": "unary",
+                                    "operator": "cube",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "value",
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "missing",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 17,
+      "fitness": 0.8207529854774476,
+      "nodes": 13,
+      "depth": 7,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  add(\n    missing,\n    multiply(\n      add(\n        max(\n          confidence,\n          value\n        ),\n        leaky_relu(\n          cube(\n            confidence\n          )\n        )\n      ),\n      value\n    )\n  ),\n  value\n)",
+      "infix": "((m + ((max(c, x) + leakyrelu((c)^3)) * x)) + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              },
+              {
+                "type": "binary",
+                "operator": "multiply",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "max",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "leaky_relu",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cube",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "confidence",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 18,
+      "fitness": 0.8259771077156067,
+      "nodes": 19,
+      "depth": 8,
+      "uses_inputs": 3,
+      "tree_str": "max(\n  multiply(\n    add(\n      add(\n        max(\n          min(\n            value,\n            confidence\n          ),\n          confidence\n        ),\n        leaky_relu(\n          multiply(\n            0.1,\n            relu(\n              value\n            )\n          )\n        )\n      ),\n      cube(\n        cube(\n          missing\n        )\n      )\n    ),\n    missing\n  ),\n  value\n)",
+      "infix": "max((((max(min(x, c), c) + leakyrelu((0.1 * relu(x)))) + ((m)^3)^3) * m), x)",
+      "tree": {
+        "type": "binary",
+        "operator": "max",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "multiply",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "max",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "min",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "value",
+                                "children": []
+                              },
+                              {
+                                "type": "input",
+                                "input_name": "confidence",
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "leaky_relu",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "multiply",
+                            "children": [
+                              {
+                                "type": "constant",
+                                "value": 0.1,
+                                "children": []
+                              },
+                              {
+                                "type": "unary",
+                                "operator": "relu",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "value",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "cube",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "cube",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "missing",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 19,
+      "fitness": 0.8287678966204326,
+      "nodes": 18,
+      "depth": 8,
+      "uses_inputs": 2,
+      "tree_str": "multiply(\n  add(\n    max(\n      leaky_relu(\n        elu(\n          subtract(\n            value,\n            multiply(\n              value,\n              value\n            )\n          )\n        )\n      ),\n      divide(\n        confidence,\n        elu(\n          sigmoid(\n            0.1\n          )\n        )\n      )\n    ),\n    leaky_relu(\n      confidence\n    )\n  ),\n  value\n)",
+      "infix": "((max(leakyrelu(elu((x - (x * x)))), (c / elu(sigmoid(0.1)))) + leakyrelu(c)) * x)",
+      "tree": {
+        "type": "binary",
+        "operator": "multiply",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "max",
+                "children": [
+                  {
+                    "type": "unary",
+                    "operator": "leaky_relu",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "elu",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "subtract",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "value",
+                                "children": []
+                              },
+                              {
+                                "type": "binary",
+                                "operator": "multiply",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "value",
+                                    "children": []
+                                  },
+                                  {
+                                    "type": "input",
+                                    "input_name": "value",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "divide",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "elu",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "sigmoid",
+                            "children": [
+                              {
+                                "type": "constant",
+                                "value": 0.1,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "leaky_relu",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 20,
+      "fitness": 0.8267771077156068,
+      "nodes": 13,
+      "depth": 7,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  add(\n    missing,\n    multiply(\n      max(\n        elu(\n          sigmoid(\n            0.1\n          )\n        ),\n        leaky_relu(\n          cube(\n            confidence\n          )\n        )\n      ),\n      value\n    )\n  ),\n  value\n)",
+      "infix": "((m + (max(elu(sigmoid(0.1)), leakyrelu((c)^3)) * x)) + x)",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              },
+              {
+                "type": "binary",
+                "operator": "multiply",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "elu",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "sigmoid",
+                            "children": [
+                              {
+                                "type": "constant",
+                                "value": 0.1,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "leaky_relu",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cube",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "confidence",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    }
+  ]
+}

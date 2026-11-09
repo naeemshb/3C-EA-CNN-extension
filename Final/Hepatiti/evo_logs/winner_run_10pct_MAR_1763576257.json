@@ -1,0 +1,2477 @@
+{
+  "timestamp": "2025-11-19 12:17:37",
+  "dataset": "diabetes",
+  "missing_rate": 0.1,
+  "mechanism": "MAR",
+  "best": {
+    "fitness": 0.969675239976247,
+    "nodes": 8,
+    "depth": 4,
+    "uses_inputs": 1,
+    "tree_str": "add(\n  value,\n  max(\n    sigmoid(\n      value\n    ),\n    add(\n      value,\n      value\n    )\n  )\n)"
+  },
+  "per_generation": [
+    {
+      "generation": 1,
+      "fitness": 0.9078924462000529,
+      "nodes": 10,
+      "depth": 6,
+      "uses_inputs": 2,
+      "tree_str": "abs(\n  divide(\n    max(\n      missing,\n      value\n    ),\n    divide(\n      sin(\n        cos(\n          value\n        )\n      ),\n      value\n    )\n  )\n)",
+      "infix": "|(max(m, x) / (sin(cos(x)) / x))|",
+      "tree": {
+        "type": "unary",
+        "operator": "abs",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "max",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "divide",
+                "children": [
+                  {
+                    "type": "unary",
+                    "operator": "sin",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "cos",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 2,
+      "fitness": 0.8439096524238586,
+      "nodes": 28,
+      "depth": 11,
+      "uses_inputs": 3,
+      "tree_str": "min(\n  exp(\n    min(\n      max(\n        missing,\n        max(\n          min(\n            0.1,\n            -0.1\n          ),\n          identity(\n            subtract(\n              divide(\n                multiply(\n                  confidence,\n                  softplus(\n                    missing\n                  )\n                ),\n                max(\n                  confidence,\n                  multiply(\n                    value,\n                    1.0\n                  )\n                )\n              ),\n              0.1\n            )\n          )\n        )\n      ),\n      log(\n        value\n      )\n    )\n  ),\n  sigmoid(\n    divide(\n      0.0,\n      missing\n    )\n  )\n)",
+      "infix": "min(exp(min(max(m, max(min(0.1, -0.1), (((c * softplus(m)) / max(c, (x * 1))) - 0.1))), log(|x|))), sigmoid((0 / m)))",
+      "tree": {
+        "type": "binary",
+        "operator": "min",
+        "children": [
+          {
+            "type": "unary",
+            "operator": "exp",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "missing",
+                        "children": []
+                      },
+                      {
+                        "type": "binary",
+                        "operator": "max",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "min",
+                            "children": [
+                              {
+                                "type": "constant",
+                                "value": 0.1,
+                                "children": []
+                              },
+                              {
+                                "type": "constant",
+                                "value": -0.1,
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "unary",
+                            "operator": "identity",
+                            "children": [
+                              {
+                                "type": "binary",
+                                "operator": "subtract",
+                                "children": [
+                                  {
+                                    "type": "binary",
+                                    "operator": "divide",
+                                    "children": [
+                                      {
+                                        "type": "binary",
+                                        "operator": "multiply",
+                                        "children": [
+                                          {
+                                            "type": "input",
+                                            "input_name": "confidence",
+                                            "children": []
+                                          },
+                                          {
+                                            "type": "unary",
+                                            "operator": "softplus",
+                                            "children": [
+                                              {
+                                                "type": "input",
+                                                "input_name": "missing",
+                                                "children": []
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "binary",
+                                        "operator": "max",
+                                        "children": [
+                                          {
+                                            "type": "input",
+                                            "input_name": "confidence",
+                                            "children": []
+                                          },
+                                          {
+                                            "type": "binary",
+                                            "operator": "multiply",
+                                            "children": [
+                                              {
+                                                "type": "input",
+                                                "input_name": "value",
+                                                "children": []
+                                              },
+                                              {
+                                                "type": "constant",
+                                                "value": 1.0,
+                                                "children": []
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "constant",
+                                    "value": 0.1,
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "log",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "sigmoid",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "divide",
+                "children": [
+                  {
+                    "type": "constant",
+                    "value": 0.0,
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 3,
+      "fitness": 0.8736010791142782,
+      "nodes": 3,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "cube(\n  cos(\n    value\n  )\n)",
+      "infix": "(cos(x))^3",
+      "tree": {
+        "type": "unary",
+        "operator": "cube",
+        "children": [
+          {
+            "type": "unary",
+            "operator": "cos",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 4,
+      "fitness": 0.8470096524238586,
+      "nodes": 9,
+      "depth": 5,
+      "uses_inputs": 3,
+      "tree_str": "max(\n  max(\n    confidence,\n    missing\n  ),\n  exp(\n    abs(\n      min(\n        1.0,\n        value\n      )\n    )\n  )\n)",
+      "infix": "max(max(c, m), exp(|min(1, x)|))",
+      "tree": {
+        "type": "binary",
+        "operator": "max",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              },
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "exp",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "abs",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "min",
+                    "children": [
+                      {
+                        "type": "constant",
+                        "value": 1.0,
+                        "children": []
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 5,
+      "fitness": 0.841142985757192,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  max(\n    value,\n    0.0\n  )\n)",
+      "infix": "(x + max(x, 0))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 0.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 6,
+      "fitness": 0.8780677457809449,
+      "nodes": 15,
+      "depth": 8,
+      "uses_inputs": 3,
+      "tree_str": "subtract(\n  max(\n    add(\n      missing,\n      subtract(\n        confidence,\n        identity(\n          exp(\n            add(\n              confidence,\n              confidence\n            )\n          )\n        )\n      )\n    ),\n    negate(\n      value\n    )\n  ),\n  sqrt(\n    value\n  )\n)",
+      "infix": "(max((m + (c - exp((c + c)))), (-x)) - sqrt(x))",
+      "tree": {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "subtract",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "identity",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "exp",
+                            "children": [
+                              {
+                                "type": "binary",
+                                "operator": "add",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "confidence",
+                                    "children": []
+                                  },
+                                  {
+                                    "type": "input",
+                                    "input_name": "confidence",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "negate",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "sqrt",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 7,
+      "fitness": 0.8478096524238588,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  value,\n  max(\n    missing,\n    confidence\n  )\n)",
+      "infix": "(x + max(m, c))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              },
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 8,
+      "fitness": 0.8739010791142782,
+      "nodes": 2,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "relu(\n  value\n)",
+      "infix": "relu(x)",
+      "tree": {
+        "type": "unary",
+        "operator": "relu",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 9,
+      "fitness": 0.907492446200053,
+      "nodes": 12,
+      "depth": 7,
+      "uses_inputs": 2,
+      "tree_str": "relu(\n  subtract(\n    missing,\n    max(\n      relu(\n        log(\n          value\n        )\n      ),\n      identity(\n        multiply(\n          value,\n          cos(\n            -1.0\n          )\n        )\n      )\n    )\n  )\n)",
+      "infix": "relu((m - max(relu(log(|x|)), (x * cos(-1)))))",
+      "tree": {
+        "type": "unary",
+        "operator": "relu",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "subtract",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              },
+              {
+                "type": "binary",
+                "operator": "max",
+                "children": [
+                  {
+                    "type": "unary",
+                    "operator": "relu",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "log",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "identity",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "multiply",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          },
+                          {
+                            "type": "unary",
+                            "operator": "cos",
+                            "children": [
+                              {
+                                "type": "constant",
+                                "value": -1.0,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 10,
+      "fitness": 0.8739010791142782,
+      "nodes": 2,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "cube(\n  value\n)",
+      "infix": "(x)^3",
+      "tree": {
+        "type": "unary",
+        "operator": "cube",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 11,
+      "fitness": 0.8444763190905255,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  value,\n  max(\n    missing,\n    0.0\n  )\n)",
+      "infix": "(x + max(m, 0))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "missing",
+                "children": []
+              },
+              {
+                "type": "constant",
+                "value": 0.0,
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 12,
+      "fitness": 0.8452096524238587,
+      "nodes": 21,
+      "depth": 8,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  exp(\n    min(\n      divide(\n        confidence,\n        max(\n          cube(\n            multiply(\n              missing,\n              confidence\n            )\n          ),\n          cos(\n            -1.0\n          )\n        )\n      ),\n      log(\n        value\n      )\n    )\n  ),\n  sigmoid(\n    min(\n      max(\n        missing,\n        value\n      ),\n      identity(\n        missing\n      )\n    )\n  )\n)",
+      "infix": "(exp(min((c / max(((m * c))^3, cos(-1))), log(|x|))) + sigmoid(min(max(m, x), m)))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "unary",
+            "operator": "exp",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "divide",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      },
+                      {
+                        "type": "binary",
+                        "operator": "max",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cube",
+                            "children": [
+                              {
+                                "type": "binary",
+                                "operator": "multiply",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "missing",
+                                    "children": []
+                                  },
+                                  {
+                                    "type": "input",
+                                    "input_name": "confidence",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "type": "unary",
+                            "operator": "cos",
+                            "children": [
+                              {
+                                "type": "constant",
+                                "value": -1.0,
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "log",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "unary",
+            "operator": "sigmoid",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "missing",
+                        "children": []
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "identity",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "missing",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 13,
+      "fitness": 0.8444763190905255,
+      "nodes": 5,
+      "depth": 3,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  value,\n  max(\n    -1.0,\n    confidence\n  )\n)",
+      "infix": "(x + max(-1, c))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "constant",
+                "value": -1.0,
+                "children": []
+              },
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 14,
+      "fitness": 0.8775677457809448,
+      "nodes": 18,
+      "depth": 9,
+      "uses_inputs": 3,
+      "tree_str": "cos(\n  divide(\n    add(\n      value,\n      1.0\n    ),\n    max(\n      min(\n        divide(\n          missing,\n          max(\n            cube(\n              multiply(\n                missing,\n                confidence\n              )\n            ),\n            cos(\n              -1.0\n            )\n          )\n        ),\n        value\n      ),\n      confidence\n    )\n  )\n)",
+      "infix": "cos(((x + 1) / max(min((m / max(((m * c))^3, cos(-1))), x), c)))",
+      "tree": {
+        "type": "unary",
+        "operator": "cos",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "constant",
+                    "value": 1.0,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "max",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "min",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "divide",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "missing",
+                            "children": []
+                          },
+                          {
+                            "type": "binary",
+                            "operator": "max",
+                            "children": [
+                              {
+                                "type": "unary",
+                                "operator": "cube",
+                                "children": [
+                                  {
+                                    "type": "binary",
+                                    "operator": "multiply",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "missing",
+                                        "children": []
+                                      },
+                                      {
+                                        "type": "input",
+                                        "input_name": "confidence",
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "unary",
+                                "operator": "cos",
+                                "children": [
+                                  {
+                                    "type": "constant",
+                                    "value": -1.0,
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 15,
+      "fitness": 0.9098257795333862,
+      "nodes": 18,
+      "depth": 9,
+      "uses_inputs": 3,
+      "tree_str": "cos(\n  divide(\n    add(\n      value,\n      1.0\n    ),\n    max(\n      min(\n        divide(\n          missing,\n          max(\n            cube(\n              multiply(\n                missing,\n                confidence\n              )\n            ),\n            cos(\n              -1.0\n            )\n          )\n        ),\n        value\n      ),\n      confidence\n    )\n  )\n)",
+      "infix": "cos(((x + 1) / max(min((m / max(((m * c))^3, cos(-1))), x), c)))",
+      "tree": {
+        "type": "unary",
+        "operator": "cos",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "divide",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "constant",
+                    "value": 1.0,
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "max",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "min",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "divide",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "missing",
+                            "children": []
+                          },
+                          {
+                            "type": "binary",
+                            "operator": "max",
+                            "children": [
+                              {
+                                "type": "unary",
+                                "operator": "cube",
+                                "children": [
+                                  {
+                                    "type": "binary",
+                                    "operator": "multiply",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "missing",
+                                        "children": []
+                                      },
+                                      {
+                                        "type": "input",
+                                        "input_name": "confidence",
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "unary",
+                                "operator": "cos",
+                                "children": [
+                                  {
+                                    "type": "constant",
+                                    "value": -1.0,
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 16,
+      "fitness": 0.8758344124476115,
+      "nodes": 10,
+      "depth": 5,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  value,\n  max(\n    cos(\n      value\n    ),\n    add(\n      min(\n        missing,\n        -0.1\n      ),\n      value\n    )\n  )\n)",
+      "infix": "(x + max(cos(x), (min(m, -0.1) + x)))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "cos",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "min",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "missing",
+                        "children": []
+                      },
+                      {
+                        "type": "constant",
+                        "value": -0.1,
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 17,
+      "fitness": 0.8739010791142782,
+      "nodes": 2,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "cube(\n  value\n)",
+      "infix": "(x)^3",
+      "tree": {
+        "type": "unary",
+        "operator": "cube",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 18,
+      "fitness": 0.8752344124476116,
+      "nodes": 14,
+      "depth": 6,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  value,\n  max(\n    add(\n      log(\n        value\n      ),\n      max(\n        cos(\n          value\n        ),\n        -1.0\n      )\n    ),\n    cube(\n      add(\n        -1.0,\n        missing\n      )\n    )\n  )\n)",
+      "infix": "(x + max((log(|x|) + max(cos(x), -1)), ((-1 + m))^3))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "unary",
+                    "operator": "log",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "cos",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "constant",
+                        "value": -1.0,
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "cube",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "constant",
+                        "value": -1.0,
+                        "children": []
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "missing",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 19,
+      "fitness": 0.9061591128667196,
+      "nodes": 2,
+      "depth": 2,
+      "uses_inputs": 1,
+      "tree_str": "softplus(\n  value\n)",
+      "infix": "softplus(x)",
+      "tree": {
+        "type": "unary",
+        "operator": "softplus",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          }
+        ]
+      }
+    },
+    {
+      "generation": 20,
+      "fitness": 0.8462096524238587,
+      "nodes": 13,
+      "depth": 7,
+      "uses_inputs": 3,
+      "tree_str": "identity(\n  max(\n    confidence,\n    max(\n      add(\n        value,\n        max(\n          cos(\n            value\n          ),\n          cube(\n            value\n          )\n        )\n      ),\n      cube(\n        missing\n      )\n    )\n  )\n)",
+      "infix": "max(c, max((x + max(cos(x), (x)^3)), (m)^3))",
+      "tree": {
+        "type": "unary",
+        "operator": "identity",
+        "children": [
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "confidence",
+                "children": []
+              },
+              {
+                "type": "binary",
+                "operator": "max",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      },
+                      {
+                        "type": "binary",
+                        "operator": "max",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cos",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "value",
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "unary",
+                            "operator": "cube",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "value",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "unary",
+                    "operator": "cube",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "missing",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 21,
+      "fitness": 0.969675239976247,
+      "nodes": 8,
+      "depth": 4,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  max(\n    sigmoid(\n      value\n    ),\n    add(\n      value,\n      value\n    )\n  )\n)",
+      "infix": "(x + max(sigmoid(x), (x + x)))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "sigmoid",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 22,
+      "fitness": 0.8746677457809449,
+      "nodes": 39,
+      "depth": 13,
+      "uses_inputs": 3,
+      "tree_str": "max(\n  cos(\n    value\n  ),\n  add(\n    min(\n      max(\n        0.0,\n        add(\n          cos(\n            cube(\n              value\n            )\n          ),\n          min(\n            missing,\n            max(\n              cos(\n                value\n              ),\n              add(\n                max(\n                  max(\n                    0.0,\n                    divide(\n                      cos(\n                        -0.1\n                      ),\n                      sigmoid(\n                        confidence\n                      )\n                    )\n                  ),\n                  confidence\n                ),\n                value\n              )\n            )\n          )\n        )\n      ),\n      add(\n        cube(\n          missing\n        ),\n        min(\n          relu(\n            subtract(\n              max(\n                missing,\n                -0.1\n              ),\n              -0.5\n            )\n          ),\n          value\n        )\n      )\n    ),\n    value\n  )\n)",
+      "infix": "max(cos(x), (min(max(0, (cos((x)^3) + min(m, max(cos(x), (max(max(0, (cos(-0.1) / sigmoid(c))), c) + x))))), ((m)^3 + min(relu((max(m, -0.1) - -0.5)), x))) + x))",
+      "tree": {
+        "type": "binary",
+        "operator": "max",
+        "children": [
+          {
+            "type": "unary",
+            "operator": "cos",
+            "children": [
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          },
+          {
+            "type": "binary",
+            "operator": "add",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "constant",
+                        "value": 0.0,
+                        "children": []
+                      },
+                      {
+                        "type": "binary",
+                        "operator": "add",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cos",
+                            "children": [
+                              {
+                                "type": "unary",
+                                "operator": "cube",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "value",
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "type": "binary",
+                            "operator": "min",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "missing",
+                                "children": []
+                              },
+                              {
+                                "type": "binary",
+                                "operator": "max",
+                                "children": [
+                                  {
+                                    "type": "unary",
+                                    "operator": "cos",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "value",
+                                        "children": []
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "binary",
+                                    "operator": "add",
+                                    "children": [
+                                      {
+                                        "type": "binary",
+                                        "operator": "max",
+                                        "children": [
+                                          {
+                                            "type": "binary",
+                                            "operator": "max",
+                                            "children": [
+                                              {
+                                                "type": "constant",
+                                                "value": 0.0,
+                                                "children": []
+                                              },
+                                              {
+                                                "type": "binary",
+                                                "operator": "divide",
+                                                "children": [
+                                                  {
+                                                    "type": "unary",
+                                                    "operator": "cos",
+                                                    "children": [
+                                                      {
+                                                        "type": "constant",
+                                                        "value": -0.1,
+                                                        "children": []
+                                                      }
+                                                    ]
+                                                  },
+                                                  {
+                                                    "type": "unary",
+                                                    "operator": "sigmoid",
+                                                    "children": [
+                                                      {
+                                                        "type": "input",
+                                                        "input_name": "confidence",
+                                                        "children": []
+                                                      }
+                                                    ]
+                                                  }
+                                                ]
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "input",
+                                            "input_name": "confidence",
+                                            "children": []
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "input",
+                                        "input_name": "value",
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "cube",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "missing",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "binary",
+                        "operator": "min",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "relu",
+                            "children": [
+                              {
+                                "type": "binary",
+                                "operator": "subtract",
+                                "children": [
+                                  {
+                                    "type": "binary",
+                                    "operator": "max",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "missing",
+                                        "children": []
+                                      },
+                                      {
+                                        "type": "constant",
+                                        "value": -0.1,
+                                        "children": []
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "constant",
+                                    "value": -0.5,
+                                    "children": []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "input",
+                "input_name": "value",
+                "children": []
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 23,
+      "fitness": 0.9088257795333862,
+      "nodes": 26,
+      "depth": 10,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  value,\n  max(\n    sigmoid(\n      value\n    ),\n    multiply(\n      max(\n        0.0,\n        cube(\n          multiply(\n            missing,\n            confidence\n          )\n        )\n      ),\n      max(\n        cos(\n          value\n        ),\n        add(\n          max(\n            max(\n              0.0,\n              divide(\n                cos(\n                  -0.1\n                ),\n                sigmoid(\n                  confidence\n                )\n              )\n            ),\n            confidence\n          ),\n          value\n        )\n      )\n    )\n  )\n)",
+      "infix": "(x + max(sigmoid(x), (max(0, ((m * c))^3) * max(cos(x), (max(max(0, (cos(-0.1) / sigmoid(c))), c) + x)))))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "sigmoid",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "multiply",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "constant",
+                        "value": 0.0,
+                        "children": []
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "cube",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "multiply",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "missing",
+                                "children": []
+                              },
+                              {
+                                "type": "input",
+                                "input_name": "confidence",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "cos",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "binary",
+                        "operator": "add",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "max",
+                            "children": [
+                              {
+                                "type": "binary",
+                                "operator": "max",
+                                "children": [
+                                  {
+                                    "type": "constant",
+                                    "value": 0.0,
+                                    "children": []
+                                  },
+                                  {
+                                    "type": "binary",
+                                    "operator": "divide",
+                                    "children": [
+                                      {
+                                        "type": "unary",
+                                        "operator": "cos",
+                                        "children": [
+                                          {
+                                            "type": "constant",
+                                            "value": -0.1,
+                                            "children": []
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "unary",
+                                        "operator": "sigmoid",
+                                        "children": [
+                                          {
+                                            "type": "input",
+                                            "input_name": "confidence",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "input",
+                                "input_name": "confidence",
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "input",
+                            "input_name": "value",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 24,
+      "fitness": 0.8764677457809448,
+      "nodes": 27,
+      "depth": 10,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  value,\n  max(\n    add(\n      value,\n      max(\n        cos(\n          subtract(\n            divide(\n              missing,\n              cos(\n                add(\n                  1.0,\n                  value\n                )\n              )\n            ),\n            max(\n              add(\n                value,\n                add(\n                  -0.1,\n                  confidence\n                )\n              ),\n              sin(\n                missing\n              )\n            )\n          )\n        ),\n        cos(\n          cube(\n            value\n          )\n        )\n      )\n    ),\n    cube(\n      missing\n    )\n  )\n)",
+      "infix": "(x + max((x + max(cos(((m / cos((1 + x))) - max((x + (-0.1 + c)), sin(m)))), cos((x)^3))), (m)^3))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "cos",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "subtract",
+                            "children": [
+                              {
+                                "type": "binary",
+                                "operator": "divide",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "missing",
+                                    "children": []
+                                  },
+                                  {
+                                    "type": "unary",
+                                    "operator": "cos",
+                                    "children": [
+                                      {
+                                        "type": "binary",
+                                        "operator": "add",
+                                        "children": [
+                                          {
+                                            "type": "constant",
+                                            "value": 1.0,
+                                            "children": []
+                                          },
+                                          {
+                                            "type": "input",
+                                            "input_name": "value",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "binary",
+                                "operator": "max",
+                                "children": [
+                                  {
+                                    "type": "binary",
+                                    "operator": "add",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "value",
+                                        "children": []
+                                      },
+                                      {
+                                        "type": "binary",
+                                        "operator": "add",
+                                        "children": [
+                                          {
+                                            "type": "constant",
+                                            "value": -0.1,
+                                            "children": []
+                                          },
+                                          {
+                                            "type": "input",
+                                            "input_name": "confidence",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "unary",
+                                    "operator": "sin",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "missing",
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "cos",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cube",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "value",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "cube",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 25,
+      "fitness": 0.9052591128667195,
+      "nodes": 7,
+      "depth": 4,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  max(\n    sigmoid(\n      value\n    ),\n    cube(\n      value\n    )\n  )\n)",
+      "infix": "(x + max(sigmoid(x), (x)^3))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "sigmoid",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "cube",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 26,
+      "fitness": 0.9051591128667195,
+      "nodes": 8,
+      "depth": 4,
+      "uses_inputs": 1,
+      "tree_str": "add(\n  value,\n  max(\n    sigmoid(\n      value\n    ),\n    add(\n      value,\n      value\n    )\n  )\n)",
+      "infix": "(x + max(sigmoid(x), (x + x)))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "sigmoid",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 27,
+      "fitness": 0.8763344124476115,
+      "nodes": 7,
+      "depth": 4,
+      "uses_inputs": 2,
+      "tree_str": "multiply(\n  value,\n  subtract(\n    tanh(\n      value\n    ),\n    cos(\n      confidence\n    )\n  )\n)",
+      "infix": "(x * (tanh(x) - cos(c)))",
+      "tree": {
+        "type": "binary",
+        "operator": "multiply",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "subtract",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "tanh",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "cos",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 28,
+      "fitness": 0.8758677457809448,
+      "nodes": 31,
+      "depth": 11,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  value,\n  max(\n    add(\n      value,\n      max(\n        sigmoid(\n          confidence\n        ),\n        cube(\n          missing\n        )\n      )\n    ),\n    add(\n      min(\n        min(\n          cos(\n            value\n          ),\n          multiply(\n            max(\n              0.0,\n              add(\n                value,\n                max(\n                  sigmoid(\n                    value\n                  ),\n                  add(\n                    value,\n                    value\n                  )\n                )\n              )\n            ),\n            missing\n          )\n        ),\n        confidence\n      ),\n      add(\n        -1.0,\n        value\n      )\n    )\n  )\n)",
+      "infix": "(x + max((x + max(sigmoid(c), (m)^3)), (min(min(cos(x), (max(0, (x + max(sigmoid(x), (x + x)))) * m)), c) + (-1 + x))))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "max",
+                    "children": [
+                      {
+                        "type": "unary",
+                        "operator": "sigmoid",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "confidence",
+                            "children": []
+                          }
+                        ]
+                      },
+                      {
+                        "type": "unary",
+                        "operator": "cube",
+                        "children": [
+                          {
+                            "type": "input",
+                            "input_name": "missing",
+                            "children": []
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "min",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "min",
+                        "children": [
+                          {
+                            "type": "unary",
+                            "operator": "cos",
+                            "children": [
+                              {
+                                "type": "input",
+                                "input_name": "value",
+                                "children": []
+                              }
+                            ]
+                          },
+                          {
+                            "type": "binary",
+                            "operator": "multiply",
+                            "children": [
+                              {
+                                "type": "binary",
+                                "operator": "max",
+                                "children": [
+                                  {
+                                    "type": "constant",
+                                    "value": 0.0,
+                                    "children": []
+                                  },
+                                  {
+                                    "type": "binary",
+                                    "operator": "add",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "value",
+                                        "children": []
+                                      },
+                                      {
+                                        "type": "binary",
+                                        "operator": "max",
+                                        "children": [
+                                          {
+                                            "type": "unary",
+                                            "operator": "sigmoid",
+                                            "children": [
+                                              {
+                                                "type": "input",
+                                                "input_name": "value",
+                                                "children": []
+                                              }
+                                            ]
+                                          },
+                                          {
+                                            "type": "binary",
+                                            "operator": "add",
+                                            "children": [
+                                              {
+                                                "type": "input",
+                                                "input_name": "value",
+                                                "children": []
+                                              },
+                                              {
+                                                "type": "input",
+                                                "input_name": "value",
+                                                "children": []
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "input",
+                                "input_name": "missing",
+                                "children": []
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "confidence",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "constant",
+                        "value": -1.0,
+                        "children": []
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 29,
+      "fitness": 0.8762344124476115,
+      "nodes": 8,
+      "depth": 4,
+      "uses_inputs": 2,
+      "tree_str": "add(\n  missing,\n  max(\n    add(\n      value,\n      value\n    ),\n    cube(\n      missing\n    )\n  )\n)",
+      "infix": "(m + max((x + x), (m)^3))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "missing",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "unary",
+                "operator": "cube",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "missing",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "generation": 30,
+      "fitness": 0.9400838728904725,
+      "nodes": 34,
+      "depth": 11,
+      "uses_inputs": 3,
+      "tree_str": "add(\n  value,\n  max(\n    add(\n      confidence,\n      value\n    ),\n    min(\n      min(\n        min(\n          max(\n            0.0,\n            add(\n              cos(\n                cube(\n                  value\n                )\n              ),\n              sigmoid(\n                confidence\n              )\n            )\n          ),\n          add(\n            cube(\n              value\n            ),\n            min(\n              cos(\n                add(\n                  missing,\n                  -1.0\n                )\n              ),\n              multiply(\n                max(\n                  0.0,\n                  add(\n                    value,\n                    value\n                  )\n                ),\n                confidence\n              )\n            )\n          )\n        ),\n        value\n      ),\n      confidence\n    )\n  )\n)",
+      "infix": "(x + max((c + x), min(min(min(max(0, (cos((x)^3) + sigmoid(c))), ((x)^3 + min(cos((m + -1)), (max(0, (x + x)) * c)))), x), c)))",
+      "tree": {
+        "type": "binary",
+        "operator": "add",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "value",
+            "children": []
+          },
+          {
+            "type": "binary",
+            "operator": "max",
+            "children": [
+              {
+                "type": "binary",
+                "operator": "add",
+                "children": [
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "value",
+                    "children": []
+                  }
+                ]
+              },
+              {
+                "type": "binary",
+                "operator": "min",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "min",
+                    "children": [
+                      {
+                        "type": "binary",
+                        "operator": "min",
+                        "children": [
+                          {
+                            "type": "binary",
+                            "operator": "max",
+                            "children": [
+                              {
+                                "type": "constant",
+                                "value": 0.0,
+                                "children": []
+                              },
+                              {
+                                "type": "binary",
+                                "operator": "add",
+                                "children": [
+                                  {
+                                    "type": "unary",
+                                    "operator": "cos",
+                                    "children": [
+                                      {
+                                        "type": "unary",
+                                        "operator": "cube",
+                                        "children": [
+                                          {
+                                            "type": "input",
+                                            "input_name": "value",
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "unary",
+                                    "operator": "sigmoid",
+                                    "children": [
+                                      {
+                                        "type": "input",
+                                        "input_name": "confidence",
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            "type": "binary",
+                            "operator": "add",
+                            "children": [
+                              {
+                                "type": "unary",
+                                "operator": "cube",
+                                "children": [
+                                  {
+                                    "type": "input",
+                                    "input_name": "value",
+                                    "children": []
+                                  }
+                                ]
+                              },
+                              {
+                                "type": "binary",
+                                "operator": "min",
+                                "children": [
+                                  {
+                                    "type": "unary",
+                                    "operator": "cos",
+                                    "children": [
+                                      {
+                                        "type": "binary",
+                                        "operator": "add",
+                                        "children": [
+                                          {
+                                            "type": "input",
+                                            "input_name": "missing",
+                                            "children": []
+                                          },
+                                          {
+                                            "type": "constant",
+                                            "value": -1.0,
+                                            "children": []
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  },
+                                  {
+                                    "type": "binary",
+                                    "operator": "multiply",
+                                    "children": [
+                                      {
+                                        "type": "binary",
+                                        "operator": "max",
+                                        "children": [
+                                          {
+                                            "type": "constant",
+                                            "value": 0.0,
+                                            "children": []
+                                          },
+                                          {
+                                            "type": "binary",
+                                            "operator": "add",
+                                            "children": [
+                                              {
+                                                "type": "input",
+                                                "input_name": "value",
+                                                "children": []
+                                              },
+                                              {
+                                                "type": "input",
+                                                "input_name": "value",
+                                                "children": []
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      },
+                                      {
+                                        "type": "input",
+                                        "input_name": "confidence",
+                                        "children": []
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  },
+                  {
+                    "type": "input",
+                    "input_name": "confidence",
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

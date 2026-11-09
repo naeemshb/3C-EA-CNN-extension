@@ -1,0 +1,4411 @@
+================================================================================
+EXPERIMENT LOG
+================================================================================
+Missing mechanism: MNAR
+Missing rate:      20%
+Runs:              25
+================================================================================
+
+=== SINGLE EXPERIMENT ===
+
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9615
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9791
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9796
+Tree complexity: 4 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9816
+Tree complexity: 11 nodes, depth 6, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9952
+Tree complexity: 17 nodes, depth 6, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9952
+============================================================
+
+Winner (compact form):
+ /(
+  min(
+    2.0,
+    +(
+      max(
+        sin(
+          value
+        ),
+        /(
+          value,
+          confidence
+        )
+      ),
+      value
+    )
+  ),
+  /(
+    -0.5,
+    -(
+      -0.5,
+      softplus(
+        0.1
+      )
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768260845.json
+
+Validation fitness: 0.9952
+Complexity: 17 nodes
+Depth: 6
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2041, Train Acc: 0.9326, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.0944, Train Acc: 0.9677, Val Acc: 0.9298, Best Val: 0.9386
+
+Early stopping at epoch 28
+
+Final Training Complete!
+Best Validation Accuracy: 0.9386
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5657, Train Acc: 0.7977, Val Acc: 0.8158, Best Val: 0.8158
+Epoch  20/100 - Loss: 0.4292, Train Acc: 0.9208, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  30/100 - Loss: 0.2856, Train Acc: 0.9384, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 38
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+ReLU Test Accuracy: 0.9035
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6109, Train Acc: 0.7918, Val Acc: 0.8333, Best Val: 0.8333
+Epoch  20/100 - Loss: 0.4732, Train Acc: 0.9062, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  30/100 - Loss: 0.3355, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  40/100 - Loss: 0.2350, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 49
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.6195, Train Acc: 0.9179, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.4851, Train Acc: 0.9267, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 27
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3971, Train Acc: 0.9238, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.2240, Train Acc: 0.9355, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.1807, Train Acc: 0.9413, Val Acc: 0.9737, Best Val: 0.9737
+
+Early stopping at epoch 38
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ELU Test Accuracy: 0.9211
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9386     0.9211     1.0000     0.7857     0.8800     0.9759    
+ReLU               0.9474     0.9035     0.9429     0.7857     0.8571     0.9858    
+Swish              0.9561     0.9298     0.9048     0.9048     0.9048     0.9854    
+LeakyReLU          0.9649     0.9123     0.9000     0.8571     0.8780     0.9712    
+ELU                0.9737     0.9211     0.9231     0.8571     0.8889     0.9914    
+
+✅ Evolved activation beats ReLU!
+⚠️ But Swish performed slightly better.
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9952 | Nodes=17 | Depth=6 | InputsUsed=2
+
+=== REPEATED EXPERIMENTS ===
+
+
+================================================================================
+REPEATED EXPERIMENTS: 25 runs (20% missing, MNAR)
+================================================================================
+
+------------------------------------------------------------
+RUN 1/25 (seed=42)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9615
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9791
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9796
+Tree complexity: 4 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9816
+Tree complexity: 11 nodes, depth 6, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9952
+Tree complexity: 17 nodes, depth 6, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9952
+============================================================
+
+Winner (compact form):
+ /(
+  min(
+    2.0,
+    +(
+      max(
+        sin(
+          value
+        ),
+        /(
+          value,
+          confidence
+        )
+      ),
+      value
+    )
+  ),
+  /(
+    -0.5,
+    -(
+      -0.5,
+      softplus(
+        0.1
+      )
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768260865.json
+
+Validation fitness: 0.9952
+Complexity: 17 nodes
+Depth: 6
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2041, Train Acc: 0.9326, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.0944, Train Acc: 0.9677, Val Acc: 0.9298, Best Val: 0.9386
+
+Early stopping at epoch 28
+
+Final Training Complete!
+Best Validation Accuracy: 0.9386
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5657, Train Acc: 0.7977, Val Acc: 0.8158, Best Val: 0.8158
+Epoch  20/100 - Loss: 0.4292, Train Acc: 0.9208, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  30/100 - Loss: 0.2856, Train Acc: 0.9384, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 38
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+ReLU Test Accuracy: 0.9035
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6109, Train Acc: 0.7918, Val Acc: 0.8333, Best Val: 0.8333
+Epoch  20/100 - Loss: 0.4732, Train Acc: 0.9062, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  30/100 - Loss: 0.3355, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  40/100 - Loss: 0.2350, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 49
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.6195, Train Acc: 0.9179, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.4851, Train Acc: 0.9267, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 27
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3971, Train Acc: 0.9238, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.2240, Train Acc: 0.9355, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.1807, Train Acc: 0.9413, Val Acc: 0.9737, Best Val: 0.9737
+
+Early stopping at epoch 38
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ELU Test Accuracy: 0.9211
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9386     0.9211     1.0000     0.7857     0.8800     0.9759    
+ReLU               0.9474     0.9035     0.9429     0.7857     0.8571     0.9858    
+Swish              0.9561     0.9298     0.9048     0.9048     0.9048     0.9854    
+LeakyReLU          0.9649     0.9123     0.9000     0.8571     0.8780     0.9712    
+ELU                0.9737     0.9211     0.9231     0.8571     0.8889     0.9914    
+
+✅ Evolved activation beats ReLU!
+⚠️ But Swish performed slightly better.
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9952 | Nodes=17 | Depth=6 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 1:
+     Test Accuracy = 0.9211
+     F1 Score      = 0.8800
+     f(x, m, c)    = (min(2, (max(sin(x), (x / c)) + x)) / (-0.5 / (-0.5 - softplus(0.1))))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 2/25 (seed=43)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9911
+Tree complexity: 8 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9971
+Tree complexity: 4 nodes, depth 3, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9971
+============================================================
+
+Winner (compact form):
+ identity(
+  /(
+    value,
+    confidence
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768260884.json
+
+Validation fitness: 0.9971
+Complexity: 4 nodes
+Depth: 3
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.3863, Train Acc: 0.8915, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.2232, Train Acc: 0.9150, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.1594, Train Acc: 0.9238, Val Acc: 0.9561, Best Val: 0.9737
+
+Early stopping at epoch 37
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.6254, Train Acc: 0.6862, Val Acc: 0.6754, Best Val: 0.6754
+Epoch  20/100 - Loss: 0.4774, Train Acc: 0.9062, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3243, Train Acc: 0.9296, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  40/100 - Loss: 0.2580, Train Acc: 0.9384, Val Acc: 0.9737, Best Val: 0.9737
+
+Early stopping at epoch 48
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ReLU Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6173, Train Acc: 0.7302, Val Acc: 0.7632, Best Val: 0.7632
+Epoch  20/100 - Loss: 0.4623, Train Acc: 0.8856, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  30/100 - Loss: 0.3115, Train Acc: 0.9267, Val Acc: 0.9474, Best Val: 0.9561
+Epoch  40/100 - Loss: 0.2517, Train Acc: 0.9267, Val Acc: 0.9474, Best Val: 0.9561
+
+Early stopping at epoch 40
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5900, Train Acc: 0.8915, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.4511, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3047, Train Acc: 0.9384, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  40/100 - Loss: 0.2395, Train Acc: 0.9501, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 40
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3894, Train Acc: 0.8768, Val Acc: 0.8860, Best Val: 0.8947
+Epoch  20/100 - Loss: 0.2143, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.1565, Train Acc: 0.9443, Val Acc: 0.9737, Best Val: 0.9737
+Epoch  40/100 - Loss: 0.1434, Train Acc: 0.9531, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 43
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ELU Test Accuracy: 0.9123
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9737     0.9474     0.9286     0.9286     0.9286     0.9927    
+ReLU               0.9737     0.9211     0.9024     0.8810     0.8916     0.9891    
+Swish              0.9561     0.9123     0.8636     0.9048     0.8837     0.9812    
+LeakyReLU          0.9649     0.9474     0.9286     0.9286     0.9286     0.9901    
+ELU                0.9737     0.9123     0.9000     0.8571     0.8780     0.9646    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9971 | Nodes=4 | Depth=3 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 2:
+     Test Accuracy = 0.9474
+     F1 Score      = 0.9286
+     f(x, m, c)    = (x / c)
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 3/25 (seed=44)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9617
+Tree complexity: 5 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9705
+Tree complexity: 5 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9711
+Tree complexity: 3 nodes, depth 2, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9799
+Tree complexity: 3 nodes, depth 2, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9828
+Tree complexity: 5 nodes, depth 3, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9853
+Tree complexity: 3 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9898
+Tree complexity: 17 nodes, depth 6, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 1.0057
+Tree complexity: 27 nodes, depth 9, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 1.0057
+============================================================
+
+Winner (compact form):
+ negate(
+  min(
+    -(
+      confidence,
+      max(
+        tanh(
+          σ(
+            confidence
+          )
+        ),
+        max(
+          tanh(
+            σ(
+              max(
+                missing,
+                missing
+              )
+            )
+          ),
+          square(
+            missing
+          )
+        )
+      )
+    ),
+    identity(
+      -(
+        /(
+          value,
+          missing
+        ),
+        *(
+          tanh(
+            missing
+          ),
+          max(
+            missing,
+            missing
+          )
+        )
+      )
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768260910.json
+
+Validation fitness: 1.0057
+Complexity: 27 nodes
+Depth: 9
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2705, Train Acc: 0.9208, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.0845, Train Acc: 0.9765, Val Acc: 0.9474, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.0530, Train Acc: 0.9853, Val Acc: 0.9386, Best Val: 0.9649
+
+Early stopping at epoch 30
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.8860
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5591, Train Acc: 0.9267, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.4188, Train Acc: 0.9384, Val Acc: 0.9561, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.3176, Train Acc: 0.9326, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 32
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5866, Train Acc: 0.8563, Val Acc: 0.8947, Best Val: 0.8947
+Epoch  20/100 - Loss: 0.4631, Train Acc: 0.9120, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  30/100 - Loss: 0.3939, Train Acc: 0.9179, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 36
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5725, Train Acc: 0.9003, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.4236, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 28
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+LeakyReLU Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3887, Train Acc: 0.9238, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.1973, Train Acc: 0.9413, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.1449, Train Acc: 0.9501, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 32
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.9298
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9649     0.8860     0.8919     0.7857     0.8354     0.9590    
+ReLU               0.9649     0.9298     0.9250     0.8810     0.9024     0.9812    
+Swish              0.9474     0.9211     0.9714     0.8095     0.8831     0.9765    
+LeakyReLU          0.9561     0.9123     0.8478     0.9286     0.8864     0.9752    
+ELU                0.9649     0.9298     0.9048     0.9048     0.9048     0.9934    
+
+⚠️ Baselines performed better this time.
+   Best: ReLU (0.9298)
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=1.0057 | Nodes=27 | Depth=9 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 3:
+     Test Accuracy = 0.8860
+     F1 Score      = 0.8354
+     f(x, m, c)    = (-min((c - max(tanh(sigmoid(c)), max(tanh(sigmoid(max(m, m))), (m)^2))), ((x / m) - (tanh(m) * max(m, m)))))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 4/25 (seed=45)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9618
+Tree complexity: 6 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9678
+Tree complexity: 2 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9874
+Tree complexity: 11 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9879
+Tree complexity: 6 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9897
+Tree complexity: 14 nodes, depth 8, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9897
+============================================================
+
+Winner (compact form):
+ identity(
+  *(
+    *(
+      -(
+        value,
+        -(
+          confidence,
+          -(
+            missing,
+            max(
+              missing,
+              value
+            )
+          )
+        )
+      ),
+      value
+    ),
+    2.0
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768260933.json
+
+Validation fitness: 0.9897
+Complexity: 14 nodes
+Depth: 8
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.1568, Train Acc: 0.9472, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.0926, Train Acc: 0.9619, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 27
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9737
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5093, Train Acc: 0.7977, Val Acc: 0.8246, Best Val: 0.8246
+Epoch  20/100 - Loss: 0.3715, Train Acc: 0.9296, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  30/100 - Loss: 0.2643, Train Acc: 0.9326, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  40/100 - Loss: 0.2207, Train Acc: 0.9443, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  50/100 - Loss: 0.2016, Train Acc: 0.9472, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 50
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6512, Train Acc: 0.5279, Val Acc: 0.5175, Best Val: 0.5175
+Epoch  20/100 - Loss: 0.5194, Train Acc: 0.8915, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.3611, Train Acc: 0.9150, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  40/100 - Loss: 0.2786, Train Acc: 0.9355, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  50/100 - Loss: 0.2357, Train Acc: 0.9355, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 55
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5786, Train Acc: 0.8358, Val Acc: 0.8860, Best Val: 0.8860
+Epoch  20/100 - Loss: 0.4264, Train Acc: 0.9179, Val Acc: 0.9737, Best Val: 0.9737
+Epoch  30/100 - Loss: 0.3063, Train Acc: 0.9355, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 35
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+LeakyReLU Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3678, Train Acc: 0.9238, Val Acc: 0.9474, Best Val: 0.9649
+Epoch  20/100 - Loss: 0.2347, Train Acc: 0.9413, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 22
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.8860
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9649     0.9737     0.9756     0.9524     0.9639     0.9749    
+ReLU               0.9561     0.9298     0.9474     0.8571     0.9000     0.9891    
+Swish              0.9649     0.9298     0.9048     0.9048     0.9048     0.9864    
+LeakyReLU          0.9737     0.9474     0.9286     0.9286     0.9286     0.9891    
+ELU                0.9649     0.8860     0.8222     0.8810     0.8506     0.9702    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9897 | Nodes=14 | Depth=8 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 4:
+     Test Accuracy = 0.9737
+     F1 Score      = 0.9639
+     f(x, m, c)    = (((x - (c - (m - max(m, x)))) * x) * 2)
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 5/25 (seed=46)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9711
+Tree complexity: 3 nodes, depth 2, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9736
+Tree complexity: 7 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9824
+Tree complexity: 7 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9874
+Tree complexity: 9 nodes, depth 5, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9874
+============================================================
+
+Winner (compact form):
+ +(
+  value,
+  *(
+    0.5,
+    +(
+      value,
+      +(
+        missing,
+        value
+      )
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768260952.json
+
+Validation fitness: 0.9874
+Complexity: 9 nodes
+Depth: 5
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.1655, Train Acc: 0.9384, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.1230, Train Acc: 0.9560, Val Acc: 0.9298, Best Val: 0.9474
+
+Early stopping at epoch 23
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9386
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5964, Train Acc: 0.9003, Val Acc: 0.8947, Best Val: 0.8947
+Epoch  20/100 - Loss: 0.4698, Train Acc: 0.9238, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3637, Train Acc: 0.9384, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  40/100 - Loss: 0.3259, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 40
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9386
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5788, Train Acc: 0.8827, Val Acc: 0.9123, Best Val: 0.9123
+Epoch  20/100 - Loss: 0.4391, Train Acc: 0.9062, Val Acc: 0.9386, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3509, Train Acc: 0.9150, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 31
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.6177, Train Acc: 0.8915, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.4806, Train Acc: 0.9238, Val Acc: 0.9298, Best Val: 0.9386
+
+Early stopping at epoch 27
+
+Final Training Complete!
+Best Validation Accuracy: 0.9386
+LeakyReLU Test Accuracy: 0.8772
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4714, Train Acc: 0.9179, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.2140, Train Acc: 0.9472, Val Acc: 0.9386, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.1761, Train Acc: 0.9501, Val Acc: 0.9386, Best Val: 0.9474
+
+Early stopping at epoch 32
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+ELU Test Accuracy: 0.9386
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9474     0.9386     0.9070     0.9286     0.9176     0.9934    
+ReLU               0.9561     0.9386     0.9070     0.9286     0.9176     0.9845    
+Swish              0.9474     0.8860     0.8537     0.8333     0.8434     0.9683    
+LeakyReLU          0.9386     0.8772     0.9118     0.7381     0.8158     0.9243    
+ELU                0.9474     0.9386     1.0000     0.8333     0.9091     0.9940    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9874 | Nodes=9 | Depth=5 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 5:
+     Test Accuracy = 0.9386
+     F1 Score      = 0.9176
+     f(x, m, c)    = (x + (0.5 * (x + (m + x))))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 6/25 (seed=47)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9796
+Tree complexity: 4 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9903
+Tree complexity: 12 nodes, depth 6, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9941
+Tree complexity: 3 nodes, depth 2, uses 1/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9941
+============================================================
+
+Winner (compact form):
+ /(
+  value,
+  0.1
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768260973.json
+
+Validation fitness: 0.9941
+Complexity: 3 nodes
+Depth: 2
+Uses 1/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2678, Train Acc: 0.9355, Val Acc: 0.9386, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.1299, Train Acc: 0.9619, Val Acc: 0.9298, Best Val: 0.9561
+
+Early stopping at epoch 27
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5946, Train Acc: 0.6950, Val Acc: 0.7105, Best Val: 0.7105
+Epoch  20/100 - Loss: 0.4730, Train Acc: 0.8680, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  30/100 - Loss: 0.3394, Train Acc: 0.9296, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  40/100 - Loss: 0.2767, Train Acc: 0.9355, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  50/100 - Loss: 0.2341, Train Acc: 0.9326, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 55
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ReLU Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6489, Train Acc: 0.8739, Val Acc: 0.8772, Best Val: 0.8772
+Epoch  20/100 - Loss: 0.5418, Train Acc: 0.9150, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  30/100 - Loss: 0.4511, Train Acc: 0.9150, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  40/100 - Loss: 0.4092, Train Acc: 0.9150, Val Acc: 0.9298, Best Val: 0.9298
+
+Early stopping at epoch 40
+
+Final Training Complete!
+Best Validation Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5322, Train Acc: 0.9501, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.4311, Train Acc: 0.9443, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.3856, Train Acc: 0.9443, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 30
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3153, Train Acc: 0.9208, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  20/100 - Loss: 0.1704, Train Acc: 0.9501, Val Acc: 0.9825, Best Val: 0.9825
+Epoch  30/100 - Loss: 0.1274, Train Acc: 0.9560, Val Acc: 0.9737, Best Val: 0.9825
+
+Early stopping at epoch 33
+
+Final Training Complete!
+Best Validation Accuracy: 0.9825
+ELU Test Accuracy: 0.9298
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9561     0.9474     0.9286     0.9286     0.9286     0.9649    
+ReLU               0.9649     0.9211     0.9714     0.8095     0.8831     0.9861    
+Swish              0.9298     0.9035     0.8780     0.8571     0.8675     0.9749    
+LeakyReLU          0.9649     0.9298     0.8864     0.9286     0.9070     0.9878    
+ELU                0.9825     0.9298     0.9250     0.8810     0.9024     0.9676    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9941 | Nodes=3 | Depth=2 | InputsUsed=1
+
+Winner of this run (math/infix):
+  Run 6:
+     Test Accuracy = 0.9474
+     F1 Score      = 0.9286
+     f(x, m, c)    = (x / 0.1)
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 7/25 (seed=48)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9708
+Tree complexity: 4 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9878
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9901
+Tree complexity: 16 nodes, depth 5, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9939
+Tree complexity: 3 nodes, depth 3, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9965
+Tree complexity: 8 nodes, depth 4, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9965
+============================================================
+
+Winner (compact form):
+ leaky_relu(
+  min(
+    *(
+      missing,
+      missing
+    ),
+    /(
+      value,
+      0.0
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768260997.json
+
+Validation fitness: 0.9965
+Complexity: 8 nodes
+Depth: 4
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2217, Train Acc: 0.9501, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.0531, Train Acc: 0.9912, Val Acc: 0.9211, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.0324, Train Acc: 0.9941, Val Acc: 0.9386, Best Val: 0.9386
+
+Early stopping at epoch 30
+
+Final Training Complete!
+Best Validation Accuracy: 0.9386
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9035
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5418, Train Acc: 0.9062, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.4135, Train Acc: 0.9179, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 25
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5825, Train Acc: 0.9091, Val Acc: 0.9123, Best Val: 0.9123
+Epoch  20/100 - Loss: 0.4421, Train Acc: 0.9267, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.3300, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 34
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5253, Train Acc: 0.8886, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.3662, Train Acc: 0.9208, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.3018, Train Acc: 0.9326, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 36
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4004, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.2238, Train Acc: 0.9384, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 26
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.9561
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9386     0.9035     0.8780     0.8571     0.8675     0.9762    
+ReLU               0.9561     0.9123     0.9444     0.8095     0.8718     0.9838    
+Swish              0.9561     0.9035     0.8974     0.8333     0.8642     0.9831    
+LeakyReLU          0.9649     0.9123     0.9211     0.8333     0.8750     0.9782    
+ELU                0.9649     0.9561     0.9302     0.9524     0.9412     0.9821    
+
+⚠️ Baselines performed better this time.
+   Best: ReLU (0.9123)
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9965 | Nodes=8 | Depth=4 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 7:
+     Test Accuracy = 0.9035
+     F1 Score      = 0.8675
+     f(x, m, c)    = leakyrelu(min((m * m), (x / 0)))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 8/25 (seed=49)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9619
+Tree complexity: 5 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9825
+Tree complexity: 6 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9878
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9892
+Tree complexity: 17 nodes, depth 9, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9892
+============================================================
+
+Winner (compact form):
+ *(
+  -(
+    +(
+      min(
+        value,
+        min(
+          /(
+            confidence,
+            min(
+              min(
+                missing,
+                1.0
+              ),
+              0.1
+            )
+          ),
+          value
+        )
+      ),
+      value
+    ),
+    confidence
+  ),
+  value
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261015.json
+
+Validation fitness: 0.9892
+Complexity: 17 nodes
+Depth: 9
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.3949, Train Acc: 0.9120, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.1840, Train Acc: 0.9501, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 28
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.8596
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.6042, Train Acc: 0.8710, Val Acc: 0.8772, Best Val: 0.8772
+Epoch  20/100 - Loss: 0.4522, Train Acc: 0.9296, Val Acc: 0.9474, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.3422, Train Acc: 0.9326, Val Acc: 0.9474, Best Val: 0.9561
+
+Early stopping at epoch 32
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9386
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5812, Train Acc: 0.9062, Val Acc: 0.9123, Best Val: 0.9123
+Epoch  20/100 - Loss: 0.4488, Train Acc: 0.9179, Val Acc: 0.9386, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3708, Train Acc: 0.9267, Val Acc: 0.9386, Best Val: 0.9474
+
+Early stopping at epoch 30
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5526, Train Acc: 0.8739, Val Acc: 0.8947, Best Val: 0.8947
+Epoch  20/100 - Loss: 0.3827, Train Acc: 0.9238, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.2773, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 33
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+LeakyReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4149, Train Acc: 0.9326, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.2203, Train Acc: 0.9531, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 28
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ELU Test Accuracy: 0.9211
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9649     0.8596     0.9062     0.6905     0.7838     0.9193    
+ReLU               0.9561     0.9386     0.9070     0.9286     0.9176     0.9897    
+Swish              0.9474     0.9211     0.9231     0.8571     0.8889     0.9808    
+LeakyReLU          0.9561     0.9298     0.8696     0.9524     0.9091     0.9785    
+ELU                0.9737     0.9211     0.9231     0.8571     0.8889     0.9838    
+
+⚠️ Baselines performed better this time.
+   Best: ReLU (0.9386)
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9892 | Nodes=17 | Depth=9 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 8:
+     Test Accuracy = 0.8596
+     F1 Score      = 0.7838
+     f(x, m, c)    = (((min(x, min((c / min(min(m, 1), 0.1)), x)) + x) - c) * x)
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 9/25 (seed=50)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9648
+Tree complexity: 7 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9674
+Tree complexity: 4 nodes, depth 3, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9910
+Tree complexity: 9 nodes, depth 4, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9910
+============================================================
+
+Winner (compact form):
+ *(
+  *(
+    confidence,
+    value
+  ),
+  /(
+    +(
+      missing,
+      -2.0
+    ),
+    missing
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261034.json
+
+Validation fitness: 0.9910
+Complexity: 9 nodes
+Depth: 4
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 3.5912, Train Acc: 0.9150, Val Acc: 0.8860, Best Val: 0.8947
+Epoch  20/100 - Loss: 1.2946, Train Acc: 0.9560, Val Acc: 0.9123, Best Val: 0.9211
+Epoch  30/100 - Loss: 0.2875, Train Acc: 0.9795, Val Acc: 0.9211, Best Val: 0.9211
+
+Early stopping at epoch 31
+
+Final Training Complete!
+Best Validation Accuracy: 0.9211
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5890, Train Acc: 0.9238, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.4645, Train Acc: 0.9296, Val Acc: 0.9386, Best Val: 0.9474
+
+Early stopping at epoch 26
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+ReLU Test Accuracy: 0.9035
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6184, Train Acc: 0.9062, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.4863, Train Acc: 0.9326, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 28
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5641, Train Acc: 0.9120, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.4211, Train Acc: 0.9238, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.2814, Train Acc: 0.9208, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 38
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 1.3126, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.2315, Train Acc: 0.9326, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 29
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.9386
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9211     0.9123     0.8478     0.9286     0.8864     0.9544    
+ReLU               0.9474     0.9035     0.9429     0.7857     0.8571     0.9818    
+Swish              0.9561     0.9211     0.8837     0.9048     0.8941     0.9884    
+LeakyReLU          0.9649     0.9298     0.9474     0.8571     0.9000     0.9802    
+ELU                0.9649     0.9386     0.9730     0.8571     0.9114     0.9762    
+
+✅ Evolved activation beats ReLU!
+⚠️ But Swish performed slightly better.
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9910 | Nodes=9 | Depth=4 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 9:
+     Test Accuracy = 0.9123
+     F1 Score      = 0.8864
+     f(x, m, c)    = ((c * x) * ((m + -2) / m))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 10/25 (seed=51)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9678
+Tree complexity: 2 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9765
+Tree complexity: 3 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9792
+Tree complexity: 6 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9849
+Tree complexity: 5 nodes, depth 3, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9850
+Tree complexity: 4 nodes, depth 3, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9953
+Tree complexity: 12 nodes, depth 8, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9953
+============================================================
+
+Winner (compact form):
+ *(
+  value,
+  relu(
+    abs(
+      +(
+        tanh(
+          value
+        ),
+        softplus(
+          /(
+            value,
+            σ(
+              confidence
+            )
+          )
+        )
+      )
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261054.json
+
+Validation fitness: 0.9953
+Complexity: 12 nodes
+Depth: 8
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.3067, Train Acc: 0.9208, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.2368, Train Acc: 0.9384, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.2140, Train Acc: 0.9384, Val Acc: 0.9386, Best Val: 0.9386
+
+Early stopping at epoch 33
+
+Final Training Complete!
+Best Validation Accuracy: 0.9386
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5809, Train Acc: 0.6921, Val Acc: 0.7456, Best Val: 0.7456
+Epoch  20/100 - Loss: 0.4520, Train Acc: 0.8651, Val Acc: 0.8684, Best Val: 0.8684
+Epoch  30/100 - Loss: 0.3216, Train Acc: 0.9296, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  40/100 - Loss: 0.2302, Train Acc: 0.9413, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 47
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6126, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.4934, Train Acc: 0.9267, Val Acc: 0.9737, Best Val: 0.9737
+Epoch  30/100 - Loss: 0.4044, Train Acc: 0.9267, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 31
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5743, Train Acc: 0.8974, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.4280, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3693, Train Acc: 0.9296, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 35
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+LeakyReLU Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4189, Train Acc: 0.8886, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.2369, Train Acc: 0.9238, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.1786, Train Acc: 0.9384, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 34
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.9386
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9386     0.9561     0.9744     0.9048     0.9383     0.9874    
+ReLU               0.9561     0.9123     0.9444     0.8095     0.8718     0.9838    
+Swish              0.9737     0.9474     0.9500     0.9048     0.9268     0.9914    
+LeakyReLU          0.9474     0.9211     0.9231     0.8571     0.8889     0.9851    
+ELU                0.9649     0.9386     0.9487     0.8810     0.9136     0.9769    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9953 | Nodes=12 | Depth=8 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 10:
+     Test Accuracy = 0.9561
+     F1 Score      = 0.9383
+     f(x, m, c)    = (x * relu(|(tanh(x) + softplus((x / sigmoid(c))))|))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 11/25 (seed=52)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9703
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9708
+Tree complexity: 4 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9854
+Tree complexity: 2 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9909
+Tree complexity: 8 nodes, depth 5, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9909
+============================================================
+
+Winner (compact form):
+ square(
+  +(
+    -2.0,
+    min(
+      value,
+      max(
+        confidence,
+        missing
+      )
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261074.json
+
+Validation fitness: 0.9909
+Complexity: 8 nodes
+Depth: 5
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.6441, Train Acc: 0.9120, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.1885, Train Acc: 0.9472, Val Acc: 0.9825, Best Val: 0.9825
+Epoch  30/100 - Loss: 0.1136, Train Acc: 0.9648, Val Acc: 0.9474, Best Val: 0.9912
+
+Early stopping at epoch 39
+
+Final Training Complete!
+Best Validation Accuracy: 0.9912
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9649
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5887, Train Acc: 0.9032, Val Acc: 0.9035, Best Val: 0.9035
+Epoch  20/100 - Loss: 0.4416, Train Acc: 0.9296, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3506, Train Acc: 0.9326, Val Acc: 0.9474, Best Val: 0.9561
+
+Early stopping at epoch 38
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9035
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5761, Train Acc: 0.9120, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.4433, Train Acc: 0.9179, Val Acc: 0.9474, Best Val: 0.9561
+
+Early stopping at epoch 26
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5716, Train Acc: 0.8710, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.4023, Train Acc: 0.9179, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 29
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4260, Train Acc: 0.9267, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.2564, Train Acc: 0.9326, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 29
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+ELU Test Accuracy: 0.9561
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9912     0.9649     0.9524     0.9524     0.9524     0.9726    
+ReLU               0.9561     0.9035     0.9429     0.7857     0.8571     0.9765    
+Swish              0.9561     0.9211     0.8837     0.9048     0.8941     0.9745    
+LeakyReLU          0.9649     0.9123     0.8478     0.9286     0.8864     0.9821    
+ELU                0.9474     0.9561     1.0000     0.8810     0.9367     0.9944    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9909 | Nodes=8 | Depth=5 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 11:
+     Test Accuracy = 0.9649
+     F1 Score      = 0.9524
+     f(x, m, c)    = ((-2 + min(x, max(c, m))))^2
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 12/25 (seed=53)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9740
+Tree complexity: 5 nodes, depth 3, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9765
+Tree complexity: 3 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9818
+Tree complexity: 11 nodes, depth 5, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9874
+Tree complexity: 9 nodes, depth 5, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9904
+Tree complexity: 11 nodes, depth 6, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9912
+Tree complexity: 7 nodes, depth 4, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9912
+============================================================
+
+Winner (compact form):
+ -(
+  -(
+    confidence,
+    /(
+      value,
+      missing
+    )
+  ),
+  missing
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261096.json
+
+Validation fitness: 0.9912
+Complexity: 7 nodes
+Depth: 4
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2919, Train Acc: 0.9355, Val Acc: 0.9386, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.1335, Train Acc: 0.9619, Val Acc: 0.9386, Best Val: 0.9561
+
+Early stopping at epoch 23
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.6398, Train Acc: 0.6334, Val Acc: 0.7018, Best Val: 0.7018
+Epoch  20/100 - Loss: 0.5017, Train Acc: 0.9120, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.3409, Train Acc: 0.9326, Val Acc: 0.9737, Best Val: 0.9737
+Epoch  40/100 - Loss: 0.2486, Train Acc: 0.9413, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 42
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ReLU Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6430, Train Acc: 0.7742, Val Acc: 0.7807, Best Val: 0.7807
+Epoch  20/100 - Loss: 0.5157, Train Acc: 0.9267, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.3756, Train Acc: 0.9238, Val Acc: 0.9386, Best Val: 0.9474
+
+Early stopping at epoch 37
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5680, Train Acc: 0.8944, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.4189, Train Acc: 0.9120, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.3047, Train Acc: 0.9267, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 34
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+LeakyReLU Test Accuracy: 0.9035
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4135, Train Acc: 0.9091, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.2256, Train Acc: 0.9355, Val Acc: 0.9474, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.1601, Train Acc: 0.9413, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  40/100 - Loss: 0.1414, Train Acc: 0.9472, Val Acc: 0.9649, Best Val: 0.9737
+Epoch  50/100 - Loss: 0.1328, Train Acc: 0.9501, Val Acc: 0.9737, Best Val: 0.9737
+
+Early stopping at epoch 50
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ELU Test Accuracy: 0.9474
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9561     0.9211     0.8837     0.9048     0.8941     0.9481    
+ReLU               0.9737     0.9474     0.9286     0.9286     0.9286     0.9874    
+Swish              0.9474     0.9211     0.8667     0.9286     0.8966     0.9851    
+LeakyReLU          0.9561     0.9035     0.8974     0.8333     0.8642     0.9778    
+ELU                0.9737     0.9474     0.9500     0.9048     0.9268     0.9931    
+
+⚠️ Baselines performed better this time.
+   Best: ReLU (0.9474)
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9912 | Nodes=7 | Depth=4 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 12:
+     Test Accuracy = 0.9211
+     F1 Score      = 0.8941
+     f(x, m, c)    = ((c - (x / m)) - m)
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 13/25 (seed=54)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9711
+Tree complexity: 3 nodes, depth 2, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9881
+Tree complexity: 6 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9967
+Tree complexity: 6 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9985
+Tree complexity: 15 nodes, depth 7, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9985
+============================================================
+
+Winner (compact form):
+ +(
+  square(
+    missing
+  ),
+  +(
+    /(
+      value,
+      -0.1
+    ),
+    /(
+      softplus(
+        missing
+      ),
+      identity(
+        σ(
+          min(
+            confidence,
+            0.0
+          )
+        )
+      )
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261118.json
+
+Validation fitness: 0.9985
+Complexity: 15 nodes
+Depth: 7
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.4737, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.1993, Train Acc: 0.9677, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 27
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5821, Train Acc: 0.8856, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.4453, Train Acc: 0.9296, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.3080, Train Acc: 0.9501, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  40/100 - Loss: 0.2257, Train Acc: 0.9501, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 43
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ReLU Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6245, Train Acc: 0.9091, Val Acc: 0.9386, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.5338, Train Acc: 0.9208, Val Acc: 0.9298, Best Val: 0.9474
+
+Early stopping at epoch 23
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5235, Train Acc: 0.8710, Val Acc: 0.9123, Best Val: 0.9123
+Epoch  20/100 - Loss: 0.3768, Train Acc: 0.9267, Val Acc: 0.9386, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.2945, Train Acc: 0.9296, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 31
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+LeakyReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4916, Train Acc: 0.8798, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.2690, Train Acc: 0.9355, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 26
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ELU Test Accuracy: 0.8947
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9649     0.9474     0.9500     0.9048     0.9268     0.9878    
+ReLU               0.9649     0.9474     0.9286     0.9286     0.9286     0.9838    
+Swish              0.9474     0.9211     0.8667     0.9286     0.8966     0.9874    
+LeakyReLU          0.9474     0.9298     1.0000     0.8095     0.8947     0.9868    
+ELU                0.9737     0.8947     0.8125     0.9286     0.8667     0.9838    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9985 | Nodes=15 | Depth=7 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 13:
+     Test Accuracy = 0.9474
+     F1 Score      = 0.9268
+     f(x, m, c)    = ((m)^2 + ((x / -0.1) + (softplus(m) / sigmoid(min(c, 0)))))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 14/25 (seed=55)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9703
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9711
+Tree complexity: 3 nodes, depth 2, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9799
+Tree complexity: 3 nodes, depth 2, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9823
+Tree complexity: 8 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9878
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9893
+Tree complexity: 18 nodes, depth 8, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9893
+============================================================
+
+Winner (compact form):
+ /(
+  /(
+    -(
+      *(
+        missing,
+        max(
+          *(
+            -(
+              missing,
+              missing
+            ),
+            sqrt(
+              confidence
+            )
+          ),
+          value
+        )
+      ),
+      value
+    ),
+    softplus(
+      σ(
+        -2.0
+      )
+    )
+  ),
+  missing
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261138.json
+
+Validation fitness: 0.9893
+Complexity: 18 nodes
+Depth: 8
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2162, Train Acc: 0.9472, Val Acc: 0.9474, Best Val: 0.9649
+Epoch  20/100 - Loss: 0.0924, Train Acc: 0.9707, Val Acc: 0.9386, Best Val: 0.9649
+
+Early stopping at epoch 22
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9649
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5537, Train Acc: 0.9062, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.3991, Train Acc: 0.9208, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 29
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5818, Train Acc: 0.8827, Val Acc: 0.9123, Best Val: 0.9123
+Epoch  20/100 - Loss: 0.4314, Train Acc: 0.9091, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3248, Train Acc: 0.9267, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 33
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.6138, Train Acc: 0.7243, Val Acc: 0.7719, Best Val: 0.7719
+Epoch  20/100 - Loss: 0.4651, Train Acc: 0.9120, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3121, Train Acc: 0.9238, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  40/100 - Loss: 0.2525, Train Acc: 0.9355, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  50/100 - Loss: 0.2346, Train Acc: 0.9384, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 52
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9386
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4318, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.2545, Train Acc: 0.9413, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 24
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ELU Test Accuracy: 0.9649
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9649     0.9649     0.9750     0.9286     0.9512     0.9808    
+ReLU               0.9649     0.9298     0.9250     0.8810     0.9024     0.9726    
+Swish              0.9474     0.9298     0.8696     0.9524     0.9091     0.9828    
+LeakyReLU          0.9649     0.9386     0.9070     0.9286     0.9176     0.9917    
+ELU                0.9561     0.9649     0.9318     0.9762     0.9535     0.9921    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9893 | Nodes=18 | Depth=8 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 14:
+     Test Accuracy = 0.9649
+     F1 Score      = 0.9512
+     f(x, m, c)    = ((((m * max(((m - m) * sqrt(c)), x)) - x) / softplus(sigmoid(-2))) / m)
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 15/25 (seed=56)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9702
+Tree complexity: 8 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9872
+Tree complexity: 13 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9873
+Tree complexity: 10 nodes, depth 5, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9939
+Tree complexity: 20 nodes, depth 11, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9939
+============================================================
+
+Winner (compact form):
+ identity(
+  min(
+    leaky_relu(
+      value
+    ),
+    max(
+      value,
+      identity(
+        max(
+          value,
+          +(
+            min(
+              leaky_relu(
+                cube(
+                  -(
+                    confidence,
+                    value
+                  )
+                )
+              ),
+              -(
+                value,
+                confidence
+              )
+            ),
+            value
+          )
+        )
+      )
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261166.json
+
+Validation fitness: 0.9939
+Complexity: 20 nodes
+Depth: 11
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.4384, Train Acc: 0.8886, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.2509, Train Acc: 0.9238, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.1795, Train Acc: 0.9326, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 36
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9386
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5110, Train Acc: 0.9355, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.4283, Train Acc: 0.9384, Val Acc: 0.9386, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3531, Train Acc: 0.9355, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  40/100 - Loss: 0.3116, Train Acc: 0.9413, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 49
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ReLU Test Accuracy: 0.9035
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6270, Train Acc: 0.9179, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.5076, Train Acc: 0.9267, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 28
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5884, Train Acc: 0.8680, Val Acc: 0.8860, Best Val: 0.8860
+Epoch  20/100 - Loss: 0.4539, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.3561, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 32
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+LeakyReLU Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3578, Train Acc: 0.9267, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.2100, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 27
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ELU Test Accuracy: 0.9561
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9649     0.9386     0.9070     0.9286     0.9176     0.9921    
+ReLU               0.9737     0.9035     0.9189     0.8095     0.8608     0.9878    
+Swish              0.9649     0.9386     0.9268     0.9048     0.9157     0.9878    
+LeakyReLU          0.9474     0.9123     0.8478     0.9286     0.8864     0.9739    
+ELU                0.9561     0.9561     1.0000     0.8810     0.9367     0.9868    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9939 | Nodes=20 | Depth=11 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 15:
+     Test Accuracy = 0.9386
+     F1 Score      = 0.9176
+     f(x, m, c)    = min(leakyrelu(x), max(x, max(x, (min(leakyrelu(((c - x))^3), (x - c)) + x))))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 16/25 (seed=57)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9591
+Tree complexity: 2 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9799
+Tree complexity: 3 nodes, depth 2, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9821
+Tree complexity: 10 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9874
+Tree complexity: 9 nodes, depth 5, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9899
+Tree complexity: 14 nodes, depth 7, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9899
+============================================================
+
+Winner (compact form):
+ +(
+  +(
+    +(
+      +(
+        *(
+          +(
+            confidence,
+            confidence
+          ),
+          leaky_relu(
+            value
+          )
+        ),
+        value
+      ),
+      missing
+    ),
+    value
+  ),
+  -2.0
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261188.json
+
+Validation fitness: 0.9899
+Complexity: 14 nodes
+Depth: 7
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.1915, Train Acc: 0.9238, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.1174, Train Acc: 0.9560, Val Acc: 0.9474, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.0987, Train Acc: 0.9648, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 31
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9386
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5725, Train Acc: 0.9238, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.4737, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.4189, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 32
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5898, Train Acc: 0.8710, Val Acc: 0.8947, Best Val: 0.9035
+Epoch  20/100 - Loss: 0.4738, Train Acc: 0.9150, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  30/100 - Loss: 0.3502, Train Acc: 0.9150, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  40/100 - Loss: 0.3032, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 43
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5602, Train Acc: 0.9267, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.4389, Train Acc: 0.9326, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.3807, Train Acc: 0.9296, Val Acc: 0.9737, Best Val: 0.9737
+Epoch  40/100 - Loss: 0.3519, Train Acc: 0.9296, Val Acc: 0.9737, Best Val: 0.9737
+
+Early stopping at epoch 43
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+LeakyReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3919, Train Acc: 0.9208, Val Acc: 0.9386, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.2254, Train Acc: 0.9238, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 24
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+ELU Test Accuracy: 0.9123
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9649     0.9386     0.9487     0.8810     0.9136     0.9914    
+ReLU               0.9561     0.9561     0.9744     0.9048     0.9383     0.9888    
+Swish              0.9474     0.9386     0.9730     0.8571     0.9114     0.9864    
+LeakyReLU          0.9737     0.9298     0.9250     0.8810     0.9024     0.9874    
+ELU                0.9474     0.9123     0.8478     0.9286     0.8864     0.9812    
+
+⚠️ Baselines performed better this time.
+   Best: ReLU (0.9561)
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9899 | Nodes=14 | Depth=7 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 16:
+     Test Accuracy = 0.9386
+     F1 Score      = 0.9136
+     f(x, m, c)    = ((((((c + c) * leakyrelu(x)) + x) + m) + x) + -2)
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 17/25 (seed=58)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9620
+Tree complexity: 4 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9821
+Tree complexity: 10 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9864
+Tree complexity: 13 nodes, depth 8, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 1.0053
+Tree complexity: 8 nodes, depth 4, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 1.0053
+============================================================
+
+Winner (compact form):
+ /(
+  value,
+  min(
+    max(
+      missing,
+      1.0
+    ),
+    square(
+      missing
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261212.json
+
+Validation fitness: 1.0053
+Complexity: 8 nodes
+Depth: 4
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 10.6864, Train Acc: 0.9384, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 2.5589, Train Acc: 0.9677, Val Acc: 0.9298, Best Val: 0.9298
+
+Early stopping at epoch 22
+
+Final Training Complete!
+Best Validation Accuracy: 0.9298
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.8772
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5753, Train Acc: 0.9179, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.4272, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 28
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5704, Train Acc: 0.8563, Val Acc: 0.8772, Best Val: 0.8772
+Epoch  20/100 - Loss: 0.4432, Train Acc: 0.9091, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  30/100 - Loss: 0.3104, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  40/100 - Loss: 0.2321, Train Acc: 0.9296, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  50/100 - Loss: 0.2117, Train Acc: 0.9296, Val Acc: 0.9474, Best Val: 0.9561
+
+Early stopping at epoch 58
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5535, Train Acc: 0.9062, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.4036, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 29
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+LeakyReLU Test Accuracy: 0.9035
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.5333, Train Acc: 0.8739, Val Acc: 0.8772, Best Val: 0.8772
+Epoch  20/100 - Loss: 0.2837, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.1794, Train Acc: 0.9384, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 35
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ELU Test Accuracy: 0.9211
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9298     0.8772     0.8333     0.8333     0.8333     0.8896    
+ReLU               0.9561     0.9298     0.9048     0.9048     0.9048     0.9894    
+Swish              0.9561     0.9474     0.9737     0.8810     0.9250     0.9904    
+LeakyReLU          0.9474     0.9035     0.8780     0.8571     0.8675     0.9821    
+ELU                0.9561     0.9211     0.8837     0.9048     0.8941     0.9907    
+
+⚠️ Baselines performed better this time.
+   Best: Swish (0.9474)
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=1.0053 | Nodes=8 | Depth=4 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 17:
+     Test Accuracy = 0.8772
+     F1 Score      = 0.8333
+     f(x, m, c)    = (x / min(max(m, 1), (m)^2))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 18/25 (seed=59)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9736
+Tree complexity: 7 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9882
+Tree complexity: 5 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9883
+Tree complexity: 4 nodes, depth 3, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9883
+============================================================
+
+Winner (compact form):
+ *(
+  value,
+  log(
+    missing
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261233.json
+
+Validation fitness: 0.9883
+Complexity: 4 nodes
+Depth: 3
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2353, Train Acc: 0.9238, Val Acc: 0.9386, Best Val: 0.9561
+Epoch  20/100 - Loss: 0.1652, Train Acc: 0.9472, Val Acc: 0.9474, Best Val: 0.9561
+
+Early stopping at epoch 24
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9386
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5698, Train Acc: 0.9032, Val Acc: 0.9035, Best Val: 0.9035
+Epoch  20/100 - Loss: 0.4350, Train Acc: 0.9296, Val Acc: 0.9211, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.3326, Train Acc: 0.9267, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  40/100 - Loss: 0.3026, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 46
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6087, Train Acc: 0.9208, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.4828, Train Acc: 0.9267, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 29
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5497, Train Acc: 0.8710, Val Acc: 0.9035, Best Val: 0.9035
+Epoch  20/100 - Loss: 0.4046, Train Acc: 0.9179, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.2986, Train Acc: 0.9238, Val Acc: 0.9386, Best Val: 0.9474
+
+Early stopping at epoch 34
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+LeakyReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4401, Train Acc: 0.9267, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.2493, Train Acc: 0.9355, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.1998, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  40/100 - Loss: 0.1836, Train Acc: 0.9384, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 46
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.9298
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9561     0.9386     0.9268     0.9048     0.9157     0.9854    
+ReLU               0.9561     0.9211     0.9024     0.8810     0.8916     0.9838    
+Swish              0.9474     0.9211     0.9024     0.8810     0.8916     0.9841    
+LeakyReLU          0.9474     0.9298     0.9722     0.8333     0.8974     0.9808    
+ELU                0.9649     0.9298     0.9250     0.8810     0.9024     0.9858    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9883 | Nodes=4 | Depth=3 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 18:
+     Test Accuracy = 0.9386
+     F1 Score      = 0.9157
+     f(x, m, c)    = (x * log(|m|))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 19/25 (seed=60)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9711
+Tree complexity: 3 nodes, depth 2, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9824
+Tree complexity: 7 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9875
+Tree complexity: 8 nodes, depth 5, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9875
+============================================================
+
+Winner (compact form):
+ min(
+  value,
+  min(
+    confidence,
+    +(
+      confidence,
+      sqrt(
+        value
+      )
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261258.json
+
+Validation fitness: 0.9875
+Complexity: 8 nodes
+Depth: 5
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.4044, Train Acc: 0.9032, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.2413, Train Acc: 0.9267, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.1725, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 37
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5830, Train Acc: 0.9179, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.4279, Train Acc: 0.9296, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.3251, Train Acc: 0.9296, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 32
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ReLU Test Accuracy: 0.8947
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6011, Train Acc: 0.9238, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  20/100 - Loss: 0.4866, Train Acc: 0.9326, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 24
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5366, Train Acc: 0.9032, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.3908, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 29
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+LeakyReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3566, Train Acc: 0.9062, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.1987, Train Acc: 0.9443, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.1627, Train Acc: 0.9472, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 36
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ELU Test Accuracy: 0.9386
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9561     0.9211     0.9024     0.8810     0.8916     0.9914    
+ReLU               0.9649     0.8947     0.8947     0.8095     0.8500     0.9706    
+Swish              0.9649     0.8860     0.7636     1.0000     0.8660     0.9831    
+LeakyReLU          0.9561     0.9298     1.0000     0.8095     0.8947     0.9812    
+ELU                0.9737     0.9386     0.9268     0.9048     0.9157     0.9944    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9875 | Nodes=8 | Depth=5 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 19:
+     Test Accuracy = 0.9211
+     F1 Score      = 0.8916
+     f(x, m, c)    = min(x, min(c, (c + sqrt(x))))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 20/25 (seed=61)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9591
+Tree complexity: 2 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9766
+Tree complexity: 2 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9792
+Tree complexity: 6 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9816
+Tree complexity: 11 nodes, depth 6, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9882
+Tree complexity: 5 nodes, depth 3, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9907
+Tree complexity: 10 nodes, depth 5, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9907
+============================================================
+
+Winner (compact form):
+ +(
+  *(
+    /(
+      identity(
+        value
+      ),
+      max(
+        value,
+        1.0
+      )
+    ),
+    confidence
+  ),
+  missing
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261274.json
+
+Validation fitness: 0.9907
+Complexity: 10 nodes
+Depth: 5
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.4503, Train Acc: 0.9003, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.2750, Train Acc: 0.9238, Val Acc: 0.9298, Best Val: 0.9386
+
+Early stopping at epoch 26
+
+Final Training Complete!
+Best Validation Accuracy: 0.9386
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5822, Train Acc: 0.9003, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.4455, Train Acc: 0.9267, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.3538, Train Acc: 0.9296, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 38
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ReLU Test Accuracy: 0.9035
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5377, Train Acc: 0.8974, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.3960, Train Acc: 0.9238, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.2725, Train Acc: 0.9238, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  40/100 - Loss: 0.2375, Train Acc: 0.9296, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  50/100 - Loss: 0.2243, Train Acc: 0.9267, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 53
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5742, Train Acc: 0.8622, Val Acc: 0.9035, Best Val: 0.9035
+Epoch  20/100 - Loss: 0.4248, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.2785, Train Acc: 0.9267, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  40/100 - Loss: 0.2169, Train Acc: 0.9384, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 41
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4274, Train Acc: 0.9091, Val Acc: 0.9474, Best Val: 0.9649
+Epoch  20/100 - Loss: 0.2509, Train Acc: 0.9326, Val Acc: 0.9474, Best Val: 0.9649
+
+Early stopping at epoch 23
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.8684
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9386     0.9211     0.8837     0.9048     0.8941     0.9835    
+ReLU               0.9649     0.9035     0.9429     0.7857     0.8571     0.9802    
+Swish              0.9561     0.9211     0.9024     0.8810     0.8916     0.9894    
+LeakyReLU          0.9649     0.9211     0.9459     0.8333     0.8861     0.9881    
+ELU                0.9649     0.8684     0.7872     0.8810     0.8315     0.9563    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9907 | Nodes=10 | Depth=5 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 20:
+     Test Accuracy = 0.9211
+     F1 Score      = 0.8941
+     f(x, m, c)    = (((x / max(x, 1)) * c) + m)
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 21/25 (seed=62)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9591
+Tree complexity: 2 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9648
+Tree complexity: 7 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9825
+Tree complexity: 6 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9908
+Tree complexity: 9 nodes, depth 5, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9908
+============================================================
+
+Winner (compact form):
+ +(
+  value,
+  +(
+    value,
+    -(
+      min(
+        confidence,
+        value
+      ),
+      missing
+    )
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261301.json
+
+Validation fitness: 0.9908
+Complexity: 9 nodes
+Depth: 5
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.1913, Train Acc: 0.9326, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.1275, Train Acc: 0.9619, Val Acc: 0.9474, Best Val: 0.9561
+
+Early stopping at epoch 26
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5307, Train Acc: 0.8974, Val Acc: 0.9123, Best Val: 0.9123
+Epoch  20/100 - Loss: 0.3932, Train Acc: 0.9472, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.2822, Train Acc: 0.9326, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  40/100 - Loss: 0.2413, Train Acc: 0.9384, Val Acc: 0.9474, Best Val: 0.9561
+
+Early stopping at epoch 44
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5791, Train Acc: 0.8798, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.4360, Train Acc: 0.9179, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  30/100 - Loss: 0.3464, Train Acc: 0.9179, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  40/100 - Loss: 0.2996, Train Acc: 0.9238, Val Acc: 0.9386, Best Val: 0.9386
+
+Early stopping at epoch 42
+
+Final Training Complete!
+Best Validation Accuracy: 0.9386
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5874, Train Acc: 0.8944, Val Acc: 0.8860, Best Val: 0.8860
+Epoch  20/100 - Loss: 0.4284, Train Acc: 0.9267, Val Acc: 0.9561, Best Val: 0.9649
+Epoch  30/100 - Loss: 0.3053, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 34
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4063, Train Acc: 0.9238, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  20/100 - Loss: 0.2517, Train Acc: 0.9326, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 22
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.8860
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9561     0.9474     0.9500     0.9048     0.9268     0.9940    
+ReLU               0.9561     0.9298     0.9474     0.8571     0.9000     0.9845    
+Swish              0.9386     0.9298     1.0000     0.8095     0.8947     0.9848    
+LeakyReLU          0.9649     0.9474     0.9286     0.9286     0.9286     0.9934    
+ELU                0.9649     0.8860     0.8537     0.8333     0.8434     0.9411    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9908 | Nodes=9 | Depth=5 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 21:
+     Test Accuracy = 0.9474
+     F1 Score      = 0.9268
+     f(x, m, c)    = (x + (x + (min(c, x) - m)))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 22/25 (seed=63)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9623
+Tree complexity: 3 nodes, depth 2, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9828
+Tree complexity: 5 nodes, depth 3, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9966
+Tree complexity: 7 nodes, depth 4, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9966
+============================================================
+
+Winner (compact form):
+ /(
+  value,
+  max(
+    -(
+      value,
+      missing
+    ),
+    missing
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261319.json
+
+Validation fitness: 0.9966
+Complexity: 7 nodes
+Depth: 4
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.8370, Train Acc: 0.8798, Val Acc: 0.8860, Best Val: 0.8860
+Epoch  20/100 - Loss: 0.1489, Train Acc: 0.9501, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.0663, Train Acc: 0.9853, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  40/100 - Loss: 0.0480, Train Acc: 0.9912, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 49
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5562, Train Acc: 0.7566, Val Acc: 0.8158, Best Val: 0.8158
+Epoch  20/100 - Loss: 0.4125, Train Acc: 0.9238, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.2749, Train Acc: 0.9443, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  40/100 - Loss: 0.2211, Train Acc: 0.9443, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 49
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+ReLU Test Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5706, Train Acc: 0.9267, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.4806, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.4224, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 32
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5196, Train Acc: 0.8152, Val Acc: 0.8684, Best Val: 0.8684
+Epoch  20/100 - Loss: 0.3622, Train Acc: 0.9150, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  30/100 - Loss: 0.2430, Train Acc: 0.9238, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  40/100 - Loss: 0.1841, Train Acc: 0.9443, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 45
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+LeakyReLU Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4433, Train Acc: 0.9003, Val Acc: 0.9211, Best Val: 0.9211
+Epoch  20/100 - Loss: 0.2422, Train Acc: 0.9208, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.1936, Train Acc: 0.9267, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  40/100 - Loss: 0.1758, Train Acc: 0.9296, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 40
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.9386
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9649     0.9474     0.9286     0.9286     0.9286     0.9828    
+ReLU               0.9737     0.9561     0.9744     0.9048     0.9383     0.9934    
+Swish              0.9474     0.9123     0.9211     0.8333     0.8750     0.9815    
+LeakyReLU          0.9561     0.9298     0.9474     0.8571     0.9000     0.9884    
+ELU                0.9649     0.9386     0.9268     0.9048     0.9157     0.9901    
+
+⚠️ Baselines performed better this time.
+   Best: ReLU (0.9561)
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9966 | Nodes=7 | Depth=4 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 22:
+     Test Accuracy = 0.9474
+     F1 Score      = 0.9286
+     f(x, m, c)    = (x / max((x - m), m))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 23/25 (seed=64)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9673
+Tree complexity: 5 nodes, depth 3, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9699
+Tree complexity: 11 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9765
+Tree complexity: 3 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9899
+Tree complexity: 14 nodes, depth 7, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9963
+Tree complexity: 10 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 1.0078
+Tree complexity: 14 nodes, depth 5, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 1.0078
+============================================================
+
+Winner (compact form):
+ *(
+  min(
+    *(
+      /(
+        missing,
+        -2.0
+      ),
+      confidence
+    ),
+    *(
+      value,
+      2.0
+    )
+  ),
+  +(
+    log(
+      missing
+    ),
+    value
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261341.json
+
+Validation fitness: 1.0078
+Complexity: 14 nodes
+Depth: 5
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2013, Train Acc: 0.9501, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.0984, Train Acc: 0.9589, Val Acc: 0.9737, Best Val: 0.9737
+Epoch  30/100 - Loss: 0.0578, Train Acc: 0.9795, Val Acc: 0.9649, Best Val: 0.9737
+
+Early stopping at epoch 34
+
+Final Training Complete!
+Best Validation Accuracy: 0.9737
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9298
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5441, Train Acc: 0.8886, Val Acc: 0.9123, Best Val: 0.9123
+Epoch  20/100 - Loss: 0.3787, Train Acc: 0.9355, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  30/100 - Loss: 0.2788, Train Acc: 0.9413, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  40/100 - Loss: 0.2480, Train Acc: 0.9413, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 40
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ReLU Test Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5754, Train Acc: 0.8974, Val Acc: 0.9123, Best Val: 0.9123
+Epoch  20/100 - Loss: 0.4476, Train Acc: 0.9267, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.3934, Train Acc: 0.9267, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  40/100 - Loss: 0.3712, Train Acc: 0.9238, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 41
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5455, Train Acc: 0.9238, Val Acc: 0.9298, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.3929, Train Acc: 0.9296, Val Acc: 0.9386, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.2988, Train Acc: 0.9296, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 31
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+LeakyReLU Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4465, Train Acc: 0.8651, Val Acc: 0.8860, Best Val: 0.8860
+Epoch  20/100 - Loss: 0.2382, Train Acc: 0.9326, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.1818, Train Acc: 0.9384, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 30
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+ELU Test Accuracy: 0.9211
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9737     0.9298     0.9722     0.8333     0.8974     0.9679    
+ReLU               0.9649     0.9474     1.0000     0.8571     0.9231     0.9911    
+Swish              0.9474     0.9211     0.9231     0.8571     0.8889     0.9821    
+LeakyReLU          0.9474     0.9211     0.9714     0.8095     0.8831     0.9874    
+ELU                0.9474     0.9211     0.9714     0.8095     0.8831     0.9821    
+
+⚠️ Baselines performed better this time.
+   Best: ReLU (0.9474)
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=1.0078 | Nodes=14 | Depth=5 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 23:
+     Test Accuracy = 0.9298
+     F1 Score      = 0.8974
+     f(x, m, c)    = (min(((m / -2) * c), (x * 2)) * (log(|m|) + x))
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 24/25 (seed=65)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9677
+Tree complexity: 3 nodes, depth 2, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9702
+Tree complexity: 8 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9912
+Tree complexity: 7 nodes, depth 4, uses 3/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9991
+Tree complexity: 11 nodes, depth 6, uses 3/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9991
+============================================================
+
+Winner (compact form):
+ max(
+  min(
+    confidence,
+    min(
+      value,
+      min(
+        -(
+          -0.1,
+          missing
+        ),
+        missing
+      )
+    )
+  ),
+  value
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261362.json
+
+Validation fitness: 0.9991
+Complexity: 11 nodes
+Depth: 6
+Uses 3/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.4930, Train Acc: 0.9208, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.3446, Train Acc: 0.9238, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 22
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9211
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5752, Train Acc: 0.8592, Val Acc: 0.9123, Best Val: 0.9123
+Epoch  20/100 - Loss: 0.4285, Train Acc: 0.9208, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 27
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+ReLU Test Accuracy: 0.8772
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.6364, Train Acc: 0.8475, Val Acc: 0.8947, Best Val: 0.8947
+Epoch  20/100 - Loss: 0.5149, Train Acc: 0.9208, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.4234, Train Acc: 0.9267, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 38
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.5561, Train Acc: 0.9091, Val Acc: 0.9123, Best Val: 0.9298
+Epoch  20/100 - Loss: 0.4535, Train Acc: 0.9179, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.4100, Train Acc: 0.9208, Val Acc: 0.9561, Best Val: 0.9561
+Epoch  40/100 - Loss: 0.3760, Train Acc: 0.9208, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 47
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9123
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.3634, Train Acc: 0.8886, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  20/100 - Loss: 0.1860, Train Acc: 0.9326, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 29
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+ELU Test Accuracy: 0.9211
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9474     0.9211     0.8511     0.9524     0.8989     0.9828    
+ReLU               0.9561     0.8772     0.7593     0.9762     0.8542     0.9821    
+Swish              0.9474     0.9035     0.8605     0.8810     0.8706     0.9821    
+LeakyReLU          0.9649     0.9123     0.9211     0.8333     0.8750     0.9861    
+ELU                0.9649     0.9211     0.9024     0.8810     0.8916     0.9878    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9991 | Nodes=11 | Depth=6 | InputsUsed=3
+
+Winner of this run (math/infix):
+  Run 24:
+     Test Accuracy = 0.9211
+     F1 Score      = 0.8989
+     f(x, m, c)    = max(min(c, min(x, min((-0.1 - m), m))), x)
+------------------------------------------------------------
+
+------------------------------------------------------------
+RUN 25/25 (seed=66)
+------------------------------------------------------------
+============================================================
+EVOLVING ACTIVATION FUNCTIONS
+WITH 20% MISSING DATA (MNAR)
+============================================================
+
+Step 1: Loading dataset...
+Loaded dataset: 569 samples, 31 columns
+✅ Dataset is complete (no missing values)
+Strategy: High/low values are more likely to be missing
+
+Results:
+  Total values: 17070
+  Missing values introduced: 3456
+  Actual missing rate: 20.25%
+  Missing values per feature (range): 102 to 129
+============================================================
+
+
+🎯 NEW BEST! Fitness: 0.9616
+Tree complexity: 6 nodes, depth 4, uses 2/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9849
+Tree complexity: 5 nodes, depth 3, uses 1/3 inputs
+
+🎯 NEW BEST! Fitness: 0.9971
+Tree complexity: 4 nodes, depth 3, uses 2/3 inputs
+
+============================================================
+Evolution Complete!
+Best fitness achieved: 0.9971
+============================================================
+
+Winner (compact form):
+ /(
+  value,
+  relu(
+    missing
+  )
+)
+
+✅ Saved run report to: evo_logs/winner_run_20pct_MNAR_1768261385.json
+
+Validation fitness: 0.9971
+Complexity: 4 nodes
+Depth: 3
+Uses 2/3 input channels
+
+============================================================
+VISUALIZING THE EVOLVED FUNCTION:
+============================================================
+⚠️ Could not create visualization: [Errno 2] No such file or directory: '/mnt/user-data/outputs/evolved_activation_sonar_20pct_MNAR.png'
+
+Step 6: Training final model with best activation...
+Epoch  10/100 - Loss: 0.2045, Train Acc: 0.9413, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.0841, Train Acc: 0.9648, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.0682, Train Acc: 0.9707, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  40/100 - Loss: 0.0616, Train Acc: 0.9736, Val Acc: 0.9561, Best Val: 0.9561
+
+Early stopping at epoch 48
+
+Final Training Complete!
+Best Validation Accuracy: 0.9561
+
+Step 7: Evaluating on held-out test set...
+Test Accuracy: 0.9561
+
+============================================================
+BASELINE COMPARISON: Training with ReLU
+============================================================
+Epoch  10/100 - Loss: 0.5388, Train Acc: 0.9208, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  20/100 - Loss: 0.3842, Train Acc: 0.9238, Val Acc: 0.9474, Best Val: 0.9474
+
+Early stopping at epoch 27
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+ReLU Test Accuracy: 0.8947
+
+============================================================
+BASELINE COMPARISON: Training with Swish
+============================================================
+Epoch  10/100 - Loss: 0.5768, Train Acc: 0.9062, Val Acc: 0.9649, Best Val: 0.9649
+Epoch  20/100 - Loss: 0.4711, Train Acc: 0.9208, Val Acc: 0.9561, Best Val: 0.9649
+
+Early stopping at epoch 24
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+
+============================================================
+BASELINE COMPARISON: Training with LeakyReLU
+============================================================
+Epoch  10/100 - Loss: 0.6020, Train Acc: 0.8182, Val Acc: 0.8158, Best Val: 0.8158
+Epoch  20/100 - Loss: 0.4527, Train Acc: 0.9032, Val Acc: 0.9474, Best Val: 0.9474
+Epoch  30/100 - Loss: 0.2935, Train Acc: 0.9413, Val Acc: 0.9649, Best Val: 0.9649
+
+Early stopping at epoch 39
+
+Final Training Complete!
+Best Validation Accuracy: 0.9649
+LeakyReLU Test Accuracy: 0.9386
+
+============================================================
+BASELINE COMPARISON: Training with ELU
+============================================================
+Epoch  10/100 - Loss: 0.4307, Train Acc: 0.9003, Val Acc: 0.9035, Best Val: 0.9035
+Epoch  20/100 - Loss: 0.2554, Train Acc: 0.9150, Val Acc: 0.9386, Best Val: 0.9386
+Epoch  30/100 - Loss: 0.1998, Train Acc: 0.9208, Val Acc: 0.9386, Best Val: 0.9474
+
+Early stopping at epoch 37
+
+Final Training Complete!
+Best Validation Accuracy: 0.9474
+ELU Test Accuracy: 0.9298
+
+============================================================
+FINAL RESULTS SUMMARY (20% Missing, MNAR)
+============================================================
+Method             ValAcc     TestAcc    Prec       Recall     F1         AUC       
+------------------------------------------------------------
+Evolved            0.9561     0.9561     0.9302     0.9524     0.9412     0.9835    
+ReLU               0.9474     0.8947     0.8750     0.8333     0.8537     0.9620    
+Swish              0.9649     0.9035     0.8298     0.9286     0.8764     0.9835    
+LeakyReLU          0.9649     0.9386     0.9070     0.9286     0.9176     0.9874    
+ELU                0.9474     0.9298     0.8864     0.9286     0.9070     0.9884    
+
+✅ Evolved activation is THE BEST! Beats both ReLU and Swish!
+
+============================================================
+Experiment completed successfully!
+============================================================
+
+============================================================
+RUN WINNER (final):
+============================================================
+Fitness=0.9971 | Nodes=4 | Depth=3 | InputsUsed=2
+
+Winner of this run (math/infix):
+  Run 25:
+     Test Accuracy = 0.9561
+     F1 Score      = 0.9412
+     f(x, m, c)    = (x / relu(m))
+------------------------------------------------------------
+
+================================================================================
+
+========================================================================================================================
+AGGREGATED RESULTS (MEAN ± STD)
+========================================================================================================================
+Method       ValAcc         TestAcc        Precision      Recall         Specificity  F1             AUC           
+------------------------------------------------------------------------------------------------------------------------
+Evolved     0.9558±0.0152 0.9312±0.0273 0.9213±0.0428 0.8914±0.0621 0.9544±0.0265 0.9045±0.0405 0.9733±0.0241 
+ReLU        0.9604±0.0079 0.9221±0.0205 0.9262±0.0441 0.8610±0.0550 0.9578±0.0265 0.8903±0.0290 0.9835±0.0069 
+Swish       0.9526±0.0093 0.9196±0.0156 0.8997±0.0503 0.8857±0.0442 0.9394±0.0265 0.8906±0.0194 0.9833±0.0052 
+LeakyReLU   0.9586±0.0091 0.9232±0.0157 0.9184±0.0414 0.8724±0.0542 0.9528±0.0269 0.8928±0.0239 0.9814±0.0129 
+ELU         0.9632±0.0099 0.9263±0.0233 0.9142±0.0557 0.8876±0.0372 0.9489±0.0364 0.8992±0.0295 0.9819±0.0129 
+========================================================================================================================
+--------------------------------------------------------------------------------
+
+WINNER FORMULAS ACROSS RUNS:
+================================================================================
+Run 1:
+   Test Accuracy = 0.9211
+   F1 Score      = 0.8800
+   f(x, m, c)    = (min(2, (max(sin(x), (x / c)) + x)) / (-0.5 / (-0.5 - softplus(0.1))))
+--------------------------------------------------------------------------------
+Run 2:
+   Test Accuracy = 0.9474
+   F1 Score      = 0.9286
+   f(x, m, c)    = (x / c)
+--------------------------------------------------------------------------------
+Run 3:
+   Test Accuracy = 0.8860
+   F1 Score      = 0.8354
+   f(x, m, c)    = (-min((c - max(tanh(sigmoid(c)), max(tanh(sigmoid(max(m, m))), (m)^2))), ((x / m) - (tanh(m) * max(m, m)))))
+--------------------------------------------------------------------------------
+Run 4:
+   Test Accuracy = 0.9737
+   F1 Score      = 0.9639
+   f(x, m, c)    = (((x - (c - (m - max(m, x)))) * x) * 2)
+--------------------------------------------------------------------------------
+Run 5:
+   Test Accuracy = 0.9386
+   F1 Score      = 0.9176
+   f(x, m, c)    = (x + (0.5 * (x + (m + x))))
+--------------------------------------------------------------------------------
+Run 6:
+   Test Accuracy = 0.9474
+   F1 Score      = 0.9286
+   f(x, m, c)    = (x / 0.1)
+--------------------------------------------------------------------------------
+Run 7:
+   Test Accuracy = 0.9035
+   F1 Score      = 0.8675
+   f(x, m, c)    = leakyrelu(min((m * m), (x / 0)))
+--------------------------------------------------------------------------------
+Run 8:
+   Test Accuracy = 0.8596
+   F1 Score      = 0.7838
+   f(x, m, c)    = (((min(x, min((c / min(min(m, 1), 0.1)), x)) + x) - c) * x)
+--------------------------------------------------------------------------------
+Run 9:
+   Test Accuracy = 0.9123
+   F1 Score      = 0.8864
+   f(x, m, c)    = ((c * x) * ((m + -2) / m))
+--------------------------------------------------------------------------------
+Run 10:
+   Test Accuracy = 0.9561
+   F1 Score      = 0.9383
+   f(x, m, c)    = (x * relu(|(tanh(x) + softplus((x / sigmoid(c))))|))
+--------------------------------------------------------------------------------
+Run 11:
+   Test Accuracy = 0.9649
+   F1 Score      = 0.9524
+   f(x, m, c)    = ((-2 + min(x, max(c, m))))^2
+--------------------------------------------------------------------------------
+Run 12:
+   Test Accuracy = 0.9211
+   F1 Score      = 0.8941
+   f(x, m, c)    = ((c - (x / m)) - m)
+--------------------------------------------------------------------------------
+Run 13:
+   Test Accuracy = 0.9474
+   F1 Score      = 0.9268
+   f(x, m, c)    = ((m)^2 + ((x / -0.1) + (softplus(m) / sigmoid(min(c, 0)))))
+--------------------------------------------------------------------------------
+Run 14:
+   Test Accuracy = 0.9649
+   F1 Score      = 0.9512
+   f(x, m, c)    = ((((m * max(((m - m) * sqrt(c)), x)) - x) / softplus(sigmoid(-2))) / m)
+--------------------------------------------------------------------------------
+Run 15:
+   Test Accuracy = 0.9386
+   F1 Score      = 0.9176
+   f(x, m, c)    = min(leakyrelu(x), max(x, max(x, (min(leakyrelu(((c - x))^3), (x - c)) + x))))
+--------------------------------------------------------------------------------
+Run 16:
+   Test Accuracy = 0.9386
+   F1 Score      = 0.9136
+   f(x, m, c)    = ((((((c + c) * leakyrelu(x)) + x) + m) + x) + -2)
+--------------------------------------------------------------------------------
+Run 17:
+   Test Accuracy = 0.8772
+   F1 Score      = 0.8333
+   f(x, m, c)    = (x / min(max(m, 1), (m)^2))
+--------------------------------------------------------------------------------
+Run 18:
+   Test Accuracy = 0.9386
+   F1 Score      = 0.9157
+   f(x, m, c)    = (x * log(|m|))
+--------------------------------------------------------------------------------
+Run 19:
+   Test Accuracy = 0.9211
+   F1 Score      = 0.8916
+   f(x, m, c)    = min(x, min(c, (c + sqrt(x))))
+--------------------------------------------------------------------------------
+Run 20:
+   Test Accuracy = 0.9211
+   F1 Score      = 0.8941
+   f(x, m, c)    = (((x / max(x, 1)) * c) + m)
+--------------------------------------------------------------------------------
+Run 21:
+   Test Accuracy = 0.9474
+   F1 Score      = 0.9268
+   f(x, m, c)    = (x + (x + (min(c, x) - m)))
+--------------------------------------------------------------------------------
+Run 22:
+   Test Accuracy = 0.9474
+   F1 Score      = 0.9286
+   f(x, m, c)    = (x / max((x - m), m))
+--------------------------------------------------------------------------------
+Run 23:
+   Test Accuracy = 0.9298
+   F1 Score      = 0.8974
+   f(x, m, c)    = (min(((m / -2) * c), (x * 2)) * (log(|m|) + x))
+--------------------------------------------------------------------------------
+Run 24:
+   Test Accuracy = 0.9211
+   F1 Score      = 0.8989
+   f(x, m, c)    = max(min(c, min(x, min((-0.1 - m), m))), x)
+--------------------------------------------------------------------------------
+Run 25:
+   Test Accuracy = 0.9561
+   F1 Score      = 0.9412
+   f(x, m, c)    = (x / relu(m))
+--------------------------------------------------------------------------------
+================================================================================
+Saved run-winner figure to: activation_run_winners.pdf
+
+=== All tests completed ===
+Results saved to: sonar_results_MNAR_20pct.txt

@@ -1,0 +1,820 @@
+{
+ "name": "fidelity_fashion_mnist_random20",
+ "config_base": "cnn_extension/configs/reference_fashion_mnist.json",
+ "replicate": 0,
+ "seeds": {
+  "split": 1000,
+  "corruption": 2000,
+  "evolution": 3000,
+  "init": 4000,
+  "batch": 5000,
+  "replicate": 0,
+  "corruption_per_split": {
+   "train": 4082782755,
+   "val": 1131335558,
+   "test": 2573781011
+  }
+ },
+ "tree_seed": 777,
+ "cheap_protocol": {
+  "fitness_epochs": 5,
+  "fitness_patience": 2,
+  "fitness_batch_size": 256,
+  "fitness_train_subset": 10000
+ },
+ "full_protocol": {
+  "fitness_epochs": 30,
+  "fitness_patience": 2,
+  "fitness_batch_size": 128,
+  "fitness_train_subset": null
+ },
+ "device": "mps",
+ "data": {
+  "dataset": {
+   "in_channels": 1,
+   "height": 28,
+   "width": 28,
+   "num_classes": 10,
+   "name": "fashion_mnist",
+   "split": {
+    "kind": "stratified_from_official_train",
+    "val_fraction": 0.1,
+    "seed": 1000,
+    "val_index_fingerprint": "b0fb44e6026ceea4",
+    "n_train": 54000,
+    "n_val": 6000
+   },
+   "sizes": {
+    "train": 54000,
+    "val": 6000,
+    "test": 10000
+   }
+  },
+  "masks": {
+   "train": {
+    "pattern": "random",
+    "nominal_rate": 0.2,
+    "seed": 4082782755,
+    "realized_rate": 0.2000287462207105,
+    "n": 54000,
+    "fingerprint": "4697d01746518888"
+   },
+   "val": {
+    "pattern": "random",
+    "nominal_rate": 0.2,
+    "seed": 1131335558,
+    "realized_rate": 0.1999906462585034,
+    "n": 6000,
+    "fingerprint": "9487573362f8219e"
+   },
+   "test": {
+    "pattern": "random",
+    "nominal_rate": 0.2,
+    "seed": 2573781011,
+    "realized_rate": 0.20010586734693878,
+    "n": 10000,
+    "fingerprint": "056d3b4b8d0848d1"
+   }
+  },
+  "preprocessor": {
+   "fingerprint": "6509e20ea2a7ff0c",
+   "fallbacks": {
+    "features_without_observed_train_entries": 0,
+    "features_using_channel_fallback_constant": 0
+   },
+   "tau": 0.1
+  }
+ },
+ "n_trees": 30,
+ "n_valid_both": 29,
+ "n_with_x": 14,
+ "agreement_all_valid": {
+  "fitness": {
+   "n": 29,
+   "spearman": 0.8871088088051725,
+   "kendall": 0.7881095349169979
+  },
+  "val_acc": {
+   "n": 29,
+   "spearman": 0.8432259884970907,
+   "kendall": 0.7076586426874981
+  },
+  "top_k": 5,
+  "top_k_overlap": 4,
+  "full_rank_of_cheap_winner": 6
+ },
+ "agreement_trees_with_x": {
+  "fitness": {
+   "n": 14,
+   "spearman": 0.8813186813186813,
+   "kendall": 0.7142857142857144
+  },
+  "val_acc": {
+   "n": 14,
+   "spearman": 0.8857142857142857,
+   "kendall": 0.7362637362637363
+  },
+  "top_k": 2,
+  "top_k_overlap": 1,
+  "full_rank_of_cheap_winner": 6
+ },
+ "runtime_s": {
+  "cheap_total": 90.24848413467407,
+  "full_total": 715.877779006958,
+  "cheap_mean": 3.0082828044891357,
+  "full_mean": 23.862592633565267
+ },
+ "trees": [
+  {
+   "index": 0,
+   "infix": "max(min(cos(1), (c * 0)), (exp(x) * max(2, c)))",
+   "uses_x": true,
+   "nodes": 13,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.6651,
+    "val_acc": 0.6603333333333333,
+    "epochs_run": 5,
+    "runtime_s": 8.018765211105347,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.7777666666666667,
+    "val_acc": 0.773,
+    "epochs_run": 7,
+    "runtime_s": 48.88156199455261,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 1,
+   "infix": "min(0.1, x)",
+   "uses_x": true,
+   "nodes": 3,
+   "depth": 2,
+   "cheap": {
+    "fitness": 0.764,
+    "val_acc": 0.7611666666666667,
+    "epochs_run": 5,
+    "runtime_s": 2.15195894241333,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.8868333333333334,
+    "val_acc": 0.884,
+    "epochs_run": 18,
+    "runtime_s": 40.43779397010803,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 2,
+   "infix": "relu(m)",
+   "uses_x": false,
+   "nodes": 2,
+   "depth": 2,
+   "cheap": {
+    "fitness": 0.11076666666666665,
+    "val_acc": 0.10783333333333334,
+    "epochs_run": 5,
+    "runtime_s": 2.126176118850708,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10509999999999999,
+    "val_acc": 0.10216666666666667,
+    "epochs_run": 4,
+    "runtime_s": 9.26905608177185,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 3,
+   "infix": "max(((-m))^2, sin((0.1)^2))",
+   "uses_x": false,
+   "nodes": 7,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.10469999999999999,
+    "val_acc": 0.10266666666666667,
+    "epochs_run": 5,
+    "runtime_s": 2.909018039703369,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10519999999999999,
+    "val_acc": 0.10316666666666667,
+    "epochs_run": 8,
+    "runtime_s": 25.09611678123474,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 4,
+   "infix": "((c / c) / (softplus(m) + (m / c)))",
+   "uses_x": false,
+   "nodes": 10,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.10756666666666666,
+    "val_acc": 0.1025,
+    "epochs_run": 3,
+    "runtime_s": 3.723555088043213,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10523333333333333,
+    "val_acc": 0.10016666666666667,
+    "epochs_run": 3,
+    "runtime_s": 16.254199981689453,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 5,
+   "infix": "tanh(m)",
+   "uses_x": false,
+   "nodes": 2,
+   "depth": 2,
+   "cheap": {
+    "fitness": 0.10859999999999999,
+    "val_acc": 0.10566666666666667,
+    "epochs_run": 5,
+    "runtime_s": 2.0602118968963623,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10593333333333331,
+    "val_acc": 0.103,
+    "epochs_run": 6,
+    "runtime_s": 14.108154058456421,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 6,
+   "infix": "max(leakyrelu((c)^2), (cos(c))^3)",
+   "uses_x": false,
+   "nodes": 7,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.10703333333333331,
+    "val_acc": 0.105,
+    "epochs_run": 4,
+    "runtime_s": 2.4809882640838623,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10469999999999999,
+    "val_acc": 0.10266666666666667,
+    "epochs_run": 3,
+    "runtime_s": 10.132145881652832,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 7,
+   "infix": "(m / m)",
+   "uses_x": false,
+   "nodes": 3,
+   "depth": 2,
+   "cheap": {
+    "fitness": 0.10283333333333333,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 1.6465609073638916,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10283333333333333,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 8.921487092971802,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 8,
+   "infix": "min(min(m, c), x)",
+   "uses_x": true,
+   "nodes": 5,
+   "depth": 3,
+   "cheap": {
+    "fitness": 0.7657666666666668,
+    "val_acc": 0.7566666666666667,
+    "epochs_run": 5,
+    "runtime_s": 5.0057783126831055,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.8837666666666668,
+    "val_acc": 0.8746666666666667,
+    "epochs_run": 14,
+    "runtime_s": 77.62494778633118,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 9,
+   "infix": "((x / (0.1 * c)) - x)",
+   "uses_x": true,
+   "nodes": 7,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.7728666666666666,
+    "val_acc": 0.7675,
+    "epochs_run": 5,
+    "runtime_s": 5.072220087051392,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.8188666666666666,
+    "val_acc": 0.8135,
+    "epochs_run": 5,
+    "runtime_s": 25.47823429107666,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 10,
+   "infix": "(x * x)",
+   "uses_x": true,
+   "nodes": 3,
+   "depth": 2,
+   "cheap": {
+    "fitness": 0.7576666666666667,
+    "val_acc": 0.7548333333333334,
+    "epochs_run": 5,
+    "runtime_s": 2.2312917709350586,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.8781666666666667,
+    "val_acc": 0.8753333333333333,
+    "epochs_run": 13,
+    "runtime_s": 31.63990306854248,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 11,
+   "infix": "(sin(m) + ((m - c) / tanh(x)))",
+   "uses_x": true,
+   "nodes": 9,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.11349999999999999,
+    "val_acc": 0.105,
+    "epochs_run": 5,
+    "runtime_s": 6.471941232681274,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10883333333333332,
+    "val_acc": 0.10033333333333333,
+    "epochs_run": 3,
+    "runtime_s": 19.695167064666748,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 12,
+   "infix": "(m * -0.5)",
+   "uses_x": false,
+   "nodes": 3,
+   "depth": 2,
+   "cheap": {
+    "fitness": 0.10333333333333333,
+    "val_acc": 0.1005,
+    "epochs_run": 5,
+    "runtime_s": 2.362657070159912,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10466666666666666,
+    "val_acc": 0.10183333333333333,
+    "epochs_run": 3,
+    "runtime_s": 7.472778797149658,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 13,
+   "infix": "max(leakyrelu((m * x)), (-0.5 - c))",
+   "uses_x": true,
+   "nodes": 8,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.6272666666666666,
+    "val_acc": 0.6186666666666667,
+    "epochs_run": 5,
+    "runtime_s": 5.640019178390503,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.7826,
+    "val_acc": 0.774,
+    "epochs_run": 12,
+    "runtime_s": 72.91621422767639,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 14,
+   "infix": "(((c + 0) + c) * (sqrt(m) / x))",
+   "uses_x": true,
+   "nodes": 10,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.0,
+    "val_acc": null,
+    "epochs_run": 1,
+    "runtime_s": 0.12057709693908691,
+    "valid": false,
+    "failure": "non-finite loss at epoch 1"
+   },
+   "full": {
+    "fitness": 0.0,
+    "val_acc": null,
+    "epochs_run": 1,
+    "runtime_s": 0.0325930118560791,
+    "valid": false,
+    "failure": "non-finite loss at epoch 1"
+   }
+  },
+  {
+   "index": 15,
+   "infix": "(-1 / c)",
+   "uses_x": false,
+   "nodes": 3,
+   "depth": 2,
+   "cheap": {
+    "fitness": 0.10283333333333333,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 1.6967651844024658,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10283333333333333,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 9.01911997795105,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 16,
+   "infix": "sqrt((-0.1 / x))",
+   "uses_x": true,
+   "nodes": 5,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.1434,
+    "val_acc": 0.14116666666666666,
+    "epochs_run": 5,
+    "runtime_s": 3.6358489990234375,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.09856666666666666,
+    "val_acc": 0.09633333333333334,
+    "epochs_run": 4,
+    "runtime_s": 14.712323188781738,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 17,
+   "infix": "(softplus((-1 + 2)) - ((x + m) - (-1)^3))",
+   "uses_x": true,
+   "nodes": 11,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.7569666666666667,
+    "val_acc": 0.752,
+    "epochs_run": 5,
+    "runtime_s": 4.188097953796387,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.8253,
+    "val_acc": 0.8203333333333334,
+    "epochs_run": 11,
+    "runtime_s": 45.72400617599487,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 18,
+   "infix": "(-0.1 - min(c, c))",
+   "uses_x": false,
+   "nodes": 5,
+   "depth": 3,
+   "cheap": {
+    "fitness": 0.1026,
+    "val_acc": 0.10016666666666667,
+    "epochs_run": 3,
+    "runtime_s": 1.3530430793762207,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10243333333333333,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 7.823192119598389,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 19,
+   "infix": "min(c, sin(0.5))",
+   "uses_x": false,
+   "nodes": 4,
+   "depth": 3,
+   "cheap": {
+    "fitness": 0.10253333333333334,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 1.3757250308990479,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10253333333333334,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 7.98615026473999,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 20,
+   "infix": "leakyrelu((c + (c)^2))",
+   "uses_x": false,
+   "nodes": 5,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.10223333333333333,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 1.494385004043579,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10323333333333333,
+    "val_acc": 0.101,
+    "epochs_run": 3,
+    "runtime_s": 8.205151796340942,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 21,
+   "infix": "log(|x|)",
+   "uses_x": true,
+   "nodes": 2,
+   "depth": 2,
+   "cheap": {
+    "fitness": 0.32010000000000005,
+    "val_acc": 0.31716666666666665,
+    "epochs_run": 4,
+    "runtime_s": 1.9425349235534668,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.4769333333333334,
+    "val_acc": 0.474,
+    "epochs_run": 7,
+    "runtime_s": 17.54980206489563,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 22,
+   "infix": "sigmoid(max(0, m))",
+   "uses_x": false,
+   "nodes": 4,
+   "depth": 3,
+   "cheap": {
+    "fitness": 0.10253333333333334,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 1.4559078216552734,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.1027,
+    "val_acc": 0.10016666666666667,
+    "epochs_run": 3,
+    "runtime_s": 7.900763034820557,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 23,
+   "infix": "relu((1 * (0.5 * -1)))",
+   "uses_x": false,
+   "nodes": 6,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.0988,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 1.0511322021484375,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.0988,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 5.613448858261108,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 24,
+   "infix": "(min(cos(x), max(x, x)) * 0.1)",
+   "uses_x": true,
+   "nodes": 8,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.5997666666666666,
+    "val_acc": 0.5978333333333333,
+    "epochs_run": 5,
+    "runtime_s": 4.23660683631897,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.8060999999999999,
+    "val_acc": 0.8041666666666667,
+    "epochs_run": 20,
+    "runtime_s": 91.49183583259583,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 25,
+   "infix": "((-0.1 + x) + softplus(m))",
+   "uses_x": true,
+   "nodes": 6,
+   "depth": 3,
+   "cheap": {
+    "fitness": 0.7435,
+    "val_acc": 0.7378333333333333,
+    "epochs_run": 5,
+    "runtime_s": 3.5488388538360596,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.8226666666666667,
+    "val_acc": 0.817,
+    "epochs_run": 7,
+    "runtime_s": 26.854377031326294,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 26,
+   "infix": "max(c, c)",
+   "uses_x": false,
+   "nodes": 3,
+   "depth": 2,
+   "cheap": {
+    "fitness": 0.10283333333333333,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 1.239943027496338,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10383333333333333,
+    "val_acc": 0.101,
+    "epochs_run": 3,
+    "runtime_s": 7.518641710281372,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 27,
+   "infix": "min(1, (m / c))",
+   "uses_x": false,
+   "nodes": 5,
+   "depth": 3,
+   "cheap": {
+    "fitness": 0.1101,
+    "val_acc": 0.10433333333333333,
+    "epochs_run": 5,
+    "runtime_s": 3.9184138774871826,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10993333333333334,
+    "val_acc": 0.10416666666666667,
+    "epochs_run": 7,
+    "runtime_s": 28.62694501876831,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 28,
+   "infix": "cos((min(-2, x) + -2))",
+   "uses_x": true,
+   "nodes": 6,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.10213333333333333,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 1.7821571826934814,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10213333333333333,
+    "val_acc": 0.1,
+    "epochs_run": 3,
+    "runtime_s": 9.806232929229736,
+    "valid": true,
+    "failure": null
+   }
+  },
+  {
+   "index": 29,
+   "infix": "(((c / 0) / min(x, x)) * -0.5)",
+   "uses_x": true,
+   "nodes": 9,
+   "depth": 4,
+   "cheap": {
+    "fitness": 0.11883333333333333,
+    "val_acc": 0.11366666666666667,
+    "epochs_run": 4,
+    "runtime_s": 5.3073649406433105,
+    "valid": true,
+    "failure": null
+   },
+   "full": {
+    "fitness": 0.10766666666666666,
+    "val_acc": 0.1025,
+    "epochs_run": 3,
+    "runtime_s": 19.085434913635254,
+    "valid": true,
+    "failure": null
+   }
+  }
+ ],
+ "timestamp": "2026-10-27 16:55:25"
+}

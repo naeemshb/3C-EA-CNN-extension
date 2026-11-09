@@ -1,0 +1,952 @@
+{
+  "name": "ref_fashion_mnist_random20_cnn_evolved_zmc_rr10",
+  "label": "REFERENCE search budget (paper Table 3): pop 100 x 30 gen, depth 3, p_cross 0.7, p_mut 0.15, 2 elites. CHEAP FITNESS PROTOCOL (decided 2026-10-27, fidelity-checked; see README section 5): each candidate trains <=5 minibatch epochs (patience 2, batch 256) on a fixed seeded 10k-sample subset of the training partition. Selection, final retraining (<=100 epochs, patience 15, batch 128) and the test evaluation use the full partitions. TWO-STAGE SELECTION (deviation D12, decided 2026-11-09 after the step-3 gate): the top-10 distinct candidates of the final population are re-scored under the long protocol (<=30 epochs, patience 2, batch 128, full training partition, paired seeds) and the best re-scored formula is selected.",
+  "replicate": 0,
+  "mode": "matched_conditions",
+  "config": {
+    "name": "ref_fashion_mnist_random20_cnn_evolved_zmc_rr10",
+    "label": "REFERENCE search budget (paper Table 3): pop 100 x 30 gen, depth 3, p_cross 0.7, p_mut 0.15, 2 elites. CHEAP FITNESS PROTOCOL (decided 2026-10-27, fidelity-checked; see README section 5): each candidate trains <=5 minibatch epochs (patience 2, batch 256) on a fixed seeded 10k-sample subset of the training partition. Selection, final retraining (<=100 epochs, patience 15, batch 128) and the test evaluation use the full partitions. TWO-STAGE SELECTION (deviation D12, decided 2026-11-09 after the step-3 gate): the top-10 distinct candidates of the final population are re-scored under the long protocol (<=30 epochs, patience 2, batch 128, full training partition, paired seeds) and the best re-scored formula is selected.",
+    "dataset": "fashion_mnist",
+    "data_root": "data",
+    "download": true,
+    "val_fraction": 0.1,
+    "synthetic": {},
+    "corruption": {
+      "pattern": "random",
+      "rate": 0.2
+    },
+    "method": {
+      "type": "evolved",
+      "terminals": [
+        "value",
+        "missing",
+        "confidence"
+      ]
+    },
+    "backbone": "cnn",
+    "metadata_mode": "full",
+    "architecture": {
+      "conv_channels": [
+        16,
+        32
+      ],
+      "kernel_size": 3,
+      "pool_size": 2,
+      "fc_hidden": 64,
+      "mlp_hidden_sizes": [
+        64,
+        32
+      ]
+    },
+    "search": {
+      "population_size": 100,
+      "generations": 30,
+      "max_tree_depth": 3,
+      "mutation_rate": 0.15,
+      "crossover_rate": 0.7,
+      "elite_size": 2,
+      "fitness_epochs": 5,
+      "fitness_patience": 2,
+      "fitness_batch_size": 256,
+      "fitness_train_subset": 10000,
+      "rerank": {
+        "top_k": 10,
+        "epochs": 30,
+        "patience": 2,
+        "batch_size": 128,
+        "train_subset": null
+      },
+      "reuse_search_dir": "runs/ref_fashion_mnist_random20_cnn_evolved_zmc/rep0/search"
+    },
+    "final": {
+      "epochs": 100,
+      "patience": 15,
+      "batch_size": 128
+    },
+    "optimizer": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "grad_clip": 1.0
+    },
+    "seeds": {
+      "split": 1000,
+      "corruption": 2000,
+      "evolution": 3000,
+      "init": 4000,
+      "batch": 5000
+    },
+    "device": "auto",
+    "out_root": "runs"
+  },
+  "seeds": {
+    "split": 1000,
+    "corruption": 2000,
+    "evolution": 3000,
+    "init": 4000,
+    "batch": 5000,
+    "replicate": 0,
+    "corruption_per_split": {
+      "train": 4082782755,
+      "val": 1131335558,
+      "test": 2573781011
+    }
+  },
+  "device": "mps",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "torch": "2.8.0.dev20250430",
+  "data": {
+    "dataset": {
+      "in_channels": 1,
+      "height": 28,
+      "width": 28,
+      "num_classes": 10,
+      "name": "fashion_mnist",
+      "split": {
+        "kind": "stratified_from_official_train",
+        "val_fraction": 0.1,
+        "seed": 1000,
+        "val_index_fingerprint": "b0fb44e6026ceea4",
+        "n_train": 54000,
+        "n_val": 6000
+      },
+      "sizes": {
+        "train": 54000,
+        "val": 6000,
+        "test": 10000
+      }
+    },
+    "masks": {
+      "train": {
+        "pattern": "random",
+        "nominal_rate": 0.2,
+        "seed": 4082782755,
+        "realized_rate": 0.2000287462207105,
+        "n": 54000,
+        "fingerprint": "4697d01746518888"
+      },
+      "val": {
+        "pattern": "random",
+        "nominal_rate": 0.2,
+        "seed": 1131335558,
+        "realized_rate": 0.1999906462585034,
+        "n": 6000,
+        "fingerprint": "9487573362f8219e"
+      },
+      "test": {
+        "pattern": "random",
+        "nominal_rate": 0.2,
+        "seed": 2573781011,
+        "realized_rate": 0.20010586734693878,
+        "n": 10000,
+        "fingerprint": "056d3b4b8d0848d1"
+      }
+    },
+    "preprocessor": {
+      "fingerprint": "6509e20ea2a7ff0c",
+      "fallbacks": {
+        "features_without_observed_train_entries": 0,
+        "features_using_channel_fallback_constant": 0
+      },
+      "tau": 0.1
+    }
+  },
+  "selection": {
+    "type": "evolved",
+    "terminals": [
+      "value",
+      "missing",
+      "confidence"
+    ],
+    "selection_rule": "two_stage_rerank",
+    "infix": "(x + (m - sin(cos((x + x)))))",
+    "fitness": 0.7987666666666667,
+    "search_val_acc": 0.794,
+    "nodes": 9,
+    "depth": 6,
+    "uses_inputs": 2,
+    "found_in_generation": 30,
+    "n_evaluations": 3000,
+    "search_runtime_s": 14059.04934501648,
+    "rerank_runtime_s": 357.09202003479004,
+    "search_copied_from": "runs/ref_fashion_mnist_random20_cnn_evolved_zmc/rep0/search",
+    "fitness_train_subset": {
+      "n": 10000,
+      "fingerprint": "dec8e73c42cd9eb1"
+    },
+    "per_generation": [
+      {
+        "generation": 1,
+        "best_fitness": 0.7855,
+        "best_val_acc": 0.7826666666666666,
+        "best_infix": "(x / -0.5)",
+        "best_nodes": 3,
+        "best_depth": 2,
+        "best_uses_inputs": 1,
+        "mean_fitness": 0.20561333333333334,
+        "n_invalid": 30,
+        "runtime_s": 195.1272177696228
+      },
+      {
+        "generation": 2,
+        "best_fitness": 0.7944666666666667,
+        "best_val_acc": 0.7895,
+        "best_infix": "((relu(x) + (0 + (x / c))))^3",
+        "best_nodes": 9,
+        "best_depth": 5,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.2979136666666667,
+        "n_invalid": 23,
+        "runtime_s": 249.90213775634766
+      },
+      {
+        "generation": 3,
+        "best_fitness": 0.7924666666666667,
+        "best_val_acc": 0.7875,
+        "best_infix": "((relu(x) + (0 + (x / c))))^3",
+        "best_nodes": 9,
+        "best_depth": 5,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.29664066666666666,
+        "n_invalid": 25,
+        "runtime_s": 230.11559796333313
+      },
+      {
+        "generation": 4,
+        "best_fitness": 0.7898,
+        "best_val_acc": 0.7843333333333333,
+        "best_infix": "((m - relu(x)) - x)",
+        "best_nodes": 6,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.3294493333333333,
+        "n_invalid": 18,
+        "runtime_s": 279.2569239139557
+      },
+      {
+        "generation": 5,
+        "best_fitness": 0.8143666666666667,
+        "best_val_acc": 0.809,
+        "best_infix": "((sqrt(x) - (c - x)))^3",
+        "best_nodes": 7,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.376773,
+        "n_invalid": 19,
+        "runtime_s": 303.07644605636597
+      },
+      {
+        "generation": 6,
+        "best_fitness": 0.8083666666666667,
+        "best_val_acc": 0.803,
+        "best_infix": "((sqrt(x) - (c - x)))^3",
+        "best_nodes": 7,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.43883333333333324,
+        "n_invalid": 13,
+        "runtime_s": 359.8154671192169
+      },
+      {
+        "generation": 7,
+        "best_fitness": 0.8148666666666666,
+        "best_val_acc": 0.8095,
+        "best_infix": "((sqrt(x) - (c - x)))^3",
+        "best_nodes": 7,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.478608,
+        "n_invalid": 12,
+        "runtime_s": 353.9373998641968
+      },
+      {
+        "generation": 8,
+        "best_fitness": 0.8121999999999999,
+        "best_val_acc": 0.8068333333333333,
+        "best_infix": "((sqrt(x) - (c - x)))^3",
+        "best_nodes": 7,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.4854863333333334,
+        "n_invalid": 8,
+        "runtime_s": 350.08527398109436
+      },
+      {
+        "generation": 9,
+        "best_fitness": 0.8173666666666667,
+        "best_val_acc": 0.812,
+        "best_infix": "((sqrt(x) - (c - x)))^3",
+        "best_nodes": 7,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.4725503333333333,
+        "n_invalid": 10,
+        "runtime_s": 344.44050693511963
+      },
+      {
+        "generation": 10,
+        "best_fitness": 0.8374666666666667,
+        "best_val_acc": 0.8325,
+        "best_infix": "sin(((tanh(x) + x) / min(c, 0.5)))",
+        "best_nodes": 9,
+        "best_depth": 5,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.50334,
+        "n_invalid": 8,
+        "runtime_s": 341.42581725120544
+      },
+      {
+        "generation": 11,
+        "best_fitness": 0.8446,
+        "best_val_acc": 0.8393333333333334,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5095366666666667,
+        "n_invalid": 7,
+        "runtime_s": 354.1498351097107
+      },
+      {
+        "generation": 12,
+        "best_fitness": 0.8334333333333334,
+        "best_val_acc": 0.8281666666666667,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.48787933333333333,
+        "n_invalid": 9,
+        "runtime_s": 368.1271872520447
+      },
+      {
+        "generation": 13,
+        "best_fitness": 0.8381,
+        "best_val_acc": 0.8328333333333333,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5173266666666667,
+        "n_invalid": 5,
+        "runtime_s": 385.1686887741089
+      },
+      {
+        "generation": 14,
+        "best_fitness": 0.8348,
+        "best_val_acc": 0.8298333333333333,
+        "best_infix": "sin(((tanh(x) + x) / min(c, 0.5)))",
+        "best_nodes": 9,
+        "best_depth": 5,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.541036,
+        "n_invalid": 6,
+        "runtime_s": 393.86662888526917
+      },
+      {
+        "generation": 15,
+        "best_fitness": 0.8303,
+        "best_val_acc": 0.8253333333333334,
+        "best_infix": "sin(((tanh(x) + x) / min(c, 0.5)))",
+        "best_nodes": 9,
+        "best_depth": 5,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5080593333333333,
+        "n_invalid": 11,
+        "runtime_s": 393.4568099975586
+      },
+      {
+        "generation": 16,
+        "best_fitness": 0.8386333333333333,
+        "best_val_acc": 0.8336666666666667,
+        "best_infix": "sin(((tanh(x) + x) / min(c, 0.5)))",
+        "best_nodes": 9,
+        "best_depth": 5,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.534497,
+        "n_invalid": 9,
+        "runtime_s": 424.22404503822327
+      },
+      {
+        "generation": 17,
+        "best_fitness": 0.8481,
+        "best_val_acc": 0.8428333333333333,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5713813333333334,
+        "n_invalid": 10,
+        "runtime_s": 463.20967507362366
+      },
+      {
+        "generation": 18,
+        "best_fitness": 0.8427666666666667,
+        "best_val_acc": 0.8375,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5570256666666666,
+        "n_invalid": 11,
+        "runtime_s": 482.4653971195221
+      },
+      {
+        "generation": 19,
+        "best_fitness": 0.8342666666666666,
+        "best_val_acc": 0.829,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5268250000000001,
+        "n_invalid": 13,
+        "runtime_s": 506.79455614089966
+      },
+      {
+        "generation": 20,
+        "best_fitness": 0.8422666666666666,
+        "best_val_acc": 0.837,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5156753333333333,
+        "n_invalid": 9,
+        "runtime_s": 499.54874086380005
+      },
+      {
+        "generation": 21,
+        "best_fitness": 0.8427666666666667,
+        "best_val_acc": 0.8375,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.542826,
+        "n_invalid": 11,
+        "runtime_s": 583.267728805542
+      },
+      {
+        "generation": 22,
+        "best_fitness": 0.8341,
+        "best_val_acc": 0.8288333333333333,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5824436666666667,
+        "n_invalid": 5,
+        "runtime_s": 617.082329750061
+      },
+      {
+        "generation": 23,
+        "best_fitness": 0.8387666666666667,
+        "best_val_acc": 0.8335,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.6084893333333334,
+        "n_invalid": 3,
+        "runtime_s": 650.2302629947662
+      },
+      {
+        "generation": 24,
+        "best_fitness": 0.8409333333333333,
+        "best_val_acc": 0.8356666666666667,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.62043,
+        "n_invalid": 4,
+        "runtime_s": 651.8959350585938
+      },
+      {
+        "generation": 25,
+        "best_fitness": 0.8396,
+        "best_val_acc": 0.8343333333333334,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.591121,
+        "n_invalid": 4,
+        "runtime_s": 705.4557180404663
+      },
+      {
+        "generation": 26,
+        "best_fitness": 0.8354333333333334,
+        "best_val_acc": 0.8301666666666667,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5859156666666666,
+        "n_invalid": 4,
+        "runtime_s": 713.3065040111542
+      },
+      {
+        "generation": 27,
+        "best_fitness": 0.8391,
+        "best_val_acc": 0.8338333333333333,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5500423333333334,
+        "n_invalid": 5,
+        "runtime_s": 656.6568078994751
+      },
+      {
+        "generation": 28,
+        "best_fitness": 0.8422666666666666,
+        "best_val_acc": 0.837,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5660766666666667,
+        "n_invalid": 4,
+        "runtime_s": 662.4793620109558
+      },
+      {
+        "generation": 29,
+        "best_fitness": 0.8444333333333333,
+        "best_val_acc": 0.8391666666666666,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.5656526666666667,
+        "n_invalid": 4,
+        "runtime_s": 732.4410028457642
+      },
+      {
+        "generation": 30,
+        "best_fitness": 0.8372666666666666,
+        "best_val_acc": 0.832,
+        "best_infix": "sin(((x + x) / min(c, 0.5)))",
+        "best_nodes": 8,
+        "best_depth": 4,
+        "best_uses_inputs": 2,
+        "mean_fitness": 0.589409,
+        "n_invalid": 7,
+        "runtime_s": 807.4997930526733
+      }
+    ],
+    "search_best": {
+      "infix": "sin(((x + x) / min(c, 0.5)))",
+      "fitness": 0.8481,
+      "search_val_acc": 0.8428333333333333
+    },
+    "rerank": {
+      "protocol": {
+        "top_k": 10,
+        "epochs": 30,
+        "patience": 2,
+        "batch_size": 128,
+        "train_subset": null
+      },
+      "top_k": 10,
+      "winner_search_rank": 7,
+      "table": [
+        {
+          "search_rank": 1,
+          "infix": "sin(((x + x) / min(c, 0.5)))",
+          "nodes": 8,
+          "depth": 4,
+          "search_fitness": 0.8481,
+          "search_val_acc": 0.8428333333333333,
+          "rerank_fitness": 0.8721,
+          "rerank_val_acc": 0.8668333333333333,
+          "rerank_valid": true,
+          "rerank_failure": null,
+          "rerank_epochs": 8,
+          "rerank_runtime_s": 48.57459497451782
+        },
+        {
+          "search_rank": 2,
+          "infix": "sin(((x + x) / min(elu((leakyrelu(x) - (sqrt(c) - (sqrt((((tanh(x) * -0.5) - x) + x)) - x)))), (x - sqrt(max(x, (x + x)))))))",
+          "nodes": 33,
+          "depth": 13,
+          "search_fitness": 0.8234666666666668,
+          "search_val_acc": 0.8225,
+          "rerank_fitness": 0.0,
+          "rerank_val_acc": null,
+          "rerank_valid": false,
+          "rerank_failure": "non-finite loss at epoch 1",
+          "rerank_epochs": 1,
+          "rerank_runtime_s": 1.014530897140503
+        },
+        {
+          "search_rank": 3,
+          "infix": "(x - (|(sqrt(x) - (c - (c * (x * max((c - max(exp(log(|x|)), (x - m))), (x + -0.1))))))| - x))",
+          "nodes": 28,
+          "depth": 13,
+          "search_fitness": 0.8188,
+          "search_val_acc": 0.814,
+          "rerank_fitness": 0.0,
+          "rerank_val_acc": null,
+          "rerank_valid": false,
+          "rerank_failure": "non-finite loss at epoch 1",
+          "rerank_epochs": 1,
+          "rerank_runtime_s": 6.690880060195923
+        },
+        {
+          "search_rank": 4,
+          "infix": "sin((sin(((x + x) / (leakyrelu(c) + 0.5))) / min(c, max((tanh(x) * x), 0.5))))",
+          "nodes": 19,
+          "depth": 7,
+          "search_fitness": 0.8175666666666667,
+          "search_val_acc": 0.814,
+          "rerank_fitness": 0.8712333333333334,
+          "rerank_val_acc": 0.8676666666666667,
+          "rerank_valid": true,
+          "rerank_failure": null,
+          "rerank_epochs": 7,
+          "rerank_runtime_s": 76.61357712745667
+        },
+        {
+          "search_rank": 5,
+          "infix": "sin(((x + cos((((m - 0.5) + c) * x))) / (c - 0.5)))",
+          "nodes": 15,
+          "depth": 8,
+          "search_fitness": 0.8077666666666667,
+          "search_val_acc": 0.8006666666666666,
+          "rerank_fitness": 0.8744333333333334,
+          "rerank_val_acc": 0.8673333333333333,
+          "rerank_valid": true,
+          "rerank_failure": null,
+          "rerank_epochs": 8,
+          "rerank_runtime_s": 68.37906408309937
+        },
+        {
+          "search_rank": 6,
+          "infix": "(|(sqrt(x) - (c - x))| * x)",
+          "nodes": 9,
+          "depth": 5,
+          "search_fitness": 0.8049666666666667,
+          "search_val_acc": 0.8,
+          "rerank_fitness": 0.0,
+          "rerank_val_acc": null,
+          "rerank_valid": false,
+          "rerank_failure": "non-finite loss at epoch 1",
+          "rerank_epochs": 1,
+          "rerank_runtime_s": 1.6838710308074951
+        },
+        {
+          "search_rank": 7,
+          "infix": "(x + (m - sin(cos((x + x)))))",
+          "nodes": 9,
+          "depth": 6,
+          "search_fitness": 0.7987666666666667,
+          "search_val_acc": 0.794,
+          "rerank_fitness": 0.8802666666666666,
+          "rerank_val_acc": 0.8755,
+          "rerank_valid": true,
+          "rerank_failure": null,
+          "rerank_epochs": 12,
+          "rerank_runtime_s": 58.156188011169434
+        },
+        {
+          "search_rank": 8,
+          "infix": "sin(((x + cos((sqrt(x) - x))) / min(c, max((x * x), 0.5))))",
+          "nodes": 16,
+          "depth": 7,
+          "search_fitness": 0.7972,
+          "search_val_acc": 0.7933333333333333,
+          "rerank_fitness": 0.0,
+          "rerank_val_acc": null,
+          "rerank_valid": false,
+          "rerank_failure": "non-finite loss at epoch 1",
+          "rerank_epochs": 1,
+          "rerank_runtime_s": 2.000185966491699
+        },
+        {
+          "search_rank": 9,
+          "infix": "(m - (|(sqrt(((x + leakyrelu(x)) / min(x, 0.5))) - (c - x))| * x))",
+          "nodes": 18,
+          "depth": 9,
+          "search_fitness": 0.7866,
+          "search_val_acc": 0.78,
+          "rerank_fitness": 0.0,
+          "rerank_val_acc": null,
+          "rerank_valid": false,
+          "rerank_failure": "non-finite loss at epoch 1",
+          "rerank_epochs": 1,
+          "rerank_runtime_s": 0.9375476837158203
+        },
+        {
+          "search_rank": 10,
+          "infix": "((m + min(max(x, ((x)^3 * ((c / 0.5) * x))), x)) + (-0.1 + x))",
+          "nodes": 18,
+          "depth": 8,
+          "search_fitness": 0.7864666666666666,
+          "search_val_acc": 0.7796666666666666,
+          "rerank_fitness": 0.8314666666666667,
+          "rerank_val_acc": 0.8246666666666667,
+          "rerank_valid": true,
+          "rerank_failure": null,
+          "rerank_epochs": 9,
+          "rerank_runtime_s": 93.04158020019531
+        }
+      ]
+    }
+  },
+  "selected_tree": {
+    "type": "binary",
+    "operator": "add",
+    "children": [
+      {
+        "type": "input",
+        "input_name": "value",
+        "children": []
+      },
+      {
+        "type": "binary",
+        "operator": "subtract",
+        "children": [
+          {
+            "type": "input",
+            "input_name": "missing",
+            "children": []
+          },
+          {
+            "type": "unary",
+            "operator": "sin",
+            "children": [
+              {
+                "type": "unary",
+                "operator": "cos",
+                "children": [
+                  {
+                    "type": "binary",
+                    "operator": "add",
+                    "children": [
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      },
+                      {
+                        "type": "input",
+                        "input_name": "value",
+                        "children": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "selected_infix": "(x + (m - sin(cos((x + x)))))",
+  "final": {
+    "val_accuracy_selected": 0.8788333333333334,
+    "best_val_accuracy": 0.8788333333333334,
+    "best_epoch": 21,
+    "epochs_run": 36,
+    "training_failure": null,
+    "test_accuracy": 0.8666,
+    "test_macro_f1": 0.8658834593727238,
+    "final_train_runtime_s": 167.36748003959656,
+    "test_eval_runtime_s": 0.36745190620422363,
+    "parameters": 56714,
+    "first_layer_parameters": 160,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.707961807930911,
+        "val_acc": 0.8093333333333333
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.4709168499045902,
+        "val_acc": 0.8415
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.41265514307551915,
+        "val_acc": 0.8581666666666666
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.3757401578779574,
+        "val_acc": 0.8566666666666667
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.35062355490084046,
+        "val_acc": 0.8595
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.33267755786577863,
+        "val_acc": 0.8608333333333333
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.31515019377955683,
+        "val_acc": 0.8645
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.30128734185077527,
+        "val_acc": 0.869
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.2898627500534058,
+        "val_acc": 0.8713333333333333
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.27797179151022877,
+        "val_acc": 0.8773333333333333
+      },
+      {
+        "epoch": 11,
+        "train_loss": 0.26544623726827127,
+        "val_acc": 0.871
+      },
+      {
+        "epoch": 12,
+        "train_loss": 0.25383025909794704,
+        "val_acc": 0.8756666666666667
+      },
+      {
+        "epoch": 13,
+        "train_loss": 0.24456191364924112,
+        "val_acc": 0.8738333333333334
+      },
+      {
+        "epoch": 14,
+        "train_loss": 0.23399511803962567,
+        "val_acc": 0.874
+      },
+      {
+        "epoch": 15,
+        "train_loss": 0.22345493563457772,
+        "val_acc": 0.8711666666666666
+      },
+      {
+        "epoch": 16,
+        "train_loss": 0.21567062079906463,
+        "val_acc": 0.8715
+      },
+      {
+        "epoch": 17,
+        "train_loss": 0.17408389553758832,
+        "val_acc": 0.8753333333333333
+      },
+      {
+        "epoch": 18,
+        "train_loss": 0.16246101723335407,
+        "val_acc": 0.877
+      },
+      {
+        "epoch": 19,
+        "train_loss": 0.1538842357441231,
+        "val_acc": 0.8736666666666667
+      },
+      {
+        "epoch": 20,
+        "train_loss": 0.1461481606165568,
+        "val_acc": 0.8706666666666667
+      },
+      {
+        "epoch": 21,
+        "train_loss": 0.13930103190298435,
+        "val_acc": 0.8788333333333334
+      },
+      {
+        "epoch": 22,
+        "train_loss": 0.13264432756768332,
+        "val_acc": 0.8788333333333334
+      },
+      {
+        "epoch": 23,
+        "train_loss": 0.12554786531571988,
+        "val_acc": 0.875
+      },
+      {
+        "epoch": 24,
+        "train_loss": 0.11838911133783835,
+        "val_acc": 0.8736666666666667
+      },
+      {
+        "epoch": 25,
+        "train_loss": 0.1114959835520497,
+        "val_acc": 0.871
+      },
+      {
+        "epoch": 26,
+        "train_loss": 0.10504684762159984,
+        "val_acc": 0.8726666666666667
+      },
+      {
+        "epoch": 27,
+        "train_loss": 0.10079750521315468,
+        "val_acc": 0.8691666666666666
+      },
+      {
+        "epoch": 28,
+        "train_loss": 0.07890308183321246,
+        "val_acc": 0.8693333333333333
+      },
+      {
+        "epoch": 29,
+        "train_loss": 0.07289651620056894,
+        "val_acc": 0.8678333333333333
+      },
+      {
+        "epoch": 30,
+        "train_loss": 0.06886645561015164,
+        "val_acc": 0.8676666666666667
+      },
+      {
+        "epoch": 31,
+        "train_loss": 0.06500576376031947,
+        "val_acc": 0.8725
+      },
+      {
+        "epoch": 32,
+        "train_loss": 0.06213643856732934,
+        "val_acc": 0.8691666666666666
+      },
+      {
+        "epoch": 33,
+        "train_loss": 0.05879330809690334,
+        "val_acc": 0.8653333333333333
+      },
+      {
+        "epoch": 34,
+        "train_loss": 0.049130767662216114,
+        "val_acc": 0.8688333333333333
+      },
+      {
+        "epoch": 35,
+        "train_loss": 0.046725078664444114,
+        "val_acc": 0.8686666666666667
+      },
+      {
+        "epoch": 36,
+        "train_loss": 0.0449376522148097,
+        "val_acc": 0.8698333333333333
+      }
+    ]
+  },
+  "cost": {
+    "search_runtime_s": 14059.04934501648,
+    "search_evaluations": 3000,
+    "rerank_runtime_s": 357.09202003479004,
+    "final_train_runtime_s": 167.36748003959656,
+    "total_runtime_s": 527.0192320346832
+  },
+  "timestamp": "2026-11-09 12:37:23",
+  "note": "run directory renamed from ..._rr to ..._rr10 on 2026-11-09 when the run-name suffix gained the pool size; config rerank.top_k was 10"
+}

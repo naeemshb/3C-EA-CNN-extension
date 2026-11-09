@@ -1,0 +1,79 @@
+{
+  "config": {
+    "name": "ref_fashion_mnist_random20_cnn_relu",
+    "label": "REFERENCE search budget (paper Table 3): pop 100 x 30 gen, depth 3, p_cross 0.7, p_mut 0.15, 2 elites. CHEAP FITNESS PROTOCOL (decided 2026-10-27, fidelity-checked; see README section 5): each candidate trains <=5 minibatch epochs (patience 2, batch 256) on a fixed seeded 10k-sample subset of the training partition. Selection, final retraining (<=100 epochs, patience 15, batch 128) and the test evaluation use the full partitions.",
+    "dataset": "fashion_mnist",
+    "data_root": "data",
+    "download": true,
+    "val_fraction": 0.1,
+    "synthetic": {},
+    "corruption": {
+      "pattern": "random",
+      "rate": 0.2
+    },
+    "method": {
+      "type": "fixed",
+      "activation": "relu"
+    },
+    "backbone": "cnn",
+    "metadata_mode": "full",
+    "architecture": {
+      "conv_channels": [
+        16,
+        32
+      ],
+      "kernel_size": 3,
+      "pool_size": 2,
+      "fc_hidden": 64,
+      "mlp_hidden_sizes": [
+        64,
+        32
+      ]
+    },
+    "search": {
+      "population_size": 100,
+      "generations": 30,
+      "max_tree_depth": 3,
+      "mutation_rate": 0.15,
+      "crossover_rate": 0.7,
+      "elite_size": 2,
+      "fitness_epochs": 5,
+      "fitness_patience": 2,
+      "fitness_batch_size": 256,
+      "fitness_train_subset": 10000
+    },
+    "final": {
+      "epochs": 100,
+      "patience": 15,
+      "batch_size": 128
+    },
+    "optimizer": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "grad_clip": 1.0
+    },
+    "seeds": {
+      "split": 1000,
+      "corruption": 2000,
+      "evolution": 3000,
+      "init": 4000,
+      "batch": 5000
+    },
+    "device": "auto",
+    "out_root": "runs"
+  },
+  "replicate": 0,
+  "seeds": {
+    "split": 1000,
+    "corruption": 2000,
+    "evolution": 3000,
+    "init": 4000,
+    "batch": 5000,
+    "replicate": 0,
+    "corruption_per_split": {
+      "train": 4082782755,
+      "val": 1131335558,
+      "test": 2573781011
+    }
+  }
+}

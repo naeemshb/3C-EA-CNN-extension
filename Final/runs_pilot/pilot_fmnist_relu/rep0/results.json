@@ -1,0 +1,242 @@
+{
+  "name": "pilot_fmnist_relu",
+  "label": "PILOT - Fashion-MNIST, 20% random pixels. Reduced search (pop 10 x 3 gen), 3 fitness epochs on a 10k training subset, 10 final epochs. ENGINEERING CHECK ONLY - not a publication result.",
+  "replicate": 0,
+  "mode": "matched_conditions",
+  "config": {
+    "name": "pilot_fmnist_relu",
+    "label": "PILOT - Fashion-MNIST, 20% random pixels. Reduced search (pop 10 x 3 gen), 3 fitness epochs on a 10k training subset, 10 final epochs. ENGINEERING CHECK ONLY - not a publication result.",
+    "dataset": "fashion_mnist",
+    "data_root": "data",
+    "download": true,
+    "val_fraction": 0.1,
+    "synthetic": {},
+    "corruption": {
+      "pattern": "random",
+      "rate": 0.2
+    },
+    "method": {
+      "type": "fixed",
+      "terminals": [
+        "value",
+        "missing",
+        "confidence"
+      ],
+      "activation": "relu"
+    },
+    "backbone": "cnn",
+    "metadata_mode": "full",
+    "architecture": {
+      "conv_channels": [
+        16,
+        32
+      ],
+      "kernel_size": 3,
+      "pool_size": 2,
+      "fc_hidden": 64,
+      "mlp_hidden_sizes": [
+        64,
+        32
+      ]
+    },
+    "search": {
+      "population_size": 10,
+      "generations": 3,
+      "max_tree_depth": 3,
+      "mutation_rate": 0.15,
+      "crossover_rate": 0.7,
+      "elite_size": 2,
+      "fitness_epochs": 3,
+      "fitness_patience": 2,
+      "fitness_batch_size": 128,
+      "fitness_train_subset": 10000
+    },
+    "final": {
+      "epochs": 10,
+      "patience": 5,
+      "batch_size": 128
+    },
+    "optimizer": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "grad_clip": 1.0
+    },
+    "seeds": {
+      "split": 1000,
+      "corruption": 2000,
+      "evolution": 3000,
+      "init": 4000,
+      "batch": 5000
+    },
+    "device": "auto",
+    "out_root": "runs_pilot"
+  },
+  "seeds": {
+    "split": 1000,
+    "corruption": 2000,
+    "evolution": 3000,
+    "init": 4000,
+    "batch": 5000,
+    "replicate": 0,
+    "corruption_per_split": {
+      "train": 4082782755,
+      "val": 1131335558,
+      "test": 2573781011
+    }
+  },
+  "device": "mps",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "torch": "2.8.0.dev20250430",
+  "data": {
+    "dataset": {
+      "in_channels": 1,
+      "height": 28,
+      "width": 28,
+      "num_classes": 10,
+      "name": "fashion_mnist",
+      "split": {
+        "kind": "stratified_from_official_train",
+        "val_fraction": 0.1,
+        "seed": 1000,
+        "val_index_fingerprint": "b0fb44e6026ceea4",
+        "n_train": 54000,
+        "n_val": 6000
+      },
+      "sizes": {
+        "train": 54000,
+        "val": 6000,
+        "test": 10000
+      }
+    },
+    "masks": {
+      "train": {
+        "pattern": "random",
+        "nominal_rate": 0.2,
+        "seed": 4082782755,
+        "realized_rate": 0.2000287462207105,
+        "n": 54000,
+        "fingerprint": "4697d01746518888"
+      },
+      "val": {
+        "pattern": "random",
+        "nominal_rate": 0.2,
+        "seed": 1131335558,
+        "realized_rate": 0.1999906462585034,
+        "n": 6000,
+        "fingerprint": "9487573362f8219e"
+      },
+      "test": {
+        "pattern": "random",
+        "nominal_rate": 0.2,
+        "seed": 2573781011,
+        "realized_rate": 0.20010586734693878,
+        "n": 10000,
+        "fingerprint": "056d3b4b8d0848d1"
+      }
+    },
+    "preprocessor": {
+      "fingerprint": "6509e20ea2a7ff0c",
+      "fallbacks": {
+        "features_without_observed_train_entries": 0,
+        "features_using_channel_fallback_constant": 0
+      },
+      "tau": 0.1
+    }
+  },
+  "selection": {
+    "type": "fixed",
+    "activation": "relu",
+    "infix": "max(x, 0)",
+    "search_runtime_s": 0.0,
+    "n_evaluations": 0
+  },
+  "selected_tree": {
+    "type": "binary",
+    "operator": "max",
+    "children": [
+      {
+        "type": "input",
+        "input_name": "value",
+        "children": []
+      },
+      {
+        "type": "constant",
+        "value": 0.0,
+        "children": []
+      }
+    ]
+  },
+  "selected_infix": "max(x, 0)",
+  "final": {
+    "val_accuracy_selected": 0.8618333333333333,
+    "best_val_accuracy": 0.8618333333333333,
+    "best_epoch": 10,
+    "epochs_run": 10,
+    "training_failure": null,
+    "test_accuracy": 0.8593,
+    "test_macro_f1": 0.8600925171370355,
+    "final_train_runtime_s": 25.214458227157593,
+    "test_eval_runtime_s": 0.25046706199645996,
+    "parameters": 56714,
+    "first_layer_parameters": 160,
+    "history": [
+      {
+        "epoch": 1,
+        "train_loss": 0.8618534955095362,
+        "val_acc": 0.7548333333333334
+      },
+      {
+        "epoch": 2,
+        "train_loss": 0.6009184782416732,
+        "val_acc": 0.794
+      },
+      {
+        "epoch": 3,
+        "train_loss": 0.53928578987828,
+        "val_acc": 0.8118333333333333
+      },
+      {
+        "epoch": 4,
+        "train_loss": 0.49469442539744907,
+        "val_acc": 0.8208333333333333
+      },
+      {
+        "epoch": 5,
+        "train_loss": 0.462488692495558,
+        "val_acc": 0.8343333333333334
+      },
+      {
+        "epoch": 6,
+        "train_loss": 0.43663005844751995,
+        "val_acc": 0.8335
+      },
+      {
+        "epoch": 7,
+        "train_loss": 0.4140989243984222,
+        "val_acc": 0.8455
+      },
+      {
+        "epoch": 8,
+        "train_loss": 0.39891179893634937,
+        "val_acc": 0.854
+      },
+      {
+        "epoch": 9,
+        "train_loss": 0.38295959213044906,
+        "val_acc": 0.8545
+      },
+      {
+        "epoch": 10,
+        "train_loss": 0.37082010649751734,
+        "val_acc": 0.8618333333333333
+      }
+    ]
+  },
+  "cost": {
+    "search_runtime_s": 0.0,
+    "search_evaluations": 0,
+    "final_train_runtime_s": 25.214458227157593,
+    "total_runtime_s": 27.179116010665894
+  },
+  "timestamp": "2026-10-27 16:39:50"
+}

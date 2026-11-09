@@ -1,0 +1,84 @@
+{
+  "config": {
+    "name": "pilot_fmnist_relu",
+    "label": "PILOT - Fashion-MNIST, 20% random pixels. Reduced search (pop 10 x 3 gen), 3 fitness epochs on a 10k training subset, 10 final epochs. ENGINEERING CHECK ONLY - not a publication result.",
+    "dataset": "fashion_mnist",
+    "data_root": "data",
+    "download": true,
+    "val_fraction": 0.1,
+    "synthetic": {},
+    "corruption": {
+      "pattern": "random",
+      "rate": 0.2
+    },
+    "method": {
+      "type": "fixed",
+      "terminals": [
+        "value",
+        "missing",
+        "confidence"
+      ],
+      "activation": "relu"
+    },
+    "backbone": "cnn",
+    "metadata_mode": "full",
+    "architecture": {
+      "conv_channels": [
+        16,
+        32
+      ],
+      "kernel_size": 3,
+      "pool_size": 2,
+      "fc_hidden": 64,
+      "mlp_hidden_sizes": [
+        64,
+        32
+      ]
+    },
+    "search": {
+      "population_size": 10,
+      "generations": 3,
+      "max_tree_depth": 3,
+      "mutation_rate": 0.15,
+      "crossover_rate": 0.7,
+      "elite_size": 2,
+      "fitness_epochs": 3,
+      "fitness_patience": 2,
+      "fitness_batch_size": 128,
+      "fitness_train_subset": 10000
+    },
+    "final": {
+      "epochs": 10,
+      "patience": 5,
+      "batch_size": 128
+    },
+    "optimizer": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "grad_clip": 1.0
+    },
+    "seeds": {
+      "split": 1000,
+      "corruption": 2000,
+      "evolution": 3000,
+      "init": 4000,
+      "batch": 5000
+    },
+    "device": "auto",
+    "out_root": "runs_pilot"
+  },
+  "replicate": 0,
+  "seeds": {
+    "split": 1000,
+    "corruption": 2000,
+    "evolution": 3000,
+    "init": 4000,
+    "batch": 5000,
+    "replicate": 0,
+    "corruption_per_split": {
+      "train": 4082782755,
+      "val": 1131335558,
+      "test": 2573781011
+    }
+  }
+}
