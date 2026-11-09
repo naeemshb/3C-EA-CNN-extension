@@ -1,0 +1,83 @@
+{
+  "datasets": [
+    "synthetic"
+  ],
+  "seeds": [
+    42
+  ],
+  "device": "cpu",
+  "torch_threads": 2,
+  "hidden_sizes": [
+    8,
+    4
+  ],
+  "corruption": {
+    "mechanism": "mcar",
+    "rate": 0.2
+  },
+  "variants": [
+    "original",
+    "learned",
+    "feature_constant",
+    "first_only",
+    "shuffled"
+  ],
+  "fixed_baselines": [
+    "relu"
+  ],
+  "confidence": {
+    "outer_folds": 2,
+    "inner_folds": 2,
+    "mask_repeats": 1,
+    "context_mask_rate": 0.2,
+    "tolerance_std": 0.5,
+    "max_iter": 3,
+    "max_leaf_nodes": 3,
+    "min_samples_leaf": 15,
+    "min_examples": 30,
+    "l2_regularization": 1
+  },
+  "search": {
+    "population": 4,
+    "generations": 2,
+    "init_depth": 3,
+    "mutation_rate": 0.15,
+    "crossover_rate": 0.7,
+    "elite_size": 2,
+    "max_seconds": 30,
+    "safety_max_depth": 12,
+    "safety_max_nodes": 256,
+    "training": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "grad_clip": 1,
+      "epochs": 3,
+      "patience": 2
+    }
+  },
+  "final": {
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "grad_clip": 1,
+    "epochs": 5,
+    "patience": 3
+  },
+  "test_conditions": [
+    {
+      "mechanism": "mcar",
+      "rate": 0.4
+    },
+    {
+      "mechanism": "group",
+      "rate": 0.4
+    },
+    {
+      "mechanism": "mar",
+      "rate": 0.2
+    },
+    {
+      "mechanism": "mnar",
+      "rate": 0.2
+    }
+  ]
+}

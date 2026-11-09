@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-09",
+  "tests": {
+    "command": "py -3.11 -m unittest discover -s tests -v",
+    "passed": 15,
+    "duration_seconds": 16.635
+  },
+  "checks": [
+    "AST equivalence of all 36 original GP and ChannelProp definitions",
+    "Synthetic end-to-end confidence, GP training, frozen evaluation and cache reuse",
+    "No test-row influence on preprocessing or confidence preparation",
+    "Disjoint nested confidence cross-fitting",
+    "Finite prediction checks and stale configuration rejection",
+    "Interrupted GP resume equivalence"
+  ],
+  "actual_data_run": {
+    "command": "py -3.11 -m telo_tabular confidence --config configs/pilot.json --output runs/confidence_pilot",
+    "scope": "PIMA and WDBC validation confidence only; no real-data GP search or test evaluation"
+  },
+  "environment": {
+    "python": "3.11",
+    "torch": "2.9.1+cpu",
+    "sklearn": "1.8.0",
+    "numpy": "2.3.5",
+    "device": "cpu"
+  },
+  "limitations": [
+    "Single-seed development pilot, not a scientific claim of improved classification",
+    "Confidence estimator did not beat the feature-level control on PIMA",
+    "The implementation follows original code fitness D/3 and documents discrepancies from the conference equation"
+  ]
+}
