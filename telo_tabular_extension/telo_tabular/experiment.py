@@ -15,8 +15,9 @@ FIXED = ("relu", "swish", "leaky_relu", "elu")
 
 def read_config(path):
     cfg = json.loads(Path(path).read_text(encoding="utf-8"))
-    if not cfg["datasets"] or any(d not in ("pima", "wdbc", "synthetic") for d in cfg["datasets"]):
-        raise ValueError("Use numeric pilot datasets pima and/or wdbc")
+    from .datasets_gecco import REGISTRY
+    if not cfg["datasets"] or any(d not in ("pima", "wdbc", "synthetic", *REGISTRY) for d in cfg["datasets"]):
+        raise ValueError("Unknown dataset; choose from pima, wdbc, synthetic or " + ", ".join(sorted(REGISTRY)))
     if not cfg["seeds"] or len(set(cfg["seeds"])) != len(cfg["seeds"]):
         raise ValueError("Seeds must be nonempty and unique")
     if not cfg["variants"] or any(v not in VARIANTS for v in cfg["variants"]):

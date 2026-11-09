@@ -213,3 +213,24 @@ class ScientificChecks(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class GeccoDatasetRegistryTests(unittest.TestCase):
+    def test_all_registered_datasets_load_with_integer_labels_and_no_label_in_features(self):
+        from telo_tabular.datasets_gecco import REGISTRY, load_gecco_dataset
+        for name in REGISTRY:
+            x, y, meta = load_gecco_dataset(name)
+            self.assertEqual(len(x), len(y), name)
+            self.assertEqual(x.dtype, np.float64, name)
+            self.assertTrue(np.issubdtype(y.dtype, np.integer), name)
+            self.assertEqual(set(np.unique(y)), set(range(len(meta["classes"]))), name)
+            self.assertEqual(x.shape[1], len(meta["features"]), name)
+            self.assertGreaterEqual(len(meta["classes"]), 2, name)
+            self.assertFalse(np.isnan(x).all(axis=0).any(), name)   # all-NaN columns dropped
+
+    def test_known_shapes(self):
+        from telo_tabular.datasets_gecco import load_gecco_dataset
+        x, y, m = load_gecco_dataset("pima"); self.assertEqual(x.shape, (768, 8)); self.assertEqual(m["classes"], ["0", "1"])
+        x, y, m = load_gecco_dataset("wdbc"); self.assertEqual(x.shape, (569, 30)); self.assertEqual(m["classes"], ["B", "M"])
+        x, y, m = load_gecco_dataset("housevote"); self.assertEqual(x.shape[1], 16); self.assertTrue(np.isnan(x).any())
+        x, y, m = load_gecco_dataset("horse"); self.assertEqual(len(m["classes"]), 3)

@@ -28,7 +28,10 @@ def load_dataset(name):
                       "classes": ["0", "1"], "rows": len(x),
                       "source_sha256": array_hash(x), "synthetic": True}
     if name not in ("pima", "wdbc"):
-        raise ValueError("Pilot datasets: pima or wdbc")
+        from .datasets_gecco import REGISTRY, load_gecco_dataset
+        if name in REGISTRY:
+            return load_gecco_dataset(name)
+        raise ValueError("Unknown dataset: " + name)
     path = ROOT / "data" / (name + ".csv")
     with path.open(encoding="utf-8", newline="") as f:
         rows = list(csv.reader(f))

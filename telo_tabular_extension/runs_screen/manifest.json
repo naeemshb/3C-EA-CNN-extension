@@ -1,0 +1,157 @@
+{
+  "fingerprint": "7252b842542a18cb2c8013ddf9ee8df20002fc90196a0b3e08b51e315a241f86",
+  "config": {
+    "datasets": [
+      "adult",
+      "aust_credit",
+      "cylinderband",
+      "glass",
+      "heart",
+      "hepatitis",
+      "horse",
+      "housevote",
+      "mammo",
+      "mushroom",
+      "pima",
+      "sonar",
+      "wdbc"
+    ],
+    "seeds": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "device": "cpu",
+    "torch_threads": 2,
+    "hidden_sizes": [
+      64,
+      32
+    ],
+    "corruption": {
+      "mechanism": "mcar",
+      "rate": 0.2
+    },
+    "variants": [
+      "original",
+      "learned",
+      "feature_constant",
+      "first_only",
+      "shuffled"
+    ],
+    "fixed_baselines": [
+      "relu",
+      "swish",
+      "leaky_relu",
+      "elu"
+    ],
+    "confidence": {
+      "outer_folds": 3,
+      "inner_folds": 3,
+      "mask_repeats": 2,
+      "context_mask_rate": 0.2,
+      "tolerance_std": 0.5,
+      "max_iter": 60,
+      "max_leaf_nodes": 7,
+      "min_samples_leaf": 15,
+      "min_examples": 30,
+      "l2_regularization": 1
+    },
+    "search": {
+      "population": 12,
+      "generations": 3,
+      "init_depth": 3,
+      "mutation_rate": 0.15,
+      "crossover_rate": 0.7,
+      "elite_size": 2,
+      "max_seconds": 300,
+      "safety_max_depth": 12,
+      "safety_max_nodes": 256,
+      "training": {
+        "lr": 0.001,
+        "weight_decay": 0.0001,
+        "grad_clip": 1,
+        "epochs": 30,
+        "patience": 2
+      }
+    },
+    "final": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "grad_clip": 1,
+      "epochs": 100,
+      "patience": 15
+    },
+    "test_conditions": [
+      {
+        "mechanism": "mcar",
+        "rate": 0
+      },
+      {
+        "mechanism": "mcar",
+        "rate": 0.4
+      },
+      {
+        "mechanism": "mcar",
+        "rate": 0.6
+      },
+      {
+        "mechanism": "group",
+        "rate": 0.2
+      },
+      {
+        "mechanism": "group",
+        "rate": 0.4
+      },
+      {
+        "mechanism": "mar",
+        "rate": 0.2
+      },
+      {
+        "mechanism": "mnar",
+        "rate": 0.2
+      }
+    ]
+  },
+  "code": {
+    "__init__.py": "d2d752bd28aaabec7d2be9902da97cd235dfc98932b37bc8fc9f91dec1dc0403",
+    "__main__.py": "31ae08ac533d929d1ead8b96eb2ff58458a793b1dfc37bc3acb2b23eab71fb36",
+    "confidence.py": "a104a242a821f90a8176e773c25fdd2162919c10128227910b7f677deabfa419",
+    "data.py": "3cd1551afba57092c2a4d0af5aa80d145e7269e0ca6ddcf48c193892ea025fc4",
+    "datasets_gecco.py": "50417bfed3e3d6c257ff402b3d6ae1181a541c3c1a4ca716293d728d5913635f",
+    "experiment.py": "ee452f56771e86d32dcf3491047803976cd981177ad1e51b5f05f9f335245794",
+    "gp_core.py": "5c56c8f4ed185736b0e73e3a822a47fd7e46d71fde52ca35853e8e80bdfdb761",
+    "models.py": "ce796012accd8c1854994ce582ef5b3eb83f96707594afddc803aaf94a9014fd",
+    "screen.py": "4b98a3a97aa5f3efc8091ca181de50261a939603be2d8a0743cd6d01f23eb8f1",
+    "search.py": "d7829c213e85d22c125df6fd7745880fcadad976ae4615c61dbb5665a6671a0a",
+    "storage.py": "4f4008106fc1a5004f3c13e6faeb69227acc2f0075001286e1ca1af5b5004fdf"
+  },
+  "data": {
+    "adult": "250e154ed75714ae57a564926d66c6319cd6aac1bcd32774cc76841a88d74e53",
+    "aust_credit": "e31ba3b4edccd66495d493b79585dc5af37651eb597970f3c7acc4f9ac9ba2f4",
+    "cylinderband": "31b4bd7f6cbca567e06199ae8bbe085c00d64657fcb2daad0c214cb4d08076f7",
+    "glass": "1be3d7514e883752c32b4467be2aab04b19c695c3677e7fb26aabb273e705066",
+    "heart": "ddb2996b2f4db2e00aad13f4518200179ff69f79093838e3c21ffa672ebec0f1",
+    "hepatitis": "0fb264f85de75d0c87f84f4e2b39061043dbc33105083b95cf9dcc07d477e9af",
+    "horse": "f79ceb40e0b3af711d7575b59a5d7c19a176c832fc23b78ffc5edf6cfbec9826",
+    "housevote": "1c2f6936cc14a2d9295fd27654d7d2ef46e044ae6a2544d2e15c9c14c749fb33",
+    "mammo": "34ee748be60bc793b7e99a28f5fcefaa1c418e5d9bc7bb8e5aa9313861b6f42a",
+    "mushroom": "f4fff48fb193b4145222bb98d17aaf01dd4ea71d6e674030744b1e052c0a4276",
+    "pima": "bf81d06e0c0512662862248241ab46d7c29258c6ceaad32f3cab56b52a17fdab",
+    "sonar": "ea049db78fb48fa64a43a5c287ba49d16ae8238e2e168adb8db2d62abb3c5f9b",
+    "wdbc": "cd73cc8abef80d53758643af0166bb0f8d3094376950da9e7da56235d0c91ecb"
+  },
+  "versions": {
+    "numpy": "2.2.3",
+    "scikit-learn": "1.6.1",
+    "torch": "2.8.0.dev20250430",
+    "joblib": "1.4.2"
+  },
+  "environment": {
+    "python": "3.12.5 (v3.12.5:ff3bc82f7c9, Aug  7 2024, 05:32:06) [Clang 13.0.0 (clang-1300.0.29.30)]",
+    "platform": "macOS-26.5.2-arm64-arm-64bit",
+    "numpy": "2.2.3",
+    "sklearn": "1.6.1"
+  }
+}
