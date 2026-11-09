@@ -91,6 +91,7 @@ class MaskGenerator:
     q1: np.ndarray
     q3: np.ndarray
     neighbors: np.ndarray
+    mar_driver: int = 0
 
     @classmethod
     def fit(cls, train_x):
@@ -99,8 +100,11 @@ class MaskGenerator:
         corr = np.corrcoef(filled, rowvar=False)
         corr = np.nan_to_num(corr)
         neighbors = np.argsort(-np.abs(corr), axis=1, kind="stable")
+        # MAR driver = the first feature fully observed in the training partition (feature 0 when it is complete)
+        complete = np.flatnonzero(np.isfinite(train_x).all(axis=0))
+        driver = int(complete[0]) if len(complete) else -1
         return cls(np.median(filled, axis=0), np.quantile(filled, .25, axis=0),
-                   np.quantile(filled, .75, axis=0), neighbors)
+                   np.quantile(filled, .75, axis=0), neighbors, driver)
 
     def mask(self, x, mechanism, rate, seed):
         if not 0 <= rate <= 1:
@@ -116,12 +120,13 @@ class MaskGenerator:
             added[rng.choice(available, count, replace=False)] = True
             added = added.reshape(n, d)
         elif mechanism == "mar":
-            # Feature 0 is the observed driver; it receives no artificial mask.
-            if natural[:, 0].any():
-                raise ValueError("MAR simulation requires observed driver feature 0")
-            p = np.where(x[:, 0] > self.median[0], rate * 2, rate * .5)
+            # The driver (first training-complete feature) stays observed and receives no artificial mask.
+            j = self.mar_driver
+            if j < 0 or natural[:, j].any():
+                raise ValueError("MAR simulation requires a fully observed driver feature")
+            p = np.where(x[:, j] > self.median[j], rate * 2, rate * .5)
             added = rng.random((n, d)) < np.clip(p[:, None], 0, 1)
-            added[:, 0] = False
+            added[:, j] = False
         elif mechanism == "mnar":
             extreme = (x < self.q1) | (x > self.q3)
             p = np.where(extreme, rate * 1.5, rate * .5)

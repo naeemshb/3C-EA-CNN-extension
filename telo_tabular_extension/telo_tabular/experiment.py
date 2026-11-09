@@ -337,8 +337,17 @@ def evaluate_stage(output):
                 method_rows = []
                 for i, condition in enumerate(conditions):
                     mechanism, rate = condition["mechanism"], condition["rate"]
-                    masked, mask = pack["mask_generator"].corrupt(
-                        x[test_idx], mechanism, rate, seed + 20000 + i)
+                    try:
+                        masked, mask = pack["mask_generator"].corrupt(
+                            x[test_idx], mechanism, rate, seed + 20000 + i)
+                    except ValueError as exc:       # e.g. MAR without a fully observed driver: recorded, not silently dropped
+                        print(f"Skip condition {mechanism} {rate} for {dataset}/{seed}: {exc}", flush=True)
+                        method_rows.append({"dataset": dataset, "seed": seed, "variant": variant, "mechanism": mechanism,
+                                            "nominal_rate": rate, "realized_rate": None, "n_test": len(test_idx),
+                                            "accuracy": None, "macro_f1": None, "auc": None, "confidence_brier": None,
+                                            "confidence_event_auc": None, "inference_runtime_s": None,
+                                            "mask_fingerprint": None, "skipped": str(exc)})
+                        continue
                     z, m, original = pack["preprocessor"].transform(masked)
                     learned = pack["estimator"].predict(masked)
                     tiny = {"test": (z, m, original, y[test_idx]), "learned_test": learned,
@@ -360,7 +369,7 @@ def evaluate_stage(output):
                            "accuracy": metrics["accuracy"], "macro_f1": metrics["macro_f1"],
                            "auc": metrics["auc"], "confidence_brier": cm["brier"],
                            "confidence_event_auc": cm["event_auc"],
-                           "inference_runtime_s": runtime, "mask_fingerprint": array_hash(mask)}
+                           "inference_runtime_s": runtime, "mask_fingerprint": array_hash(mask), "skipped": None}
                     method_rows.append(row)
                 write_json(eval_path, {"fingerprint": saved["fingerprint"], "rows": method_rows})
                 rows.extend(method_rows)

@@ -1,0 +1,109 @@
+{
+  "datasets": [
+    "sonar"
+  ],
+  "seeds": [
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51
+  ],
+  "device": "cpu",
+  "torch_threads": 2,
+  "hidden_sizes": [
+    64,
+    32
+  ],
+  "corruption": {
+    "mechanism": "mcar",
+    "rate": 0.2
+  },
+  "variants": [
+    "original",
+    "learned",
+    "feature_constant",
+    "first_only",
+    "shuffled",
+    "regression_imputation"
+  ],
+  "fixed_baselines": [
+    "relu",
+    "swish",
+    "leaky_relu",
+    "elu",
+    "mask_concat_relu"
+  ],
+  "confidence": {
+    "outer_folds": 3,
+    "inner_folds": 3,
+    "mask_repeats": 2,
+    "context_mask_rate": 0.2,
+    "tolerance_std": 0.5,
+    "max_iter": 60,
+    "max_leaf_nodes": 7,
+    "min_samples_leaf": 15,
+    "min_examples": 30,
+    "l2_regularization": 1
+  },
+  "search": {
+    "population": 100,
+    "generations": 30,
+    "init_depth": 3,
+    "mutation_rate": 0.15,
+    "crossover_rate": 0.7,
+    "elite_size": 2,
+    "max_seconds": 7200,
+    "safety_max_depth": 12,
+    "safety_max_nodes": 256,
+    "training": {
+      "lr": 0.001,
+      "weight_decay": 0.0001,
+      "grad_clip": 1,
+      "epochs": 30,
+      "patience": 2
+    }
+  },
+  "final": {
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "grad_clip": 1,
+    "epochs": 100,
+    "patience": 15
+  },
+  "test_conditions": [
+    {
+      "mechanism": "mcar",
+      "rate": 0
+    },
+    {
+      "mechanism": "mcar",
+      "rate": 0.4
+    },
+    {
+      "mechanism": "mcar",
+      "rate": 0.6
+    },
+    {
+      "mechanism": "group",
+      "rate": 0.2
+    },
+    {
+      "mechanism": "group",
+      "rate": 0.4
+    },
+    {
+      "mechanism": "mar",
+      "rate": 0.2
+    },
+    {
+      "mechanism": "mnar",
+      "rate": 0.2
+    }
+  ]
+}

@@ -265,3 +265,19 @@ class NewBaselineTests(unittest.TestCase):
         x0, _, _ = load_gecco_dataset("pima"); x1, _, m1 = load_gecco_dataset("pima_zeros_missing")
         self.assertEqual(x0.shape, x1.shape); self.assertFalse(np.isnan(x0).any()); self.assertGreater(np.isnan(x1).sum(), 600)
         self.assertIn("treated as missing", m1["pima_zero_policy"])
+
+
+class MarDriverTests(unittest.TestCase):
+    def test_mar_driver_is_first_complete_feature(self):
+        from telo_tabular.data import MaskGenerator
+        rng = np.random.default_rng(0)
+        x = rng.normal(size=(200, 4)); x[:5, 0] = np.nan          # feature 0 has natural gaps -> driver must be 1
+        gen = MaskGenerator.fit(x)
+        self.assertEqual(gen.mar_driver, 1)
+        mask = gen.mask(x, "mar", 0.2, 3)
+        self.assertFalse(mask[:, 1].any())                          # driver never masked
+        self.assertTrue(mask[:, 0].sum() >= 5)                      # natural gaps kept
+        x_all_nan = x.copy(); x_all_nan[0, :] = np.nan
+        self.assertEqual(MaskGenerator.fit(x_all_nan).mar_driver, -1)
+        with self.assertRaises(ValueError):
+            MaskGenerator.fit(x_all_nan).mask(x_all_nan, "mar", 0.2, 3)
