@@ -141,3 +141,14 @@ Then use `.venv/bin/python` (Windows: `.venv\Scripts\python.exe`).
 The TELO proposal studies entry-specific reliability and how it is used by a single evolved activation. The planned GECCO 2027 work studies multi-objective search, archives and ensembles. Related methods and shared foundations must still be cited.
 
 No improvement, novelty guarantee, or satisfaction of the journal's 30% requirement is asserted by this implementation. See `TELO_TABULAR_EXTENSION_PROPOSAL.md` for the research rationale.
+
+## Confidence screen over the twelve GECCO datasets (2026-11-09)
+
+`python -m telo_tabular.screen --config configs/screen.json --output runs_screen` — 13 datasets x 5 seeds, validation only,
+no GP, no test data. Verdict rule fixed before running. Result (`runs_screen/screen_summary.md`): entry-specific
+confidence beats the feature-constant control on every seed with mean AUC gain >= 0.05 on **5 datasets** (wdbc +0.33,
+adult +0.10, mushroom +0.07, sonar +0.06, cylinderband +0.05); weak on glass, pima, heart; none on horse, housevote,
+aust_credit, hepatitis, mammo. The learned estimator is slightly less calibrated than the constant control everywhere
+(ECE higher by 0.01-0.1) — ranking gain, not calibration gain. Reading: per-entry reliability exists where features are
+redundant (WDBC's triplets, mushroom/adult categorical structure); on low-dimensional or weakly related features it does
+not. The GP comparison should therefore run on both groups and report the boundary, not only on the datasets with signal.
