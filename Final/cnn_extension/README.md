@@ -422,7 +422,7 @@ skipping them would roughly halve the search cost but is a protocol change.
 
 ---
 
-## 7. Verification (tests/, 85 tests, all passing)
+## 7. Verification (tests/, 86 tests, all passing)
 
 * numerical example of the brief: `Z = 0.50, M_out = 0.25, C_out = 0.95`,
   `f = z·c − 0.1·m = 0.45` through the original `evaluate_tree`;
@@ -471,15 +471,16 @@ activation is `sin(4x)`; (iii) re-ranking the final population under the
 full protocol and final-training the top-3 gives 0.883 / 0.886 / 0.879 —
 ties with ReLU, not wins (diagnostic, not a committed protocol). Also ran:
 the pilot (`runs_pilot/`) and the fidelity check (`runs_fidelity/`).
-Step 3b (2026-11-09; same search, selection rule D12): two-stage selection
-with k = 20 picks `2·x·min(x,c)·(c³−x)` (search rank 11) — test 0.883,
+Step 3b/3d (2026-11-09; same search, selection rule D12): two-stage selection
+with k = 20, and identically with ALL 90 finalists re-scored (the reference
+rule; 73 min), picks `2·x·min(x,c)·(c³−x)` (search rank 11) — test 0.883,
 tie with ReLU 0.886 / LeakyReLU 0.887; under changed test corruption it is
 the most robust of the seven models (random 60 %: 0.694 vs ReLU 0.679;
 block 20/40/60 %: 0.813/0.636/0.351 vs best fixed 0.773/0.581/0.316). With
 k = 10 the pool lacks ranks 11-12 and the rule picks `x + m − sin(cos 2x)`
-(test 0.867, brittle under shift: 0.842 clean, 0.133 at block 60 %). k = 20
-was set after the diagnostic (disclosed in D12), so replicate 0 is not a
-clean test of the rule. GP hyper-parameter tuning on validation only is
+(test 0.867, brittle under shift: 0.842 clean, 0.133 at block 60 %). The
+pool size was widened after the diagnostic (disclosed in D12), so replicate
+0 is not a clean test of the rule; the final rule has no pool size. GP hyper-parameter tuning on validation only is
 running (`scripts/tune_gp_fmnist.sh`, `runs_tune/`).
 Not run: replicates, other rates / patterns, other datasets, ablations,
 MLP-vs-CNN. One replicate is a decision gate, not a reportable result.

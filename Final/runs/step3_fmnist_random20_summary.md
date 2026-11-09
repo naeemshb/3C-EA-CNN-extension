@@ -118,3 +118,20 @@ ReLU 0.8861 / LeakyReLU 0.8871 for comparison: k = 20 ties the best fixed activa
 | evolved, two-stage k=20 (reference configs) | 0.8839 | 0.8365 | 0.6943 | 0.8129 | 0.6355 | 0.3510 |
 
 Reading (single replicate): the k=20 formula `2·x·min(x,c)·(c³−x)` is the most robust model in the table — best of all seven at random 60 % and at every block rate (block 20 %: 0.813 vs 0.773 for the best fixed activation), and it loses nothing on clean images. The k=10 formula, whose mask term enters additively (`x + m − …`), is the least robust: 0.842 on clean images (below its own matched score) and 0.133 at block 60 %. Mechanism hypothesis, to be tested with replicates and ablations: multiplicative, bounded use of the propagated confidence adapts to the local missing fraction; an additive mask term shifts every pre-activation when the rate changes.
+
+## Step 3d (2026-11-09) — reference rule fixed: re-score EVERY distinct valid finalist (no pool size)
+
+Pool: 90 distinct valid finalists of the step-3 search; 60 survive the long protocol (30 fail with non-finite loss); re-scoring cost 73 min (31 % of the search).
+
+| long-protocol rank | search rank | search val | long val | formula |
+|---|---|---|---|---|
+| 1 | 11 | 0.7805 | 0.8833 | `((2 * (x * min(x, c))) * ((c)^3 - x))` |
+| 2 | 12 | 0.7810 | 0.8827 | `(relu(|min(max(x, ((x)^3 * ((c / 2) - x))), x)|) + x)` |
+| 3 | 26 | 0.7613 | 0.8797 | `((x - min(relu(x), m)) - (x + (x + (c - max(exp(x), (c + m))` |
+| 4 | 38 | 0.7533 | 0.8785 | `max((x * (x - x)), x)` |
+| 5 | 42 | 0.7507 | 0.8785 | `max((max(tanh(x), (x - x)) * min(x, x)), x)` |
+| 6 | 68 | 0.6663 | 0.8765 | `((min(c, 0.5) * (x * min(relu(c), c))) * ((c)^3 - (x * x)))` |
+| 7 | 35 | 0.7578 | 0.8763 | `((x + x) / (0.5 / ((x / 2) * x)))` |
+| 8 | 13 | 0.7817 | 0.8760 | `(relu(sin(x)) + x)` |
+
+Selected: `((2 * (x * min(x, c))) * ((c)^3 - x))` (search rank 11) — the same formula as k = 20, hence identical test (0.8830) and shift numbers (random_0pct 0.884, random_40pct 0.837, random_60pct 0.694, block_20pct 0.813, block_40pct 0.635, block_60pct 0.351). Note that ranks 38 and 42 are algebraic ReLUs (`max(x·0, x)`), scoring 0.8785 = the fixed ReLU baseline's long-protocol value: the search does produce ReLU and the long protocol ranks the selected formula 0.005 above it on validation — a single-seed margin.
