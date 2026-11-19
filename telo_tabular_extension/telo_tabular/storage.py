@@ -42,6 +42,20 @@ def manifest(cfg):
                             "numpy": np.__version__, "sklearn": sklearn.__version__}}
 
 
+# Modules that determine results. Reporting / plotting scripts (screen, aggregate_main, shift_report,
+# extended_metrics, make_figures) and this file only read or label finished runs, so adding or editing them
+# must not invalidate a run directory.
+RESULT_MODULES = ("confidence.py", "data.py", "datasets_gecco.py", "experiment.py", "gp_core.py", "models.py", "search.py")
+
+
+def _same_run(existing, current):
+    if existing["fingerprint"] == current["fingerprint"]:
+        return True
+    return (existing["config"] == json.loads(json.dumps(current["config"], default=_default))
+            and existing["data"] == current["data"] and existing["versions"] == current["versions"]
+            and all(existing["code"].get(name) == current["code"].get(name) for name in RESULT_MODULES))
+
+
 def bind_run(output, cfg):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=True)
@@ -49,8 +63,9 @@ def bind_run(output, cfg):
     path = output / "manifest.json"
     if path.exists():
         existing = json.loads(path.read_text(encoding="utf-8"))
-        if existing["fingerprint"] != current["fingerprint"]:
+        if not _same_run(existing, current):
             raise ValueError("Configuration, dataset or code changed. Use a new output directory.")
+        current = existing          # keep the fingerprint the run was started with (search states are bound to it)
     else:
         write_json(path, current)
     return current
