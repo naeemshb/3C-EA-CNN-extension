@@ -176,3 +176,24 @@ hidden unit, and draws the function at four measured reliability states (`figure
 the Cylinder Bands winner confirmed to need both channels, with the paired differences of its confirmation on 100 splits.
 Bottom row: runs 24 and 23 of the published Hepatitis winners. Runs 1 and 19 (value and confidence only) are measured and
 reported in the json but not drawn: on Hepatitis the propagated confidence stays above 0.89 and they change by under 5%.
+
+## Informative missingness, controlled (protocol fixed 2026-11-20, before any network of the experiment was trained)
+
+Question: does the benefit of the reliability channels grow with how much the missingness pattern tells about the class?
+The full protocol is the docstring of `telo_tabular/informative.py`; in short:
+
+- Six datasets, by rule: every dataset of the package that is complete and two-class (wdbc, pima, sonar, heart,
+  aust_credit, mammo).
+- Entries of a record are deleted independently with a class-dependent probability, overall rate 20%, in training,
+  validation and test alike. Strength s in {0, 0.5, 1, 2} is the distance between the classes, in standard deviations,
+  of the number of missing features per record; s = 0 is MCAR. The realised informativeness is measured by a
+  logistic regression on the mask alone (`runs_informative/design.json`, computed without training any network:
+  from the majority rate at s = 0 to 0.76-0.88 at s = 2).
+- 20 splits (seeds 42-61) per dataset and strength. Compared: 3C-EA with channels ("on"), the identical search with
+  the channels neutralised ("off"), the "on" winner retrained with m only / c only / neither, the four fixed
+  activations, and a ReLU network that receives the mask as extra inputs. Population 100, 10 generations.
+- Primary analysis: paired difference on - off per dataset and strength; test of the hypothesis that it grows:
+  per-split change of that difference from s = 0 to s = 2, Wilcoxon, Holm over the six datasets.
+
+Commands: `python -m telo_tabular.informative design|run|report --out runs_informative`. The code was smoke-tested on one
+split outside the protocol (seed 7), whose result is not part of the experiment.
