@@ -170,6 +170,9 @@ Consequences:
 
 ## Evolved functions at the channel values the network receives
 
-`python -m telo_tabular.response_figure --out figures --json runs_past_winners/response_states.json` trains four published
-Hepatitis winners (runs 1, 19, 24, 23) on 30 splits, records the pre-activation, missingness and confidence entering every
-hidden unit, and draws each function at four measured reliability states (`figures/fig_response_examples.pdf`).
+`python -m telo_tabular.response_figure --confirm runs_past_winners/confirm.json --out figures --json runs_past_winners/response_states.json`
+trains each function on 30 splits of its dataset, records the pre-activation, missingness and confidence entering every
+hidden unit, and draws the function at four measured reliability states (`figures/fig_response_examples.pdf`). Top row:
+the Cylinder Bands winner confirmed to need both channels, with the paired differences of its confirmation on 100 splits.
+Bottom row: runs 24 and 23 of the published Hepatitis winners. Runs 1 and 19 (value and confidence only) are measured and
+reported in the json but not drawn: on Hepatitis the propagated confidence stays above 0.89 and they change by under 5%.
