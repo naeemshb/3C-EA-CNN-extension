@@ -17,7 +17,6 @@ import matplotlib.pyplot as plt
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 from scipy import stats
-from .shift_table import PUBLISHED_REFERENCE
 
 BLUE, ORANGE, AQUA = "#2a78d6", "#eb6834", "#1baf7a"
 INK, INK2, GRID, BAND = "#0b0b0b", "#52514e", "#e4e3df", "#d9d8d3"
@@ -75,11 +74,7 @@ def fig_curves(data, out):
         ax.fill_between(x, ev - se, ev + se, color=BLUE, alpha=0.16, linewidth=0, zorder=3)
         ax.plot(x, ev, color=BLUE, linewidth=1.8, marker="o", markersize=4.2, markeredgecolor="white", markeredgewidth=0.6, zorder=4)
         ax.set_title(TITLE.get(ds, ds)); ax.set_xticks([0, 20, 40, 60]); style_axis(ax)
-        lo, hi = min(fx.min(), (ev - se).min()), max(fx.max(), (ev + se).max())
-        if ds in PUBLISHED_REFERENCE:      # value of the published table at the matched condition (different, earlier runs)
-            pub = PUBLISHED_REFERENCE[ds][1] * 100; lo, hi = min(lo, pub), max(hi, pub)
-            ax.plot(20, pub, marker="D", markersize=5.2, color=ORANGE, markerfacecolor="white", markeredgewidth=1.3, linestyle="none", zorder=5)
-        pad = 0.12 * (hi - lo)
+        lo, hi = min(fx.min(), (ev - se).min()), max(fx.max(), (ev + se).max()); pad = 0.12 * (hi - lo)
         ax.set_ylim(lo - pad, hi + pad)
     np.atleast_1d(axes)[0].set_ylabel("Test accuracy (%)")
     fig.supxlabel("Test missing rate, MCAR (%)", fontsize=8, y=0.02)
@@ -87,9 +82,6 @@ def fig_curves(data, out):
                Line2D([], [], color=ORANGE, linewidth=1.4, linestyle=(0, (4, 1.5)), marker="s", markersize=3.6, markeredgecolor="white", label="ELU"),
                Patch(facecolor=BAND, edgecolor="none", label="Range of fixed activations"),
                Line2D([], [], color=INK2, linewidth=0.6, linestyle=(0, (1, 2)), label="Training rate")]
-    if any(ds in PUBLISHED_REFERENCE for ds in data):
-        handles.insert(2, Line2D([], [], color=ORANGE, marker="D", markersize=5.2, markerfacecolor="white", markeredgewidth=1.3, linestyle="none",
-                                 label="ELU, published value"))
     fig.legend(handles=handles, loc="upper center", ncol=len(handles), frameon=False, bbox_to_anchor=(0.5, 1.08), handlelength=2.4, columnspacing=1.3)
     fig.tight_layout(w_pad=0.9); save(fig, out, "fig_shift_curves")
 
@@ -111,9 +103,6 @@ def fig_differences(data, out):
             ax.plot([m - h, m + h], [y, y], color=BLUE, linewidth=1.1, solid_capstyle="round", zorder=2)
             ax.plot(m, y, marker="o", markersize=4.6, color=BLUE, markerfacecolor=BLUE if sig else "white", markeredgewidth=1.1, zorder=3)
             lim = max(lim, abs(m - h), abs(m + h))
-            if ds in PUBLISHED_REFERENCE and (mech, rate) == ("mcar", 0.2):      # unpaired: different runs, so no interval
-                ax.plot((e.mean() - PUBLISHED_REFERENCE[ds][1]) * 100, y, marker="D", markersize=5.2, color=BLUE, markerfacecolor="white",
-                        markeredgewidth=1.3, linestyle="none", zorder=4)
         lim = np.ceil(lim / 2) * 2; ax.set_xlim(-lim, lim); ax.set_title(TITLE.get(ds, ds)); style_axis(ax, "x")
         ax.tick_params(axis="y", length=0)
         for yy in (ypos[6] - 0.5, ypos[8] - 0.5, ypos[10] - 0.5):
@@ -122,9 +111,6 @@ def fig_differences(data, out):
     fig.supxlabel("Accuracy difference, 3C-EA − best fixed activation (percentage points)", fontsize=8, y=0.01)
     handles = [Line2D([], [], color=BLUE, linewidth=1.1, marker="o", markersize=4.6, markerfacecolor="white", markeredgewidth=1.1, label="Mean paired difference, 95% CI includes 0"),
                Line2D([], [], color=BLUE, linewidth=1.1, marker="o", markersize=4.6, markerfacecolor=BLUE, label="95% CI excludes 0")]
-    if any(ds in PUBLISHED_REFERENCE for ds in data):
-        handles.append(Line2D([], [], color=BLUE, marker="D", markersize=5.2, markerfacecolor="white", markeredgewidth=1.3, linestyle="none",
-                              label="Difference to published ELU value (unpaired)"))
     fig.legend(handles=handles, loc="upper center", ncol=len(handles), frameon=False, bbox_to_anchor=(0.55, 1.05), columnspacing=1.6)
     fig.tight_layout(w_pad=0.8); save(fig, out, "fig_shift_differences")
 

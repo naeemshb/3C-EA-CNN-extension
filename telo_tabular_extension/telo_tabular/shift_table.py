@@ -7,18 +7,13 @@ One row per test condition, two columns per dataset: test accuracy (mean ± samp
 and of the best fixed activation for that condition (chosen by its mean, which favours the baseline). Markers on the 3C-EA value: two-sided Wilcoxon signed-rank
 test over paired runs, * p < 0.05, ** p < 0.01, no correction for multiple comparisons.
 
-The matched condition (trained and tested at 20 % MCAR) is the reference row and is printed first. Where the published
-paper reports a different best fixed activation for that setting, PUBLISHED_REFERENCE keeps the published value in the
-reference row (marked with a dagger; no paired test is possible against it). The twelve shifted rows always use the
-baselines trained in this experiment, because the original runs stored no trained models.
+The matched condition (trained and tested at 20 % MCAR) is the reference row and is printed first.
 """
 import argparse, json
 
 TITLE = {"wdbc": "WDBC", "sonar": "Sonar", "glass": "Glass", "pima": "PIMA", "mushroom": "Mushroom"}
 SHORT = {"relu": "R", "swish": "S", "leaky_relu": "L", "elu": "E"}
 REFERENCE = "mcar_0.2"
-# Published matched-condition values kept as the reference: dataset -> (activation, mean test accuracy, std, source)
-PUBLISHED_REFERENCE = {"mushroom": ("elu", 0.9671, 0.0207, "published MCAR table (20% MCAR), ELU row")}
 COND = [("mcar_0.2", "MCAR 20\\% (reference)"), ("mcar_0", "Clean (0\\%)"), ("mcar_0.1", "MCAR 10\\%"), ("mcar_0.3", "MCAR 30\\%"),
         ("mcar_0.4", "MCAR 40\\%"), ("mcar_0.5", "MCAR 50\\%"), ("mcar_0.6", "MCAR 60\\%"), ("group_0.2", "Grouped 20\\%"),
         ("group_0.4", "Grouped 40\\%"), ("mar_0.2", "MAR 20\\%"), ("mar_0.4", "MAR 40\\%"), ("mnar_0.2", "MNAR 20\\%"), ("mnar_0.4", "MNAR 40\\%")]
@@ -39,12 +34,10 @@ def main(argv=None):
         for d in dss:
             r = rep[d]["accuracy"][key]; e, f, best = f"{r['evolved']:.3f}", f"{r['best_fixed_mean']:.3f}", r["best_fixed"]
             esd, fsd = f"{r['evolved_sd']:.3f}", f"{r['best_fixed_sd']:.3f}"
-            star = "^{**}" if r["p"] < 0.01 else "^{*}" if r["p"] < 0.05 else ""; dagger = ""
-            if key == REFERENCE and d in PUBLISHED_REFERENCE:      # published value: unpaired, so no significance marker
-                best, value, sd, _ = PUBLISHED_REFERENCE[d]; f, fsd, star, dagger = f"{value:.3f}", f"{sd:.3f}", "", "^{\\dagger}"
+            star = "^{**}" if r["p"] < 0.01 else "^{*}" if r["p"] < 0.05 else ""
             es = f"\\mathbf{{{e}{{\\pm}}{esd}}}" if e > f else f"{e}{{\\pm}}{esd}"
             fs = f"\\mathbf{{{f}{{\\pm}}{fsd}}}" if f > e else f"{f}{{\\pm}}{fsd}"
-            cells += [f"${es}{star}$", f"${fs}_{{\\text{{{SHORT[best]}}}}}{dagger}$"]
+            cells += [f"${es}{star}$", f"${fs}_{{\\text{{{SHORT[best]}}}}}$"]
         out.append(label + " & " + " & ".join(cells) + " \\\\")
         if key == REFERENCE: out.append("\\midrule")
         if key in RULE_AFTER: out.append("\\addlinespace[2pt]")
