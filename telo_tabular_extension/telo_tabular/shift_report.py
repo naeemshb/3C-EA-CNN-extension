@@ -38,7 +38,7 @@ def main(argv=None):
                 except ValueError: p = float("nan")
                 rr = np.mean([float(r["realized_rate"]) for r in rows if (r["mechanism"], float(r["nominal_rate"])) == c])
                 summary[ds].setdefault(metric, {})[f"{c[0]}_{c[1]:g}"] = {"evolved": float(e.mean()), "evolved_sd": float(e.std(ddof=1)),
-                    "best_fixed": best, "best_fixed_mean": float(F[best].mean()), "diff": float(d.mean()), "p": p, "wins": int((d > 0).sum()), "ties": int((d == 0).sum()), "n": len(seeds)}
+                    "best_fixed": best, "best_fixed_mean": float(F[best].mean()), "best_fixed_sd": float(F[best].std(ddof=1)), "diff": float(d.mean()), "p": p, "wins": int((d > 0).sum()), "ties": int((d == 0).sum()), "n": len(seeds)}
                 lines.append(f"| {c[0]} {c[1]:g} | {rr:.2f} | {e.mean():.3f}±{e.std(ddof=1):.3f} | " + " | ".join(f"{F[v].mean():.3f}±{F[v].std(ddof=1):.3f}" for v in FIXED) +
                              f" | {d.mean():+.3f} ({best}) | {p:.3f} | {int((d > 0).sum())}/{len(seeds)} |")
             lines.append("")
