@@ -19,7 +19,7 @@ test partitions, the activation function is evolved, and the selected function i
 \S\ref{sec:baselines}. The model is then \emph{frozen}. Nothing is re-estimated at test time: the network weights, the
 evolved function, the training means used for imputation, and the feature-wise confidence values, which are computed
 from the training missing rates, all stay fixed. The same test records are then masked again under thirteen
-conditions: MCAR at rates from 0\% (no injected missingness) to 60\%, and three structured mechanisms at 20\% and
+conditions, the matched one and twelve shifted ones: MCAR at rates from 0\% (no injected missingness) to 60\%, and three structured mechanisms at 20\% and
 40\%. In the \emph{grouped} mechanism each record loses a block of mutually correlated features, namely a randomly
 chosen feature together with the features most correlated with it in the training data, which imitates the failure of
 a group of related measurements. MAR and MNAR masks follow the rules of the previous section (for MAR, entries are
@@ -29,7 +29,15 @@ partition. For the structured
 mechanisms the stated rate is nominal; the realised fraction of missing entries lies between 0.14 and 0.25 for the
 20\% conditions and between 0.27 and 0.49 for the 40\% conditions, depending on the dataset. The four fixed
 activations are trained and evaluated in exactly the same way, with the same partitions, masks and random seeds, so
-every comparison is paired by run.
+every comparison under shift is paired by run.
+
+The matched condition, in which the test data also contain 20\% MCAR missingness, repeats the setting of
+Table~\ref{tab:mcar} with the reduced search budget given below and serves only as the reference for the twelve
+shifted conditions. The reference accuracies agree with Table~\ref{tab:mcar} to within 3 percentage points, with one
+exception: ELU on Mushroom reaches 0.967 in Table~\ref{tab:mcar} but 0.918 in the present runs. For this case we keep
+the published value as the reference, so that the best fixed activation at the matched condition on Mushroom is ELU
+with 0.967, as in Table~\ref{tab:mcar}. Since the earlier runs stored no trained models, the shifted conditions
+necessarily use the baselines trained here.
 
 We report Glass, WDBC, PIMA and Mushroom. Glass, WDBC and PIMA use a population of 70 and 15 generations with 10
 independent runs; Mushroom uses a population of 100 and 10 generations with 20 runs. The remaining GP settings are
@@ -44,7 +52,8 @@ test~\cite{derrac2011practical} on the paired per-run accuracies, without correc
 \caption{Test accuracy when the test missing rate differs from the training rate. All models are trained with 20\%
 MCAR missingness (dotted line) and evaluated without retraining at MCAR rates from 0\% to 60\%. The solid line is
 3C-EA (mean over runs; the band is $\pm$ one standard error), the dashed line is ELU, and the grey band spans the
-means of the four fixed activations. Vertical axes differ between panels.}
+means of the four fixed activations. The open diamond is the ELU accuracy on Mushroom reported in
+Table~\ref{tab:mcar}. Vertical axes differ between panels.}
 \label{fig:shift-curves}
 \end{figure}
 
@@ -52,19 +61,23 @@ means of the four fixed activations. Vertical axes differ between panels.}
 \centering
 \includegraphics[width=\linewidth]{figures/fig_shift_differences.pdf}
 \caption{Paired difference in test accuracy between 3C-EA and the best fixed activation under each test condition, for
-models trained with 20\% MCAR missingness (shaded row) and then frozen. Points are means over runs and bars are 95\%
-$t$-intervals of the paired difference; filled points mark intervals that exclude zero. Horizontal axes differ
-between panels.}
+models trained with 20\% MCAR missingness and then frozen. The shaded row is the matched reference condition. Points
+are means over runs and bars are 95\% $t$-intervals of the paired difference; filled points mark intervals that
+exclude zero. The open diamond is the difference to the ELU accuracy on Mushroom reported in Table~\ref{tab:mcar},
+which comes from different runs and therefore has no paired interval. Horizontal axes differ between panels.}
 \label{fig:shift-differences}
 \end{figure}
 
 \begin{table}[t]
 \centering
 \caption{Test accuracy of frozen models under missingness shift (mean over runs). All models are trained with 20\% MCAR
-missingness. \emph{Fixed} is the best of ReLU (R), Swish (S), LeakyReLU (L) and ELU (E) for that condition, indicated
+missingness; the first row is the matched reference condition and the remaining rows are the twelve shifted
+conditions. \emph{Fixed} is the best of ReLU (R), Swish (S), LeakyReLU (L) and ELU (E) for that condition, indicated
 by the subscript. The higher mean of each pair is in bold. $^{*}$ and $^{**}$ denote $p<0.05$ and $p<0.01$ in a
-two-sided Wilcoxon signed-rank test between 3C-EA and the best fixed activation. In Mushroom about 1\% of the entries
-are missing in the source data and remain missing in every condition.}
+two-sided Wilcoxon signed-rank test between 3C-EA and the best fixed activation. $^{\dagger}$Value published in
+Table~\ref{tab:mcar}, from earlier runs, so no paired test applies; in the present runs the best fixed activation at
+this condition is LeakyReLU with 0.944. In Mushroom about 1\% of the entries are missing in the source data and
+remain missing in every condition.}
 \label{tab:shift}
 \footnotesize
 \setlength{\tabcolsep}{3.5pt}
@@ -73,28 +86,32 @@ are missing in the source data and remain missing in every condition.}
 
 \subsubsection{Results}
 Figure~\ref{fig:shift-curves} shows the accuracy as the test MCAR rate moves away from the training rate,
-Figure~\ref{fig:shift-differences} shows the paired difference to the best fixed activation under all thirteen
-conditions, and Table~\ref{tab:shift} lists the corresponding accuracies.
+Figure~\ref{fig:shift-differences} shows the paired difference to the best fixed activation under the reference and
+the twelve shifted conditions, and Table~\ref{tab:shift} lists the corresponding accuracies.
 
 \emph{The evolved functions do not depend on the training missingness being present.} When the test data contain no
-injected missingness, the accuracy of 3C-EA is equal to or higher than under the training condition on all four
+injected missingness, the accuracy of 3C-EA is equal to or higher than under the reference condition on all four
 datasets (for example 0.998 against 0.979 on Mushroom and 0.574 against 0.530 on Glass). As the test rate increases,
 accuracy decreases gradually, with no abrupt failure at any rate or under any mechanism, although the confidence values
 supplied to the network are those computed at the 20\% training rate.
 
 \emph{The advantage over fixed activations is retained under shift on three of the four datasets.} On Mushroom, 3C-EA
-is more accurate than the best fixed activation in twelve of the thirteen conditions, by 1.2 to 4.1 percentage points;
-eleven of these differences have $p<0.001$ and the remaining one, MAR 40\%, has $p=0.044$. In ten conditions 3C-EA is
-ahead in every one of the 20 runs. On WDBC and Glass the mean difference is positive in all thirteen conditions (0.4
-to 2.4 and 0.5 to 4.4 points, respectively), but with 10 runs and test sets of 114 and 43 records none of these
-differences is significant ($p\ge 0.06$ and $p\ge 0.10$), so they should be read as a consistent direction and not as
-individually established effects. On PIMA the two approaches are equivalent: the difference ranges from $-1.0$ to
+is more accurate than the best fixed activation in eleven of the twelve shifted conditions, by 1.2 to 4.1 percentage
+points; ten of these differences have $p<0.001$ and the remaining one, MAR 40\%, has $p=0.044$. In nine conditions
+3C-EA is ahead in every one of the 20 runs. On WDBC and Glass the mean difference is positive in all twelve shifted
+conditions (0.4 to 2.3 and 0.5 to 4.4 points, respectively), but with 10 runs and test sets of 114 and 43 records none
+of these differences is significant ($p\ge 0.06$ and $p\ge 0.13$), so they should be read as a consistent direction
+and not as individually established effects. On PIMA the two approaches are equivalent: the difference ranges from $-1.0$ to
 $+1.3$ points and changes sign across conditions.
 
 \emph{The advantage does not grow with the amount of shift.} On WDBC and Mushroom the difference is largest at or next
 to the training rate and shrinks as the test rate increases; on Glass it varies between 1.6 and 4.2 points up to 50\%
 without a clear trend. At 60\% MCAR the difference is at most 0.9 points on every dataset, and on Mushroom the two
-methods coincide (0.848). Under the structured mechanisms the difference at 40\% is smaller than at 20\% in ten of the
+methods coincide (0.848). The Mushroom reference needs care in this comparison. Against the published ELU value the
+lead of 3C-EA at the matched condition is 1.2 points, whereas against the baselines trained here, which are the ones
+evaluated under shift, it is 3.5 points. The trend across conditions must be read against the latter, and the
+differences on Mushroom under shift may be overstated to the extent that the present ELU runs fall short of the
+published ones. Under the structured mechanisms the difference at 40\% is smaller than at 20\% in ten of the
 twelve dataset--mechanism pairs; the exceptions are MNAR on Glass and grouped missingness on PIMA. This contrasts with
 Figure~\ref{fig:performance}, where the models are evolved and trained separately at each missing rate and the gap
 widens with the rate. Taken together, the two experiments suggest that the benefit of 3C-EA comes from adapting the
@@ -102,8 +119,8 @@ activation function to the missingness regime seen during evolution. That benefi
 test conditions, but we find no evidence that an evolved function tolerates heavy unseen missingness better than a
 fixed activation.
 
-For completeness, we ran the same experiment on Sonar, the remaining complete dataset. There, 3C-EA is ahead in five of
-the thirteen conditions and level or behind in eight, with differences between $-3.3$ and $+2.9$ points and none
+For completeness, we ran the same experiment on Sonar, the remaining complete dataset. There, 3C-EA is ahead in four of
+the twelve shifted conditions and level or behind in eight, with differences between $-3.3$ and $+2.9$ points and none
 significant
 (test set of 42 records), in line with the Sonar results in Table~\ref{tab:mcar}, where no method is consistently
 best.
