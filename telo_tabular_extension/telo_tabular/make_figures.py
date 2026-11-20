@@ -1,6 +1,7 @@
 """Paper figures for the frozen-model missingness-shift experiment (reads saved results only).
 
     python -m telo_tabular.make_figures --root runs_shift --out figures
+    python -m telo_tabular.make_figures --root runs_shift --out paper_subsection/figures --datasets glass wdbc pima mushroom
 
 fig_shift_curves       accuracy vs test MCAR rate, one panel per dataset (models trained at 20 % MCAR, frozen)
 fig_shift_differences  paired accuracy difference 3C-EA minus the best fixed activation, all test conditions, 95 % CI
@@ -32,7 +33,7 @@ plt.rcParams.update({"font.family": "DejaVu Sans", "font.size": 8, "axes.titlesi
                      "axes.spines.top": False, "axes.spines.right": False, "savefig.bbox": "tight", "savefig.pad_inches": 0.03})
 
 
-def load(root):
+def load(root, order=None):
     data = {}
     for f in glob.glob(os.path.join(root, "*", "test_results.csv")):
         ds = os.path.basename(os.path.dirname(f))
@@ -41,7 +42,7 @@ def load(root):
         for r in rows:
             d.setdefault((r["variant"], r["mechanism"], round(float(r["nominal_rate"]), 2)), {})[int(r["seed"])] = float(r["accuracy"])
         data[ds] = d
-    return {ds: data[ds] for ds in DS_ORDER if ds in data}
+    return {ds: data[ds] for ds in (order or DS_ORDER) if ds in data}
 
 
 def series(d, variant, mech, rate):
@@ -143,7 +144,8 @@ def fig_metrics(root, data, out):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument("--root", required=True); ap.add_argument("--out", required=True)
-    args = ap.parse_args(argv); data = load(args.root)
+    ap.add_argument("--datasets", nargs="+", default=None, help="datasets to draw, in panel order (default: all five)")
+    args = ap.parse_args(argv); data = load(args.root, args.datasets)
     fig_curves(data, args.out); fig_differences(data, args.out); fig_metrics(args.root, data, args.out)
     print("figures for", list(data), "->", args.out)
 
