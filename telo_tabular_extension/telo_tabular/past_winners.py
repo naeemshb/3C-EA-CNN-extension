@@ -92,7 +92,8 @@ def pval(a, b):
 
 
 def screen(args):
-    os.makedirs(args.out, exist_ok=True); torch.set_num_threads(2); result = {}
+    os.makedirs(args.out, exist_ok=True); torch.set_num_threads(2); path = os.path.join(args.out, "screen.json")
+    result = json.load(open(path)) if os.path.exists(path) else {}      # datasets not named in this call are kept
     for ds in args.datasets:
         x, y, _ = load_dataset(ds); cands = candidates(ds); splits = [Split(x, y, s) for s in SCREEN_SEEDS]
         fixed = {f: [sp.run(fixed_tree(f)) for sp in splits] for f in FIXED}; best_fixed = max(FIXED, key=lambda f: np.mean(fixed[f]))
@@ -112,12 +113,15 @@ def screen(args):
               f"both>neither in {sum(1 for r in rows if r['valid'] and r['diff'] > 0)}", flush=True)
         for r in rows[:6]:
             print(f"   both {r['both']:.3f} neither {r['neither']:.3f} diff {0 if r['diff'] is None else r['diff'] * 100:+.1f} eligible {r['eligible']} | {r['infix'][:90]}", flush=True)
-        json.dump(result, open(os.path.join(args.out, "screen.json"), "w"), indent=1)
+        json.dump(result, open(path, "w"), indent=1)
 
 
 def confirm(args):
     torch.set_num_threads(2); scr = json.load(open(os.path.join(args.out, "screen.json"))); out, tests = {}, []
+    cpath = os.path.join(args.out, "confirm.json"); prev = json.load(open(cpath))["datasets"] if args.only and os.path.exists(cpath) else {}
     for ds, block in scr.items():
+        if ds in prev and ds not in args.only:      # --only: other datasets are taken unchanged from the existing confirmation
+            out[ds] = prev[ds]; tests += prev[ds]; continue
         chosen = [r for r in block["rows"] if r["eligible"]][:TOP_K]
         if not chosen: continue
         x, y, _ = load_dataset(ds); splits = [Split(x, y, s) for s in CONFIRM_SEEDS]
@@ -142,7 +146,7 @@ def confirm(args):
         p = tests[i]["p_both_vs_neither"]; adj = None if p is None else min(1., p * (len(tests) - rank))
         if adj is not None: running = max(running, adj); adj = running
         tests[i]["p_holm_both_vs_neither"] = adj
-    json.dump({"confirm_seeds": CONFIRM_SEEDS, "top_k": TOP_K, "datasets": out}, open(os.path.join(args.out, "confirm.json"), "w"), indent=1)
+    json.dump({"confirm_seeds": CONFIRM_SEEDS, "top_k": TOP_K, "datasets": out}, open(cpath, "w"), indent=1)
     L = ["# Winners of the original runs: do they need their channels?", "",
          f"Screening on {len(SCREEN_SEEDS)} splits, confirmation of the top {TOP_K} per dataset on {len(CONFIRM_SEEDS)} disjoint splits. "
          "Accuracy, mean over splits; p = two-sided Wilcoxon signed-rank, paired by split; Holm over all confirmed candidates.", ""]
@@ -164,6 +168,7 @@ def confirm(args):
 def main(argv=None):
     ap = argparse.ArgumentParser(); ap.add_argument("stage", choices=["screen", "confirm"]); ap.add_argument("--out", required=True)
     ap.add_argument("--datasets", nargs="+", default=["hepatitis", "housevote", "horse", "cylinderband"])
+    ap.add_argument("--only", nargs="+", default=None, help="confirm: recompute these datasets only, keep the others; Holm is recomputed over all")
     args = ap.parse_args(argv); (screen if args.stage == "screen" else confirm)(args)
 
 

@@ -22,7 +22,7 @@ REGISTRY = {
     "cylinderband": ("Cylinderband/bands.data",            None,       None, "numeric"),    # original: to_numeric(coerce), drop all-NaN cols
     "glass":        ("Glass/glass.csv",                    "Type",     0,    "numeric"),
     "heart":        ("Heart/heart (1).csv",                "target",   0,    "numeric"),
-    "hepatitis":    ("Hepatiti/hepatitis.csv",             None,       0,    "numeric"),
+    "hepatitis":    ("Hepatiti/hepatitis.csv",             "0",        0,    "numeric"),    # original: class is column '0' (moved to the end by the script)
     "horse":        ("Horse/horse.csv",                    "outcome",  0,    "factorize"),  # original: 'outcome' target, categoricals encoded
     "housevote":    ("HouseVote/HouseVotes84 (1) (1).csv", "Class",    0,    "votes"),      # original: y/n -> 1/0, Class -> label
     "mammo":        ("Mammo/Cleaned_data.csv",             "Severity", 0,    "numeric"),

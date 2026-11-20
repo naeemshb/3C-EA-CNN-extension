@@ -152,3 +152,24 @@ aust_credit, hepatitis, mammo. The learned estimator is slightly less calibrated
 (ECE higher by 0.01-0.1) — ranking gain, not calibration gain. Reading: per-entry reliability exists where features are
 redundant (WDBC's triplets, mushroom/adult categorical structure); on low-dimensional or weakly related features it does
 not. The GP comparison should therefore run on both groups and report the boundary, not only on the datasets with signal.
+
+## Correction: Hepatitis label column (2026-11-20)
+
+Until this date the package took the last column of `Hepatiti/hepatitis.csv` (histology, 85/70) as the Hepatitis label
+and kept the class column as a feature. The original script uses column `0` (die/live, 32/123) as the label; the registry
+entry in `datasets_gecco.py` now does the same. No other dataset is affected (label counts of all thirteen were checked).
+Consequences:
+
+- `runs_past_winners`: the Hepatitis block of `screen.json`, `confirm.json` and `confirm.md` was recomputed
+  (`past_winners screen --datasets hepatitis`, then `past_winners confirm --only hepatitis`); the other three datasets are
+  byte-identical and their Holm-corrected p-values are unchanged. The superseded files are kept as `*_before_hepatitis_fix.*`.
+- `runs_main/hepatitis`, `runs_main_pop100_partial/hepatitis` and the Hepatitis rows of `runs_screen` were produced with the
+  wrong label and must not be used. They have not been rerun.
+- The missingness-shift runs (`runs_shift`) do not use Hepatitis. Their manifests record the earlier hash of
+  `datasets_gecco.py`; the only difference is the Hepatitis registry line.
+
+## Evolved functions at the channel values the network receives
+
+`python -m telo_tabular.response_figure --out figures --json runs_past_winners/response_states.json` trains four published
+Hepatitis winners (runs 1, 19, 24, 23) on 30 splits, records the pre-activation, missingness and confidence entering every
+hidden unit, and draws each function at four measured reliability states (`figures/fig_response_examples.pdf`).

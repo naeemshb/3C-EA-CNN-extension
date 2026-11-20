@@ -4,13 +4,13 @@ Screening on 12 splits, confirmation of the top 3 per dataset on 100 disjoint sp
 
 ## hepatitis
 
-Screening: 46 distinct winners with both channels, 46 numerically valid, 13 at least as accurate as the best fixed activation, 17 more accurate with channels than without; median difference -0.0 points.
+Screening: 46 distinct winners with both channels, 46 numerically valid, 10 at least as accurate as the best fixed activation, 12 more accurate with channels than without; median difference -0.3 points.
 
 | formula | both | m only | c only | neither | best fixed | both − neither | p | Holm p | wins/losses | both − best fixed | p |
 |---|---|---|---|---|---|---|---|---|---|---|---|
-| `(min(x, (0 * c)) * (c - m))` | 0.655 | 0.660 | 0.659 | 0.663 | 0.667 (elu) | -0.8 | 0.0614 | 0.4910 | 22/32 | -1.2 | 0.1675 |
-| `sin(min(min(c, x), (softplus(m))^3))` | 0.670 | 0.670 | 0.667 | 0.667 | 0.667 (elu) | +0.3 | 0.4104 | 1.0000 | 21/17 | +0.3 | 0.9609 |
-| `(m + (c * x))` | 0.666 | 0.668 | 0.676 | 0.672 | 0.667 (elu) | -0.5 | 0.5638 | 1.0000 | 28/32 | -0.1 | 0.9152 |
+| `((x + x) + ((m + c) / (c + tanh(c))))` | 0.832 | 0.832 | 0.832 | 0.832 | 0.804 (elu) | -0.0 | 0.7514 | 1.0000 | 18/18 | +2.8 | 0.0004 |
+| `max(((-m) - min(max(x, min(m, softplus(0.5))), (2 + min((-max(min(m, x), m)), c)` | 0.803 | 0.803 | 0.787 | 0.787 | 0.804 (elu) | +1.6 | 0.0118 | 0.0944 | 46/24 | -0.1 | 0.4981 |
+| `((((x + c) + (x + c)) + softplus(x)) - softplus((0.1 + m)))` | 0.835 | 0.833 | 0.832 | 0.834 | 0.804 (elu) | +0.1 | 0.7920 | 1.0000 | 21/12 | +3.1 | 0.0002 |
 
 ## housevote
 
